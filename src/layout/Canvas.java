@@ -14,17 +14,8 @@ public class Canvas extends JPanel {
 
 	public Canvas() {
 		super();
-		this.setBackground(new Color(40, 60, 80));		
-	}
-
-	@Override
-	public void paint(Graphics g) {
-		
-//		g.setColor(Color.BLACK);
-//		g.drawOval(200, 200, 30, 30);
-		
-
-	}
+		this.setBackground(new Color(10, 60, 80));		
+	}	
 
 	public Point getPoint() {
 		return point;

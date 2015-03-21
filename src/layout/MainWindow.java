@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
+import layout.panels.LeftPanel;
+
 public class MainWindow extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
