@@ -5,7 +5,7 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JPopupMenu;
 
-import layout.Canvas;
+import view.Canvas;
 
 public class MousePopupListener extends MouseAdapter {
 	

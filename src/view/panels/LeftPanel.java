@@ -1,7 +1,8 @@
-package layout.panels;
+package view.panels;
 
 import javax.swing.*;
-import layout.Canvas;
+
+import view.Canvas;
 
 public class LeftPanel extends JPanel {
 

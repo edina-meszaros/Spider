@@ -3,8 +3,10 @@ package controller.actions;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
-import layout.Canvas;
+
+import view.Canvas;
 
 public class CreatePlaceAction extends AbstractAction {
 

@@ -1,8 +1,10 @@
-package layout;
+package view;
 
 import java.awt.BorderLayout;
+
 import javax.swing.*;
-import layout.panels.LeftPanel;
+
+import view.panels.LeftPanel;
 
 public class MainWindow extends JFrame {
 	

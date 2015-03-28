@@ -1,9 +1,9 @@
 package controller;
 
+import view.MainWindow;
 import controller.actions.CreatePlaceAction;
 import controller.actions.CreateTransitionAction;
 import controller.listeners.MousePopupListener;
-import layout.MainWindow;
 import model.Graph;
 
 public class Controller {

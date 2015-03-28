@@ -1,12 +1,14 @@
-package layout.panels;
+package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import layout.Canvas;
+
+import view.Canvas;
 
 public class TabbedPanel extends JTabbedPane {
 	
