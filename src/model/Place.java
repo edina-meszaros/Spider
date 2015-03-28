@@ -1,21 +1,22 @@
 package model;
 
+import java.awt.Point;
 import java.util.UUID;
 
 public class Place extends Node {
 
 	private Integer tokens = 0;	
 	
-	public Place(){
-		super();
+	public Place(Point position){
+		super(position);
 	}
 
-	public Place(String label){
-		super(label);
+	public Place(Point position, String label){
+		super(position, label);
 	}
 	
-	public Place(String label, int tokens){
-		super(label);
+	public Place(Point position, String label,  int tokens){
+		super(position, label);
 		this.tokens = tokens;
 	}
 	
@@ -57,5 +58,8 @@ public class Place extends Node {
 	public String getLabel() { return super.getLabel(); }
 	public void setLabel(String label) { super.setLabel(label); }
 	public Integer getTokens() { return this.tokens; }
-	public void setTokens(int tokens) { this.tokens = tokens; }	
+	public void setTokens(int tokens) { this.tokens = tokens; }
+	public Point getPosition() { return super.getPosition(); }
+	public void setPosition(Point position) { super.setPosition(position); }
+	
 }

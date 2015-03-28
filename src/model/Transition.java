@@ -1,15 +1,16 @@
 package model;
 
+import java.awt.Point;
 import java.util.UUID;
 
 public class Transition extends Node {
 	
-	public Transition(){
-		super();
+	public Transition(Point position){
+		super(position);
 	}
 	
-	public Transition(String label){
-		super(label);
+	public Transition(Point position, String label){
+		super(position, label);
 	}
 	
 	@Override
@@ -29,5 +30,7 @@ public class Transition extends Node {
 
 	public UUID getId() { return this.getId(); }
 	public String getLabel() { return super.getLabel(); }
-	public void setLabel(String label) { super.setLabel(label); }	
+	public void setLabel(String label) { super.setLabel(label); }
+	public Point getPosition() { return super.getPosition(); }
+	public void setPosition(Point position) { super.setPosition(position); }
 }

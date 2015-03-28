@@ -1,8 +1,9 @@
 package main;
 
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import layout.MainWindow;
+import controller.Controller;
 
 public class Spider {
 
@@ -14,9 +15,13 @@ public class Spider {
 			// handle exception
 		}
 		
-		MainWindow mainWindow = new MainWindow();
-		mainWindow.setVisible(true);
-		mainWindow.setResizable(false);
+		SwingUtilities.invokeLater(new Runnable() {
+            
+			@Override
+            public void run() {
+                new Controller();                
+            }
+        });
 	}
 
 }

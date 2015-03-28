@@ -14,10 +14,13 @@ public class MainMenu extends JMenuBar {
 	public MainMenu() {
 		super();
 	
+		//A menu example:
+		
 		menu = new JMenu("File");
 		//menu.setMnemonic(KeyEvent.VK_A);
 		menu.getAccessibleContext().setAccessibleDescription(
 		        "The only menu in this program that has menu items");
+		
 		this.add(menu);
 
 		//a group of JMenuItems
@@ -29,10 +32,6 @@ public class MainMenu extends JMenuBar {
 
 		menuItem = new JMenuItem("Both text and icon");
 		menu.add(menuItem);
-
-		//menuItem = new JMenuItem(new ImageIcon("images/middle.gif"));
-		//menuItem.setMnemonic(KeyEvent.VK_D);
-		//menu.add(menuItem);
 
 		//a group of radio button menu items
 		menu.addSeparator();
@@ -69,9 +68,7 @@ public class MainMenu extends JMenuBar {
 		menu = new JMenu("Help");
 		menu.getAccessibleContext().setAccessibleDescription(
 		        "This menu does nothing");
-		this.add(menu);
 		
-	}
-	
-	
+		this.add(menu);		
+	}	
 }

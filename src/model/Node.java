@@ -1,18 +1,21 @@
 package model;
 
+import java.awt.Point;
 import java.util.UUID;
 
 public class Node {
 
 	private UUID id;
 	private String label = null;
+	private Point position = null;
 	
-	public Node(){
+	public Node(Point position){
 		generateId();
+		this.position = position;
 	}
 	
-	public Node(String label){
-		this();
+	public Node(Point position, String label){
+		this(position);
 		this.label = label;
 	}
 	
@@ -60,5 +63,7 @@ public class Node {
 
 	public UUID getId() { return this.id; }
 	public String getLabel() { return this.label; }
-	public void setLabel(String label) { this.label = label; }	
+	public void setLabel(String label) { this.label = label; }
+	public Point getPosition() { return position; }
+	public void setPosition(Point position) { this.position = position; }	
 }
