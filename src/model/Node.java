@@ -9,6 +9,10 @@ public class Node {
 	private String label = null;
 	private Point position = null;
 	
+	public Node(){
+		
+	}
+	
 	public Node(Point position){
 		generateId();
 		this.position = position;

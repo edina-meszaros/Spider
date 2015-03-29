@@ -7,6 +7,9 @@ public class Place extends Node {
 
 	private Integer tokens = 0;	
 	
+	public Place(){
+		
+	}
 	public Place(Point position){
 		super(position);
 	}
