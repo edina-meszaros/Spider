@@ -35,7 +35,7 @@ public class Place extends Node {
 	@Override
 	public int hashCode() {
 		final int prime = 11;
-		int result = 1;
+		int result = super.hashCode();
 		result = prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
 		result = prime * result + ((this.getLabel() == null) ? 0 : this.getLabel().hashCode());
 		result = prime * result + this.tokens;

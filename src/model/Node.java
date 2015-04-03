@@ -10,21 +10,19 @@ public class Node {
 	private Point position = null;
 	
 	public Node(){
-		
+		this.id = UUID.randomUUID();
+		System.out.println("created node with id: " + this.id);
+
 	}
 	
 	public Node(Point position){
-		generateId();
+		this();
 		this.position = position;
 	}
 	
 	public Node(Point position, String label){
 		this(position);
 		this.label = label;
-	}
-	
-	private void generateId(){
-		this.id = UUID.randomUUID();		
 	}
 	
 	@Override

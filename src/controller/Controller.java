@@ -11,7 +11,6 @@ import model.Graph;
 public class Controller {
 
 	private MainWindow mainWindow = null;
-	private Graph graph = null;
 	private CreatePlaceButtonAction createPlaceButtonAction = null;
 	private CreateTransitionButtonAction createTransitionButtonAction = null;
 	private MousePopupListener mousePopupListener = null;
@@ -20,7 +19,6 @@ public class Controller {
 	
 	public Controller(){
 		mainWindow = MainWindow.getInstance();
-		graph = Graph.getInstance();
 		
 		createPlaceButtonAction = new CreatePlaceButtonAction("New Place", this);
 		mainWindow.getLeftPanel().getTabbedPanel().getNewPlace().setAction(createPlaceButtonAction);
@@ -39,5 +37,4 @@ public class Controller {
 	}
 
 	public MainWindow getMainWindow() { return mainWindow; }
-	public Graph getGraph() { return graph; }	
 }

@@ -4,9 +4,12 @@ import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.swing.AbstractAction;
+
 import controller.Controller;
 import model.Arch;
+import model.Graph;
 import model.Transition;
 
 public class CreateTransitionPopupAction extends AbstractAction {
@@ -28,16 +31,16 @@ public class CreateTransitionPopupAction extends AbstractAction {
 		
 		point = controller.getMainWindow().getCanvas().getMousePosition(); 
 
-		Runnable r = new Runnable() {
-			public void run() {
+//		Runnable r = new Runnable() {
+//			public void run() {
 				transition = new Transition(point);
 				edges.add(new Arch(null, 0));
-				controller.getGraph().addNode(transition, edges);
-				controller.getMainWindow().getCanvas().updateGraph(controller.getGraph().getGraph());
-			}
-		};
+				Graph.getInstance().addNode(transition, edges);
+				controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
+//			}
+//		};
 
-		Thread t = new Thread(r);
-		t.start();
+//		Thread t = new Thread(r);
+//		t.start();
 	}
 }
