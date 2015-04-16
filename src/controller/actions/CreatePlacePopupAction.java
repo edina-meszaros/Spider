@@ -11,12 +11,17 @@ import controller.Controller;
 import model.Arch;
 import model.Graph;
 import model.Place;
+import model.Transition;
 
 public class CreatePlacePopupAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
 	private Controller controller = null;
+	private Point point = null;
+	private Place place = null;
+	private List<Arch> edges = null;
+	private Arch arch = null;
 
 	public CreatePlacePopupAction(String name, Controller controller) {
 		super(name);
@@ -26,26 +31,14 @@ public class CreatePlacePopupAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Point point = new Point(100, 100);
-		Place place = new Place();
-		List<Arch> edges = new ArrayList<Arch>();
-		Arch arch = new Arch(null, 0);
-
 		point = controller.getMainWindow().getCanvas().getMousePosition();
+		place = new Place(point);
 		
-//		Runnable r = new Runnable() {
-//			public void run() {
-				place.setPosition(point);
-				edges.add(arch);
-				Graph.getInstance().addNode(place, edges);
-				
-				System.out.println(Graph.getInstance().getGraph().size());
-				
-				controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
-//			}
-//		};
+		edges = new ArrayList<Arch>();
+		arch = new Arch(null, 0);
+		edges.add(arch);		
 
-//		Thread t = new Thread(r);
-//		t.start();
+		Graph.getInstance().addNode(place, edges);		
+		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
 	}
 }

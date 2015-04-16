@@ -17,6 +17,10 @@ public class CreateTransitionButtonAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 	
 	private Controller controller = null;
+	private Point point = null;
+	private Transition transition = null;
+	private List<Arch> edges = null;
+	private Arch arch = null;
 	
 	public CreateTransitionButtonAction(String name, Controller controller) {
 		super(name);
@@ -25,24 +29,15 @@ public class CreateTransitionButtonAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {		
-		Point point;
-		Transition transition = null;
-		List<Arch> edges = new ArrayList<Arch>();
-
-		point = new Point(100, 100); 
-
-//		Runnable r = new Runnable() {
-//			public void run() {
-				transition = new Transition(point);
-				edges.add(new Arch(null, 0));
-				Graph.getInstance().addNode(transition, edges);
-				controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
-//			}
-//		};
-//
-//		Thread t = new Thread(r);
-//		t.start();
 		
+		point = new Point(100, 100);
+		transition = new Transition(point);
+		
+		edges = new ArrayList<Arch>();
+		arch = new Arch(null, 0);
+		edges.add(arch);
+		
+		Graph.getInstance().addNode(transition, edges);
 		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
 	}
 }

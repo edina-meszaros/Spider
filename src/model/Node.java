@@ -1,6 +1,7 @@
 package model;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.util.UUID;
 
 public class Node {
@@ -8,22 +9,27 @@ public class Node {
 	private UUID id;
 	private String label = null;
 	private Point position = null;
+	private Rectangle frame = null;
 	
 	public Node(){
 		this.id = UUID.randomUUID();
-		System.out.println("created node with id: " + this.id);
-
+		frame = new Rectangle();
 	}
 	
 	public Node(Point position){
 		this();
 		this.position = position;
+		setFrame(this.frame);
 	}
 	
 	public Node(Point position, String label){
 		this(position);
 		this.label = label;
 	}
+	
+	private void setFrame(Rectangle frame) {
+        frame.setBounds(position.x, position.y, 40, 40);
+    }
 	
 	@Override
 	public boolean equals(Object object) {

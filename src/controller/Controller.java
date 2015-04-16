@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.Point;
+
 import view.MainWindow;
 import controller.actions.CreatePlaceButtonAction;
 import controller.actions.CreatePlacePopupAction;

@@ -18,6 +18,10 @@ public class CreatePlaceButtonAction extends AbstractAction {
 	private static final long serialVersionUID = 1L;
 	
 	private Controller controller = null;
+	private Point point = null;
+	private Place place = null;
+	private List<Arch> edges = null;
+	private Arch arch = null;
 	
 	public CreatePlaceButtonAction(String name, Controller controller) {
 		super(name);
@@ -26,21 +30,15 @@ public class CreatePlaceButtonAction extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {		
-		Point point = new Point(100, 100);
-		Place place = null;
-		List<Arch> edges = new ArrayList<Arch>();
+		
+		point = new Point(100, 100);
+		place = new Place(point);
+		
+		edges = new ArrayList<Arch>();
+		arch = new Arch(null, 0);
+		edges.add(arch);		
 
-		//		Runnable r = new Runnable() {
-//			public void run() {
-				place = new Place(point);
-				edges.add(new Arch(null, 0));
-				Graph.getInstance().addNode(place, edges);
-//			}
-//		};
-//			 
-//		Thread t = new Thread(r);
-//		t.start();
-//		
-		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
+		Graph.getInstance().addNode(place, edges);		
+		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());		
 	}
 }
