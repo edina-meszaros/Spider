@@ -28,7 +28,7 @@ public class Place extends Node {
 		if(super.equals(object) && this.tokens == ((Place) object).getTokens()){
 			return true;
 		}
-			
+
 		return false;
 	}
 

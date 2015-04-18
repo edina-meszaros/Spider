@@ -39,5 +39,6 @@ public class CreateTransitionButtonAction extends AbstractAction {
 		
 		Graph.getInstance().addNode(transition, edges);
 		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
+		controller.getMainWindow().getCanvas().repaint();
 	}
 }

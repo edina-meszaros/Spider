@@ -67,8 +67,6 @@ public class Canvas extends JPanel {
 				drawTransition(node.getPosition(), g2);
 			}
 		}
-		
-		repaint();
 	}
 	
 	public void drawPlace(Point point, Graphics2D g2){

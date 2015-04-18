@@ -39,6 +39,7 @@ public class CreatePlaceButtonAction extends AbstractAction {
 		edges.add(arch);		
 
 		Graph.getInstance().addNode(place, edges);		
-		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());		
+		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
+		controller.getMainWindow().getCanvas().repaint();
 	}
 }

@@ -15,6 +15,7 @@ public class MouseMotionHandler extends MouseMotionAdapter {
 
     @Override
     public void mouseDragged(MouseEvent e) {
+        System.out.println(e.getX());
         
 //            mouseRect.setBounds(
 //                Math.min(mousePt.x, e.getX()),

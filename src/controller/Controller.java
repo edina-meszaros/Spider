@@ -2,11 +2,8 @@ package controller;
 
 import java.awt.Point;
 
+import controller.actions.*;
 import view.MainWindow;
-import controller.actions.CreatePlaceButtonAction;
-import controller.actions.CreatePlacePopupAction;
-import controller.actions.CreateTransitionButtonAction;
-import controller.actions.CreateTransitionPopupAction;
 import controller.listeners.MousePopupListener;
 import model.Graph;
 
@@ -18,6 +15,7 @@ public class Controller {
 	private MousePopupListener mousePopupListener = null;
 	private CreatePlacePopupAction createPlacePopupAction = null;
 	private CreateTransitionPopupAction createTransitionPopupAction = null;
+	private MouseMotionHandler mouseMotionHandler = null;
 	
 	public Controller(){
 		mainWindow = MainWindow.getInstance();
@@ -36,6 +34,9 @@ public class Controller {
 		
 		mainWindow.getCanvas().getNewPlace().setAction(createPlacePopupAction);
 		mainWindow.getCanvas().getNewTransition().setAction(createTransitionPopupAction);
+
+		mouseMotionHandler = new MouseMotionHandler();
+		mainWindow.getCanvas().addMouseMotionListener(mouseMotionHandler);
 	}
 
 	public MainWindow getMainWindow() { return mainWindow; }
