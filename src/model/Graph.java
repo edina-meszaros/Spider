@@ -39,6 +39,14 @@ public class Graph {
 	}
 
 	public Map<Node, List<Arch>> getGraph() { return graph; }
-	
-	
+
+	public Node getSelectedNode(){
+		for(Node node : graph.keySet()){
+			if(node.isSelected()){
+				return node;
+			}
+		}
+
+		return null;
+	}
 }

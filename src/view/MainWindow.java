@@ -27,19 +27,19 @@ public class MainWindow extends JFrame {
 		setSize(800, 600);
 
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLayout(new BorderLayout());		
-		
+		setLayout(new BorderLayout());
+
 		mainMenu = new MainMenu();
 		this.setJMenuBar(mainMenu);
-		
+
 		canvas = new Canvas();
 		add(canvas, BorderLayout.CENTER);
-		
+
 		toolBar = new ToolBar();
 		add(toolBar, BorderLayout.PAGE_START);
-		
+
 		leftPanel = new LeftPanel(canvas);
-		add(leftPanel, BorderLayout.LINE_START);		
+		add(leftPanel, BorderLayout.LINE_START);
 	}
 	
 	public static MainWindow getInstance() {

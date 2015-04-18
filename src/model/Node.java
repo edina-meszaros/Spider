@@ -10,10 +10,12 @@ public class Node {
 	private String label = null;
 	private Point position = null;
 	private Rectangle frame = null;
+	private boolean selected;
 	
 	public Node(){
 		this.id = UUID.randomUUID();
 		frame = new Rectangle();
+		this.selected = false;
 	}
 	
 	public Node(Point position){
@@ -73,5 +75,7 @@ public class Node {
 	public String getLabel() { return this.label; }
 	public void setLabel(String label) { this.label = label; }
 	public Point getPosition() { return position; }
-	public void setPosition(Point position) { this.position = position; }	
+	public void setPosition(Point position) { this.position = position; }
+	public boolean isSelected() { return selected; }
+	public void setSelected(boolean selected) { this.selected = selected; }
 }

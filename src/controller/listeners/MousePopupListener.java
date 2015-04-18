@@ -1,6 +1,5 @@
 package controller.listeners;
 
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,18 +15,21 @@ public class MousePopupListener extends MouseAdapter {
 	public MousePopupListener(JPopupMenu popup, Canvas canvas){
 		this.popup = popup;
 		this.canvas = canvas;
-	}	
-	
+	}
+
+	@Override
 	public void mousePressed(MouseEvent e) {
-		canvas.setMousePosition(e.getPoint());		
+		canvas.setMousePosition(e.getPoint());
 		checkPopup(e);
 	}
 
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		canvas.setMousePosition(e.getPoint());
 		checkPopup(e);
 	}
 
+	@Override
 	public void mouseReleased(MouseEvent e) {
 		canvas.setMousePosition(e.getPoint());
 		checkPopup(e);
