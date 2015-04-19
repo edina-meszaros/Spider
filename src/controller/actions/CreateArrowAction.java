@@ -76,12 +76,12 @@ public class CreateArrowAction extends MouseAdapter {
         				Graph.getInstance().getEdges(startNode).add(new Arch(targetNode));
 	        			refreshCanvas();
         			}
-        		}        	
-        	
-        		Canvas.getInstance().setLineStart(null);
-				Canvas.getInstance().setLineEnd(null);
-				Canvas.getInstance().repaint();
+        		}        		
         	}
+        	
+        	Canvas.getInstance().setLineStart(null);
+			Canvas.getInstance().setLineEnd(null);
+			Canvas.getInstance().repaint();
         }   
     }
 
