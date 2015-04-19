@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 
+import view.Canvas;
 import controller.Controller;
 import model.Arch;
 import model.Graph;
@@ -38,7 +39,7 @@ public class CreateTransitionButtonAction extends AbstractAction {
 		edges.add(arch);
 		
 		Graph.getInstance().addNode(transition, edges);
-		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
-		controller.getMainWindow().getCanvas().repaint();
+		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
+		Canvas.getInstance().repaint();
 	}
 }

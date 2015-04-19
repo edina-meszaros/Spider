@@ -11,11 +11,12 @@ public class Properties extends JComponent {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private static Properties instance = null;
 	private JPanel title = new JPanel();
 	private JPanel content = new JPanel();
 	private Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 	
-	public Properties(){
+	private Properties(){
 		
 		this.title.setPreferredSize(new Dimension(150, 25));
 		this.title.setBackground(new Color(147, 157, 168));		
@@ -27,5 +28,12 @@ public class Properties extends JComponent {
 		this.add(title, BorderLayout.NORTH);
 		this.add(content, BorderLayout.CENTER);
 		this.setBorder(this.border);
-	}	
+	}
+	
+	public static Properties getInstance() {
+		if (instance == null) {
+			instance = new Properties();
+		}
+		return instance;		
+	}
 }

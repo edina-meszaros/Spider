@@ -8,15 +8,23 @@ import javax.swing.*;
 
 public class ToolBar extends JPanel implements ActionListener {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;	
+	private static ToolBar instance = null;
 
-	public ToolBar() {
+	private ToolBar() {
 		super(new BorderLayout());
 		JToolBar toolBar = new JToolBar("Tools");
 		addButtons(toolBar);
 		setPreferredSize(new Dimension(100, 30));
 		add(toolBar, BorderLayout.PAGE_START);
 
+	}
+	
+	public static ToolBar getInstance() {
+		if (instance == null) {
+			instance = new ToolBar();
+		}
+		return instance;		
 	}
 
 	protected void addButtons(JToolBar toolBar) {
@@ -53,5 +61,4 @@ public class ToolBar extends JPanel implements ActionListener {
 		// TODO Auto-generated method stub
 
 	}
-
 }

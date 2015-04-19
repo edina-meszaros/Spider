@@ -1,40 +1,28 @@
 package view.panels;
 
 import javax.swing.*;
-
 import view.Canvas;
 
 public class LeftPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
-	private TabbedPanel tabbedPanel = null;
-	private Output output = null;
-	private Properties properties = null;
+	private static LeftPanel instance = null;	
 
-	public LeftPanel(Canvas canvas) {
+	private LeftPanel(Canvas canvas) {
 		super();
 		this.setSize(200, 300);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		this.tabbedPanel = new TabbedPanel(canvas);
-		this.output = new Output();
-		this.properties = new Properties();
-		
-		this.add(this.tabbedPanel);
-		this.add(this.output);
-		this.add(this.properties);
+		this.add(TabbedPanel.getInstance());
+		this.add(Output.getInstance());
+		this.add(Properties.getInstance());
 	}
-
-	public TabbedPanel getTabbedPanel() {
-		return tabbedPanel;
-	}
-
-	public Output getOutput() {
-		return output;
-	}
-
-	public Properties getProperties() {
-		return properties;
+	
+	public static LeftPanel getInstance() {
+		if (instance == null) {
+			instance = new LeftPanel(Canvas.getInstance());
+		}
+		return instance;		
 	}	
 }

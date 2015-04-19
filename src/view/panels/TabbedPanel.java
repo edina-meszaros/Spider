@@ -14,12 +14,13 @@ public class TabbedPanel extends JTabbedPane {
 	
 	private static final long serialVersionUID = 1L;
 	
+	private static TabbedPanel instance = null;
 	private JPanel firstTab;
 	private JPanel secondTab;
 	private JButton newPlace;
 	private JButton newTransition;
 	
-	public TabbedPanel(Canvas canvas){
+	private TabbedPanel(Canvas canvas){
 		
 		//Create first tab
 		this.firstTab = new JPanel();
@@ -39,6 +40,13 @@ public class TabbedPanel extends JTabbedPane {
 		//Add tabs to the panel
 		this.addTab("Analyser", this.firstTab);
 		this.addTab("Editor", this.secondTab);		
+	}
+	
+	public static TabbedPanel getInstance() {
+		if (instance == null) {
+			instance = new TabbedPanel(Canvas.getInstance());
+		}
+		return instance;		
 	}
 
 	public JPanel getFirstTab() { return firstTab; }

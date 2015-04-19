@@ -6,12 +6,13 @@ public class MainMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
 
+	private static MainMenu instance = null;
 	private JMenu menu, submenu;
 	private JMenuItem menuItem;
 	private JRadioButtonMenuItem rbMenuItem;
 	private JCheckBoxMenuItem cbMenuItem;
 
-	public MainMenu() {
+	private MainMenu() {
 		super();
 	
 		//A menu example:
@@ -70,5 +71,12 @@ public class MainMenu extends JMenuBar {
 		        "This menu does nothing");
 		
 		this.add(menu);		
-	}	
+	}
+	
+	public static MainMenu getInstance() {
+		if (instance == null) {
+			instance = new MainMenu();
+		}
+		return instance;		
+	}
 }

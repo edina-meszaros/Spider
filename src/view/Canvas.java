@@ -1,28 +1,12 @@
 package view;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.RectangularShape;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.awt.*;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-
 import model.Arch;
-import model.Graph;
 import model.Node;
 import model.Place;
 import model.Transition;
@@ -31,13 +15,14 @@ public class Canvas extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	private static Canvas instance = null;
 	private JPopupMenu popup;
 	private JMenuItem newPlace;
 	private JMenuItem newTransition;
 	private Point mousePosition = null;
 	private Map<Node, List<Arch>> graph = null;
 
-	public Canvas() {
+	private Canvas() {
 		super();
 		this.setBackground(new Color(219, 218, 213));
 
@@ -48,6 +33,13 @@ public class Canvas extends JPanel {
 
 		this.popup.add(newPlace);
 		this.popup.add(newTransition);
+	}
+	
+	public static Canvas getInstance() {
+		if (instance == null) {
+			instance = new Canvas();
+		}
+		return instance;		
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 
+import view.Canvas;
 import controller.Controller;
 import model.Arch;
 import model.Graph;
@@ -31,7 +32,7 @@ public class CreatePlacePopupAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		point = controller.getMainWindow().getCanvas().getMousePosition();
+		point = Canvas.getInstance().getMousePosition();
 		place = new Place(point);
 		
 		edges = new ArrayList<Arch>();
@@ -39,6 +40,6 @@ public class CreatePlacePopupAction extends AbstractAction {
 		edges.add(arch);		
 
 		Graph.getInstance().addNode(place, edges);		
-		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
+		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 	}
 }

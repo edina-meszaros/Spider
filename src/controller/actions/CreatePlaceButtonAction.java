@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 
+import view.Canvas;
 import model.Arch;
 import model.Graph;
 import model.Place;
@@ -39,7 +40,7 @@ public class CreatePlaceButtonAction extends AbstractAction {
 		edges.add(arch);		
 
 		Graph.getInstance().addNode(place, edges);		
-		controller.getMainWindow().getCanvas().updateGraph(Graph.getInstance().getGraph());
-		controller.getMainWindow().getCanvas().repaint();
+		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
+		Canvas.getInstance().repaint();
 	}
 }
