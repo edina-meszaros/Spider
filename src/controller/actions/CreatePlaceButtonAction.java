@@ -36,7 +36,7 @@ public class CreatePlaceButtonAction extends AbstractAction {
 		place = new Place(point);
 		
 		edges = new ArrayList<Arch>();
-		arch = new Arch(null, 0);
+		arch = new Arch(null);
 		edges.add(arch);		
 
 		Graph.getInstance().addNode(place, edges);		

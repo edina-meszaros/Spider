@@ -28,7 +28,7 @@ public class Transition extends Node {
 		return super.toString();
 	}
 
-	public UUID getId() { return this.getId(); }
+	public UUID getId() { return super.getId(); }
 	public String getLabel() { return super.getLabel(); }
 	public void setLabel(String label) { super.setLabel(label); }
 	public Point getPosition() { return super.getPosition(); }

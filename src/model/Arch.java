@@ -13,6 +13,10 @@ public class Arch {
 		this.target = target;
 		this.weight = weight;
 	}
+	
+	public Arch(Node target) {
+		this(target, 1);
+	}
 
 	public Node getTarget() {
 		return target;

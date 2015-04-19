@@ -49,4 +49,8 @@ public class Graph {
 
 		return null;
 	}
+	
+	public List<Arch> getEdges(Node node){
+		return graph.get(node);
+	}
 }

@@ -35,7 +35,7 @@ public class CreateTransitionPopupAction extends AbstractAction {
 		transition = new Transition(point);
 		
 		edges = new ArrayList<Arch>();
-		arch = new Arch(null, 0);
+		arch = new Arch(null);
 		edges.add(arch);
 		
 		Graph.getInstance().addNode(transition, edges);

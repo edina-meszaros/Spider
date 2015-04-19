@@ -15,6 +15,7 @@ public class Controller {
 	private CreateTransitionPopupAction createTransitionPopupAction = null;
 	private MouseMotionHandler mouseMotionHandler = null;
 	private NodeSelect nodeSelect = null;
+	private CreateArrowAction createArrowAction = null;
 	
 	public Controller(){
 		
@@ -41,5 +42,9 @@ public class Controller {
 
 		nodeSelect = new NodeSelect(Canvas.getInstance());
 		Canvas.getInstance().addMouseListener(nodeSelect);
+		
+		createArrowAction = new CreateArrowAction(Canvas.getInstance());
+		Canvas.getInstance().addMouseListener(createArrowAction);
+		Canvas.getInstance().addMouseMotionListener(createArrowAction);				
 	}
 }
