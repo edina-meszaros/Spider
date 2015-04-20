@@ -8,10 +8,8 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import controller.Controller;
-import controller.actions.CreateArrowAction;
+import view.style.Style;
 import model.Arch;
-import model.Graph;
 import model.Node;
 import model.Place;
 import model.Transition;
@@ -31,7 +29,7 @@ public class Canvas extends JPanel {
 
 	private Canvas() {
 		super();
-		this.setBackground(new Color(219, 218, 213));
+		this.setBackground(Style.BACKGROUND);
 
 		this.popup = new JPopupMenu();
 
@@ -76,57 +74,58 @@ public class Canvas extends JPanel {
 		}		
 		
 		if(lineStart != null && lineEnd != null){		
-			g2.setColor(new Color(118, 126, 135));
+			g2.setColor(Style.DARK_GREY);
 			float[] dash1 = {2f, 0f, 2f};
 			BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,
 	                BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
 			g2.setStroke(bs1);
 
-			g2.drawLine(lineStart.x + 20, lineStart.y + 20, lineEnd.x, lineEnd.y);
+			g2.drawLine(lineStart.x + Style.CENTER, lineStart.y + Style.CENTER, lineEnd.x, lineEnd.y);
 			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
 	}
 
 	public void drawPlace(Node node, Graphics2D g2){
-		g2.setColor(new Color(172, 174, 185));
-		g2.fillOval(node.getPosition().x, node.getPosition().y, 40, 40);
+		g2.setColor(Style.LIGHT_GREY);
+		g2.fillOval(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
 
         if(node.isSelected()){
-            g2.setColor(Color.MAGENTA);
+            g2.setColor(Style.PINK);
         }else{
-            g2.setColor(new Color(118, 126, 135));
+            g2.setColor(Style.DARK_GREY);
         }
 
 		g2.setStroke(new BasicStroke(1.5f));
-		g2.drawOval(node.getPosition().x, node.getPosition().y, 40, 40);
+		g2.drawOval(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
 		
-		g2.setColor(new Color(118, 126, 135));
+		//Place tokens
+		g2.setColor(Style.DARK_GREY);
 		g2.drawString(((Place)node).getTokens().toString(), node.getPosition().x + 18, node.getPosition().y + 23);
 	}
 
 	public void drawTransition(Node node, Graphics2D g2) {
-        g2.setColor(new Color(172, 174, 185));
-        g2.fillRect(node.getPosition().x, node.getPosition().y, 40, 40);
+        g2.setColor(Style.LIGHT_GREY);
+        g2.fillRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
 
         if(node.isSelected()){
-            g2.setColor(Color.MAGENTA);
+            g2.setColor(Style.PINK);
         }else{
-            g2.setColor(new Color(118, 126, 135));
+            g2.setColor(Style.DARK_GREY);
         }
 
         g2.setStroke(new BasicStroke(1.5f));
-        g2.drawRect(node.getPosition().x, node.getPosition().y, 40, 40);
+        g2.drawRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
 	}
 	
 	public void drawArch(Node startNode, Node endNode, Integer weight, Graphics2D g2){
-		g2.setColor(new Color(118, 126, 135));
-		g2.drawLine(startNode.getPosition().x + 20, startNode.getPosition().y + 20, endNode.getPosition().x + 20, endNode.getPosition().y + 20);
+		g2.setColor(Style.DARK_GREY);
+		g2.drawLine(startNode.getPosition().x + Style.CENTER, startNode.getPosition().y + Style.CENTER, endNode.getPosition().x + Style.CENTER, endNode.getPosition().y + Style.CENTER);
 		g2.fillArc(endNode.getPosition().x-3, endNode.getPosition().y-3, 20, 20, 135, 45);
 		
-		int lineCenterX = (startNode.getPosition().x + 20 + endNode.getPosition().x + 20) / 2;
-		int lineCenterY = (startNode.getPosition().y + 20 + endNode.getPosition().y + 20) / 2;
+		int lineCenterX = (startNode.getPosition().x + Style.CENTER + endNode.getPosition().x + Style.CENTER) / 2;
+		int lineCenterY = (startNode.getPosition().y + Style.CENTER + endNode.getPosition().y + Style.CENTER) / 2;
 		
-		g2.setColor(new Color(118, 126, 135));		
+		g2.setColor(Style.DARK_GREY);		
 		g2.drawString(weight.toString(), lineCenterX - 8, lineCenterY - 8);
 	}
 

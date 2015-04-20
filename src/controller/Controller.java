@@ -4,7 +4,6 @@ import controller.actions.*;
 import view.Canvas;
 import view.MainWindow;
 import view.panels.TabbedPanel;
-import controller.listeners.MousePopupListener;
 
 public class Controller {
 
@@ -31,9 +30,9 @@ public class Controller {
 		Canvas.getInstance().addMouseListener(mousePopupListener);
 		
 		createPlacePopupAction = new CreatePlacePopupAction("New Place", this);
-		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition", this);
-		
 		Canvas.getInstance().getNewPlace().setAction(createPlacePopupAction);
+		
+		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition", this);		
 		Canvas.getInstance().getNewTransition().setAction(createTransitionPopupAction);
 
 		mouseMotionHandler = new MouseMotionHandler(Canvas.getInstance());
