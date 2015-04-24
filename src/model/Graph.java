@@ -53,4 +53,17 @@ public class Graph {
 	public List<Arch> getEdges(Node node){
 		return graph.get(node);
 	}
+	
+	public Arch getSelectedArch(){
+		for(Node node : graph.keySet()){
+			for(Arch arch : getEdges(node)){
+				if(arch.isSelected()){
+					
+					return arch;
+				}
+			}
+		}
+		
+		return null;
+	}
 }

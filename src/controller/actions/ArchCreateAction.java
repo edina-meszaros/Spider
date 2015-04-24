@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
 
-public class CreateArrowAction extends MouseAdapter {
+public class ArchCreateAction extends MouseAdapter {
 
     private Canvas canvas = null;
 	private Point mouseStartPoint = null;
@@ -18,7 +18,7 @@ public class CreateArrowAction extends MouseAdapter {
 	private Point mouseEndPoint = null;
 	private boolean drawingEnabled = false;
 
-    public CreateArrowAction(Canvas canvas){
+    public ArchCreateAction(Canvas canvas){
         this.canvas = canvas;
     }
 
@@ -67,7 +67,7 @@ public class CreateArrowAction extends MouseAdapter {
         					continue;
         				}else if(arch.getTarget() == null){
         					arch.setTarget(targetNode);
-        					created = true;
+        					created = true;        					
         					refreshCanvas();
         				}
         			}

@@ -10,6 +10,7 @@ import javax.swing.JPopupMenu;
 
 import view.style.Style;
 import model.Arch;
+import model.Graph;
 import model.Node;
 import model.Place;
 import model.Transition;
@@ -118,9 +119,38 @@ public class Canvas extends JPanel {
 	}
 	
 	public void drawArch(Node startNode, Node endNode, Integer weight, Graphics2D g2){
-		g2.setColor(Style.DARK_GREY);
-		g2.drawLine(startNode.getPosition().x + Style.CENTER, startNode.getPosition().y + Style.CENTER, endNode.getPosition().x + Style.CENTER, endNode.getPosition().y + Style.CENTER);
-		g2.fillArc(endNode.getPosition().x-3, endNode.getPosition().y-3, 20, 20, 135, 45);
+		
+		Point start = new Point(startNode.getPosition().x + Style.CENTER, startNode.getPosition().y + Style.CENTER);
+		Point end = new Point(endNode.getPosition().x + Style.CENTER, endNode.getPosition().y + Style.CENTER);
+		
+		for(Arch arch : graph.get(startNode)){
+			
+			if(arch.isSelected() && arch != null){
+				
+				g2.setColor(Style.PINK);
+				g2.drawLine(start.x, start.y, end.x, end.y);
+				
+				//Point arrowHead = calculateArrowHead(start, end);		
+				//System.out.println(end + " @@ " + arrowHead);				
+				g2.setColor(Style.DARK_GREY);
+				g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+			}else{				
+				
+				g2.setColor(Style.DARK_GREY);
+				g2.drawLine(start.x, start.y, end.x, end.y);			
+				
+				//Point arrowHead = calculateArrowHead(start, end);		
+				//System.out.println(end + " @@ " + arrowHead);
+				
+				g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+			}
+		}
+		
+		g2.setColor(Color.RED);
+		g2.drawLine(301, 220, 601, 255);
+		
+		//Point arrowHead = calculateArrowHead(start, end);		
+		//System.out.println(end + " @@ " + arrowHead);
 		
 		int lineCenterX = (startNode.getPosition().x + Style.CENTER + endNode.getPosition().x + Style.CENTER) / 2;
 		int lineCenterY = (startNode.getPosition().y + Style.CENTER + endNode.getPosition().y + Style.CENTER) / 2;
@@ -131,6 +161,19 @@ public class Canvas extends JPanel {
 
 	public void updateGraph(Map<Node, List<Arch>> graph){
 		this.graph = graph;
+	}
+	
+	public Point calculateArrowHead(Point lineStart, Point lineEnd){
+		
+		int radius = Style.SHAPE_SIZE/2;
+		int a = (int) Math.pow(lineStart.x - lineEnd.x, 2);
+		int b = (int) Math.pow(lineStart.y - lineEnd.y, 2);
+		
+		int X = lineEnd.x + (radius * (lineStart.x - lineEnd.x)) / (int) Math.sqrt(a + b);
+		int Y = -1 * ((((lineStart.y - lineEnd.y) / (lineStart.x - lineEnd.x)) * (X - lineEnd.x)) - lineEnd.y);
+		
+		return new Point(X, Y);
+		
 	}
 
 	public JPopupMenu getPopup() { return popup; }
