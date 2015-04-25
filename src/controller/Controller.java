@@ -53,5 +53,9 @@ public class Controller {
 		
 		archDelete = new ArchDelete();
 		Canvas.getInstance().addKeyListener(archDelete);
+		
+		Canvas.getInstance().addFocusListener(new UnselectOnLostFocus());
+		
+		Canvas.getInstance().addKeyListener(new NodeDelete());
 	}
 }

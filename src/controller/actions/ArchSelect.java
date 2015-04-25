@@ -22,7 +22,8 @@ public class ArchSelect extends MouseAdapter {
         	}
         }       
         
-        selectArch(e);        
+        selectArch(e);  
+        Canvas.getInstance().grabFocus();
         
         Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
         Canvas.getInstance().repaint();

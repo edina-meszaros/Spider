@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +12,7 @@ import javax.swing.JPopupMenu;
 
 import view.style.Style;
 import model.Arch;
+import model.Graph;
 import model.Node;
 import model.Place;
 import model.Transition;
@@ -29,7 +32,8 @@ public class Canvas extends JPanel {
 
 	private Canvas() {
 		super();
-		this.setBackground(Style.BACKGROUND);
+		this.setFocusable(true);
+		this.setBackground(Style.BACKGROUND);		
 
 		this.popup = new JPopupMenu();
 
@@ -80,6 +84,8 @@ public class Canvas extends JPanel {
 			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
 	}
+	
+	
 
 	public void drawPlace(Node node, Graphics2D g2){
 		g2.setColor(Style.LIGHT_GREY);
@@ -171,6 +177,5 @@ public class Canvas extends JPanel {
 	public Point getMousePosition() { return mousePosition; }
 	public void setMousePosition(Point mousePosition) { this.mousePosition = mousePosition; }
 	public void setLineStart(Point lineStart) { this.lineStart = lineStart; }
-	public void setLineEnd(Point lineEnd) { this.lineEnd = lineEnd; }
-	
+	public void setLineEnd(Point lineEnd) { this.lineEnd = lineEnd; }	
 }

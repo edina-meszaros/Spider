@@ -17,7 +17,6 @@ public class ToolBar extends JPanel implements ActionListener {
 		addButtons(toolBar);
 		setPreferredSize(new Dimension(100, 30));
 		add(toolBar, BorderLayout.PAGE_START);
-
 	}
 	
 	public static ToolBar getInstance() {

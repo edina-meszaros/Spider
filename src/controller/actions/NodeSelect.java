@@ -24,7 +24,8 @@ public class NodeSelect extends MouseAdapter {
 
             if(node instanceof Transition) {
                 if (isTransitionContainsPoint(e, node.getPosition())) {
-                    node.setSelected(true);
+                    node.setSelected(true);                    
+                    Canvas.getInstance().grabFocus();
                     break;
 
                 }
@@ -32,7 +33,8 @@ public class NodeSelect extends MouseAdapter {
 
             if(node instanceof Place){
                 if (isPlaceContainsPoint(e, node.getPosition())) {
-                    node.setSelected(true);
+                    node.setSelected(true);                    
+                    Canvas.getInstance().grabFocus();
                     break;
 
                 }
