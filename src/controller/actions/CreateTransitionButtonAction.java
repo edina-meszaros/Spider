@@ -2,14 +2,9 @@ package controller.actions;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.swing.AbstractAction;
 
 import view.Canvas;
-import controller.Controller;
-import model.Arch;
 import model.Graph;
 import model.Transition;
 
@@ -17,15 +12,10 @@ public class CreateTransitionButtonAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	private Controller controller = null;
 	private Point point = null;
 	private Transition transition = null;
-	private List<Arch> edges = null;
-	private Arch arch = null;
-	
-	public CreateTransitionButtonAction(String name, Controller controller) {
+	public CreateTransitionButtonAction(String name) {
 		super(name);
-		this.controller = controller;
 	}
 
 	@Override
@@ -34,11 +24,7 @@ public class CreateTransitionButtonAction extends AbstractAction {
 		point = new Point(100, 100);
 		transition = new Transition(point);
 		
-		edges = new ArrayList<Arch>();
-		arch = new Arch(null);
-		edges.add(arch);
-		
-		Graph.getInstance().addNode(transition, edges);
+		Graph.getInstance().addNode(transition);
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 		Canvas.getInstance().repaint();
 	}

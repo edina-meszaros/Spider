@@ -12,19 +12,12 @@ import java.util.Map;
 
 public class ArchCreateAction extends MouseAdapter {
 
-    private Canvas canvas = null;
-	private Point mouseStartPoint = null;
-	private Node startNode = null;
+    private Node startNode = null;
 	private Point mouseEndPoint = null;
 	private boolean drawingEnabled = false;
 
-    public ArchCreateAction(Canvas canvas){
-        this.canvas = canvas;
-    }
-
     @Override
     public void mousePressed(MouseEvent e) {
-        mouseStartPoint = e.getPoint();
         
         Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
 
@@ -52,30 +45,18 @@ public class ArchCreateAction extends MouseAdapter {
     @Override
     public void mouseReleased(MouseEvent e) {
     	Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
-    	boolean created = false;
     	
         for(Node targetNode : graph.keySet()){
         	if(!targetNode.isSelected() && isNodeContainsPoint(e, targetNode)){        		
         		
-        		if((startNode instanceof Place && targetNode instanceof Transition) || 
-        				(startNode instanceof Transition && targetNode instanceof Place)){
+        		if(startNode.getClass() != targetNode.getClass()){
+        			
         			List<Arch> edges = Graph.getInstance().getEdges(startNode);
         			
-        			for(Arch arch : edges){
-        				if(arch.getTarget() != null && arch.getTarget().equals(targetNode)){
-        					created = true;
-        					continue;
-        				}else if(arch.getTarget() == null){
-        					arch.setTarget(targetNode);
-        					created = true;        					
-        					refreshCanvas();
-        				}
-        			}
-        			
-        			if(!created){
-        				Graph.getInstance().getEdges(startNode).add(new Arch(targetNode));
-	        			refreshCanvas();
-        			}
+        			if(!isContainsNode(targetNode, edges)){
+        				edges.add(new Arch(targetNode));
+        				refreshCanvas();
+        			}        			
         		}        		
         	}
         	
@@ -84,6 +65,17 @@ public class ArchCreateAction extends MouseAdapter {
 			Canvas.getInstance().repaint();
         }   
     }
+
+	private boolean isContainsNode(Node targetNode, List<Arch> edges) {
+		
+		for(Arch arch : edges){
+			if(arch.getTarget().equals(targetNode)){
+				return true;
+			}
+		}
+		
+		return false;
+	}
 
 	private void refreshCanvas() {
 		Canvas.getInstance().setLineStart(null);

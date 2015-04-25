@@ -22,29 +22,29 @@ public class Controller {
 		
 		MainWindow.getInstance();
 		
-		createPlaceButtonAction = new CreatePlaceButtonAction("New Place", this);
+		createPlaceButtonAction = new CreatePlaceButtonAction("New Place");
 		TabbedPanel.getInstance().getNewPlace().setAction(createPlaceButtonAction);
 		
-		createTransitionButtonAction = new CreateTransitionButtonAction("New Transition", this);
+		createTransitionButtonAction = new CreateTransitionButtonAction("New Transition");
 		TabbedPanel.getInstance().getNewTransition().setAction(createTransitionButtonAction);
 		
 		mousePopupListener = new MousePopupListener(Canvas.getInstance().getPopup(), Canvas.getInstance());
 		Canvas.getInstance().addMouseListener(mousePopupListener);
 		
-		createPlacePopupAction = new CreatePlacePopupAction("New Place", this);
+		createPlacePopupAction = new CreatePlacePopupAction("New Place");
 		Canvas.getInstance().getNewPlace().setAction(createPlacePopupAction);
 		
-		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition", this);		
+		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition");		
 		Canvas.getInstance().getNewTransition().setAction(createTransitionPopupAction);
 
-		mouseMotionHandler = new MouseMotionHandler(Canvas.getInstance());
+		mouseMotionHandler = new MouseMotionHandler();
 		Canvas.getInstance().addMouseListener(mouseMotionHandler);
 		Canvas.getInstance().addMouseMotionListener(mouseMotionHandler);
 
-		nodeSelect = new NodeSelect(Canvas.getInstance());
+		nodeSelect = new NodeSelect();
 		Canvas.getInstance().addMouseListener(nodeSelect);
 		
-		createArrowAction = new ArchCreateAction(Canvas.getInstance());
+		createArrowAction = new ArchCreateAction();
 		Canvas.getInstance().addMouseListener(createArrowAction);
 		Canvas.getInstance().addMouseMotionListener(createArrowAction);
 		

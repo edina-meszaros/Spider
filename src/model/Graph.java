@@ -1,10 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.NoSuchElementException;
 import java.util.Set;
 
 public class Graph {
@@ -13,7 +12,6 @@ public class Graph {
 	
 	private static Map<Node, List<Arch>> graph = new HashMap<Node, List<Arch>>();
 	private static Graph instance = null;
-	private int count = 0;
 
 	private Graph() {
 
@@ -26,8 +24,8 @@ public class Graph {
 		return instance;		
 	}
 	
-	public void addNode(Node node, List<Arch> edges){
-		graph.put(node, edges);
+	public void addNode(Node node){
+		graph.put(node, new ArrayList<Arch>());
 	}
 	
 	public void deleteNode(Node node){
@@ -57,8 +55,7 @@ public class Graph {
 	public Arch getSelectedArch(){
 		for(Node node : graph.keySet()){
 			for(Arch arch : getEdges(node)){
-				if(arch.isSelected()){
-					
+				if(arch.isSelected()){					
 					return arch;
 				}
 			}

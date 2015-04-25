@@ -10,7 +10,6 @@ import javax.swing.JPopupMenu;
 
 import view.style.Style;
 import model.Arch;
-import model.Graph;
 import model.Node;
 import model.Place;
 import model.Transition;
@@ -56,22 +55,18 @@ public class Canvas extends JPanel {
 		if(graph == null) return;
 
 		for (Node node : graph.keySet()) {
-		
-			for(Arch arch : graph.get(node)){
-				
-				if(node instanceof Place){
-					drawPlace(node, g2);					
-					if(arch.getTarget() != null)
-						drawArch(node, arch.getTarget(), arch.getWeight(), g2);
-				}
-
-				if(node instanceof Transition){
-					drawTransition(node, g2);
-					if(arch.getTarget() != null)
-						drawArch(node, arch.getTarget(), arch.getWeight(), g2);
-				}
+			
+			if(node instanceof Place){
+				drawPlace(node, g2);
 			}
 			
+			if(node instanceof Transition){
+				drawTransition(node, g2);
+			}			
+		
+			for (Arch arch : graph.get(node)) {
+				drawArch(arch, node, g2);
+			}			
 		}		
 		
 		if(lineStart != null && lineEnd != null){		
@@ -118,45 +113,39 @@ public class Canvas extends JPanel {
         g2.drawRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
 	}
 	
-	public void drawArch(Node startNode, Node endNode, Integer weight, Graphics2D g2){
+	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
 		
 		Point start = new Point(startNode.getPosition().x + Style.CENTER, startNode.getPosition().y + Style.CENTER);
-		Point end = new Point(endNode.getPosition().x + Style.CENTER, endNode.getPosition().y + Style.CENTER);
+		Point end = new Point(arch.getTarget().getPosition().x + Style.CENTER, arch.getTarget().getPosition().y + Style.CENTER);
 		
-		for(Arch arch : graph.get(startNode)){
+		if(arch.isSelected()){
 			
-			if(arch.isSelected() && arch != null){
-				
-				g2.setColor(Style.PINK);
-				g2.drawLine(start.x, start.y, end.x, end.y);
-				
-				//Point arrowHead = calculateArrowHead(start, end);		
-				//System.out.println(end + " @@ " + arrowHead);				
-				g2.setColor(Style.DARK_GREY);
-				g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
-			}else{				
-				
-				g2.setColor(Style.DARK_GREY);
-				g2.drawLine(start.x, start.y, end.x, end.y);			
-				
-				//Point arrowHead = calculateArrowHead(start, end);		
-				//System.out.println(end + " @@ " + arrowHead);
-				
-				g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
-			}
+			g2.setColor(Style.PINK);
+			g2.drawLine(start.x, start.y, end.x, end.y);
+			
+			//Point arrowHead = calculateArrowHead(start, end);		
+			//System.out.println(end + " @@ " + arrowHead);				
+			g2.setColor(Style.DARK_GREY);
+			g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+		}else{				
+			
+			g2.setColor(Style.DARK_GREY);
+			g2.drawLine(start.x, start.y, end.x, end.y);			
+			
+			//Point arrowHead = calculateArrowHead(start, end);		
+			//System.out.println(end + " @@ " + arrowHead);
+			
+			g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
 		}
-		
-		g2.setColor(Color.RED);
-		g2.drawLine(301, 220, 601, 255);
 		
 		//Point arrowHead = calculateArrowHead(start, end);		
 		//System.out.println(end + " @@ " + arrowHead);
 		
-		int lineCenterX = (startNode.getPosition().x + Style.CENTER + endNode.getPosition().x + Style.CENTER) / 2;
-		int lineCenterY = (startNode.getPosition().y + Style.CENTER + endNode.getPosition().y + Style.CENTER) / 2;
+		int lineCenterX = (startNode.getPosition().x + Style.CENTER + arch.getTarget().getPosition().x + Style.CENTER) / 2;
+		int lineCenterY = (startNode.getPosition().y + Style.CENTER + arch.getTarget().getPosition().y + Style.CENTER) / 2;
 		
 		g2.setColor(Style.DARK_GREY);		
-		g2.drawString(weight.toString(), lineCenterX - 8, lineCenterY - 8);
+		g2.drawString( String.valueOf(arch.getWeight()), lineCenterX - 8, lineCenterY - 8);
 	}
 
 	public void updateGraph(Map<Node, List<Arch>> graph){

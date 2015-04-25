@@ -12,12 +12,6 @@ import java.util.Map;
 
 public class NodeSelect extends MouseAdapter {
 
-    Canvas canvas = null;
-
-    public NodeSelect(Canvas canvas){
-        this.canvas = canvas;
-    }
-
     @Override
     public void mouseClicked(MouseEvent e) {
         Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
@@ -45,7 +39,7 @@ public class NodeSelect extends MouseAdapter {
             }
         }
 
-        this.canvas.repaint();
+        Canvas.getInstance().repaint();
     }
 
     private boolean isTransitionContainsPoint(MouseEvent e, Point position) {

@@ -10,12 +10,7 @@ import java.awt.event.MouseEvent;
 
 public class MouseMotionHandler extends MouseAdapter {
 
-    private Canvas canvas = null;
 	private Point mouseStartPoint = null;
-
-    public MouseMotionHandler(Canvas canvas){
-        this.canvas = canvas;
-    }
 
     @Override
     public void mousePressed(MouseEvent e) {
@@ -35,7 +30,7 @@ public class MouseMotionHandler extends MouseAdapter {
                 int deltaY = mouseStartPoint.y - e.getPoint().y;
 
                 selectedNode.setPosition(new Point(selectedNode.getPosition().x - deltaX, selectedNode.getPosition().y - deltaY));
-                canvas.repaint();
+                Canvas.getInstance().repaint();
             }
         }
 
@@ -46,7 +41,7 @@ public class MouseMotionHandler extends MouseAdapter {
                 int deltaY = mouseStartPoint.y - e.getPoint().y;
 
                 selectedNode.setPosition(new Point(selectedNode.getPosition().x - deltaX, selectedNode.getPosition().y - deltaY));
-                canvas.repaint();
+                Canvas.getInstance().repaint();
             }
         }
 
