@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
 
-public class ArchCreateAction extends MouseAdapter {
+public class ArchCreate extends MouseAdapter {
 
     private Node startNode = null;
 	private Point mouseEndPoint = null;
@@ -47,7 +47,7 @@ public class ArchCreateAction extends MouseAdapter {
     	Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
     	
         for(Node targetNode : graph.keySet()){
-        	if(!targetNode.isSelected() && isNodeContainsPoint(e, targetNode)){        		
+        	if(isNodeContainsPoint(e, targetNode)){        		
         		
         		if(startNode.getClass() != targetNode.getClass()){
         			

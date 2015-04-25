@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.List;
 import java.util.Map;
 
@@ -57,21 +55,48 @@ public class Canvas extends JPanel {
 		Graphics2D g2 = (Graphics2D) g;
 
 		if(graph == null) return;
-
-		for (Node node : graph.keySet()) {
-			
-			if(node instanceof Place){
-				drawPlace(node, g2);
-			}
-			
-			if(node instanceof Transition){
-				drawTransition(node, g2);
-			}			
 		
-			for (Arch arch : graph.get(node)) {
+		for (Node node : graph.keySet()){
+			
+			for(Arch arch : graph.get(node)){
 				drawArch(arch, node, g2);
 			}			
 		}		
+		
+		for (Node node : graph.keySet()) {
+			if(!node.isSelected()){
+				if(node instanceof Place){
+					drawPlace(node, g2);
+				}else{
+					drawTransition(node, g2);
+				}	
+			}
+		}
+		
+		if(Graph.getInstance().getSelectedNode() instanceof Place){
+			drawPlace(Graph.getInstance().getSelectedNode(), g2);
+		}
+		
+		if(Graph.getInstance().getSelectedNode() instanceof Transition){
+			drawTransition(Graph.getInstance().getSelectedNode(), g2);
+		}
+		
+		
+
+//		for (Node node : graph.keySet()) {
+//			
+//			if(node instanceof Place){
+//				drawPlace(node, g2);
+//			}
+//			
+//			if(node instanceof Transition){
+//				drawTransition(node, g2);
+//			}			
+//		
+//			for (Arch arch : graph.get(node)) {
+//				drawArch(arch, node, g2);
+//			}			
+//		}		
 		
 		if(lineStart != null && lineEnd != null){		
 			g2.setColor(Style.DARK_GREY);
@@ -90,11 +115,12 @@ public class Canvas extends JPanel {
 	public void drawPlace(Node node, Graphics2D g2){
 		g2.setColor(Style.LIGHT_GREY);
 		g2.fillOval(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
-
+		
         if(node.isSelected()){
-            g2.setColor(Style.PINK);
+            g2.setColor(Style.PINK);            
         }else{
             g2.setColor(Style.DARK_GREY);
+            
         }
 
 		g2.setStroke(new BasicStroke(1.5f));

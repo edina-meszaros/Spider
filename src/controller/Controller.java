@@ -12,9 +12,9 @@ public class Controller {
 	private MousePopupListener mousePopupListener = null;
 	private CreatePlacePopupAction createPlacePopupAction = null;
 	private CreateTransitionPopupAction createTransitionPopupAction = null;
-	private MouseMotionHandler mouseMotionHandler = null;
+	private NodeMove mouseMotionHandler = null;
 	private NodeSelect nodeSelect = null;
-	private ArchCreateAction createArrowAction = null;
+	private ArchCreate createArrowAction = null;
 	private ArchSelect archSelect = null;
 	private ArchDelete archDelete = null;
 	
@@ -37,14 +37,14 @@ public class Controller {
 		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition");		
 		Canvas.getInstance().getNewTransition().setAction(createTransitionPopupAction);
 
-		mouseMotionHandler = new MouseMotionHandler();
+		mouseMotionHandler = new NodeMove();
 		Canvas.getInstance().addMouseListener(mouseMotionHandler);
 		Canvas.getInstance().addMouseMotionListener(mouseMotionHandler);
 
 		nodeSelect = new NodeSelect();
 		Canvas.getInstance().addMouseListener(nodeSelect);
 		
-		createArrowAction = new ArchCreateAction();
+		createArrowAction = new ArchCreate();
 		Canvas.getInstance().addMouseListener(createArrowAction);
 		Canvas.getInstance().addMouseMotionListener(createArrowAction);
 		
