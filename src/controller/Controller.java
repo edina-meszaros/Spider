@@ -9,9 +9,15 @@ public class Controller {
 
 	private CreatePlaceButtonAction createPlaceButtonAction = null;
 	private CreateTransitionButtonAction createTransitionButtonAction = null;
-	private MousePopupListener mousePopupListener = null;
+	private NewNodePopupListener newNodePopupListener = null;
+	private ChangePopupListener changeNodePopupListener = null;
 	private CreatePlacePopupAction createPlacePopupAction = null;
 	private CreateTransitionPopupAction createTransitionPopupAction = null;
+	private ChangePlaceTokenPopupAction changePlaceTokenPopupAction = null;
+	private ChangeNodeNamePopupAction changeNodeNamePopupAction = null;
+	private ChangeArchWeightPopupAction changeArchWeightPopupAction = null;
+	
+	
 	private NodeMove mouseMotionHandler = null;
 	private NodeSelect nodeSelect = null;
 	private ArchCreate createArrowAction = null;
@@ -28,14 +34,24 @@ public class Controller {
 		createTransitionButtonAction = new CreateTransitionButtonAction("New Transition");
 		TabbedPanel.getInstance().getNewTransition().setAction(createTransitionButtonAction);
 		
-		mousePopupListener = new MousePopupListener(Canvas.getInstance().getPopup(), Canvas.getInstance());
-		Canvas.getInstance().addMouseListener(mousePopupListener);
+		newNodePopupListener = new NewNodePopupListener(Canvas.getInstance());
+		Canvas.getInstance().addMouseListener(newNodePopupListener);
 		
 		createPlacePopupAction = new CreatePlacePopupAction("New Place");
-		Canvas.getInstance().getNewPlace().setAction(createPlacePopupAction);
+		Canvas.getInstance().getNewPlaceMenu().setAction(createPlacePopupAction);
 		
 		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition");		
-		Canvas.getInstance().getNewTransition().setAction(createTransitionPopupAction);
+		Canvas.getInstance().getNewTransitionMenu().setAction(createTransitionPopupAction);
+		
+		changePlaceTokenPopupAction = new ChangePlaceTokenPopupAction("Change token");
+		Canvas.getInstance().getNewPlaceTokensMenu().setAction(changePlaceTokenPopupAction);
+		
+		changeNodeNamePopupAction= new ChangeNodeNamePopupAction("Change node name");
+		Canvas.getInstance().getNewNodeNamePlaceMenu().setAction(changeNodeNamePopupAction);
+		Canvas.getInstance().getNewNodeNameTransitionMenu().setAction(changeNodeNamePopupAction);
+		
+		changeArchWeightPopupAction = new ChangeArchWeightPopupAction("Change weight");
+		Canvas.getInstance().getNewArchWeightMenu().setAction(changeArchWeightPopupAction);
 
 		mouseMotionHandler = new NodeMove();
 		Canvas.getInstance().addMouseListener(mouseMotionHandler);
@@ -57,5 +73,10 @@ public class Controller {
 		Canvas.getInstance().addFocusListener(new UnselectOnLostFocus());
 		
 		Canvas.getInstance().addKeyListener(new NodeDelete());
+		
+		changeNodePopupListener = new ChangePopupListener(Canvas.getInstance());
+		Canvas.getInstance().addMouseListener(changeNodePopupListener);
+		
+		
 	}
 }

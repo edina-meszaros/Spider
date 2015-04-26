@@ -20,9 +20,16 @@ public class Canvas extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private static Canvas instance = null;
-	private JPopupMenu popup;
+	private JPopupMenu popupNewNode;
+	private JPopupMenu popupChangePlace;
+	private JPopupMenu popupChangeTransition;
+	private JPopupMenu popupChangeArch;
 	private JMenuItem newPlace;
 	private JMenuItem newTransition;
+	private JMenuItem newPlaceTokens;
+	private JMenuItem newArchWeight;
+	private JMenuItem newNodeNamePlace;
+	private JMenuItem newNodeNameTransition;
 	private Point mousePosition = null;
 	private Map<Node, List<Arch>> graph = null;
 	private Point lineStart = null;
@@ -34,13 +41,33 @@ public class Canvas extends JPanel {
 		this.setFocusable(true);
 		this.setBackground(Style.BACKGROUND);		
 
-		this.popup = new JPopupMenu();
+		this.popupNewNode = new JPopupMenu();
+		this.popupNewNode.setFocusable(false);
 
 		this.newPlace = new JMenuItem("New Place");
 		this.newTransition = new JMenuItem("New Transition");
 
-		this.popup.add(newPlace);
-		this.popup.add(newTransition);
+		this.popupNewNode.add(newPlace);
+		this.popupNewNode.add(newTransition);
+		
+		this.popupChangePlace = new JPopupMenu();
+		this.popupChangePlace.setFocusable(false);
+		
+		this.newPlaceTokens = new JMenuItem("Change token");
+		this.newArchWeight = new JMenuItem("Change weight");
+		this.newNodeNamePlace = new JMenuItem("Change node name");
+		this.newNodeNameTransition = new JMenuItem("Change node name");
+
+		this.popupChangePlace.add(newPlaceTokens);
+		this.popupChangePlace.add(newNodeNamePlace);
+		
+		this.popupChangeTransition = new JPopupMenu();
+		this.popupChangeTransition.setFocusable(false);
+		this.popupChangeTransition.add(newNodeNameTransition);
+		
+		this.popupChangeArch = new JPopupMenu();
+		this.popupChangeArch.setFocusable(false);
+		this.popupChangeArch.add(newArchWeight);
 	}
 	
 	public static Canvas getInstance() {
@@ -57,8 +84,7 @@ public class Canvas extends JPanel {
 
 		if(graph == null) return;
 		
-		for (Node node : graph.keySet()){
-			
+		for (Node node : graph.keySet()){			
 			for(Arch arch : graph.get(node)){
 				drawArch(arch, node, g2);
 			}			
@@ -209,11 +235,18 @@ public class Canvas extends JPanel {
 		
 		return new Point(X, Y);
 		
-	}
+	}	
 
-	public JPopupMenu getPopup() { return popup; }
-	public JMenuItem getNewPlace() { return newPlace; }
-	public JMenuItem getNewTransition() { return newTransition; }
+	public JPopupMenu getPopupNewNode() { return popupNewNode; }
+	public JPopupMenu getPopupChangePlace() { return popupChangePlace; }
+	public JPopupMenu getPopupChangeTransition() { return popupChangeTransition; }
+	public JPopupMenu getPopupChangeArch() { return popupChangeArch; }
+	public JMenuItem getNewPlaceMenu() { return newPlace; }
+	public JMenuItem getNewTransitionMenu() { return newTransition; }	
+	public JMenuItem getNewPlaceTokensMenu() { 		return newPlaceTokens; 	}
+	public JMenuItem getNewArchWeightMenu() { 		return newArchWeight; 	}
+	public JMenuItem getNewNodeNamePlaceMenu() { 		return newNodeNamePlace; 	}
+	public JMenuItem getNewNodeNameTransitionMenu() { 		return newNodeNameTransition; 	}
 	public Point getMousePosition() { return mousePosition; }
 	public void setMousePosition(Point mousePosition) { this.mousePosition = mousePosition; }
 	public void setLineStart(Point lineStart) { this.lineStart = lineStart; }

@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class NodeSelect extends MouseAdapter {
-
+	
     @Override
     public void mouseClicked(MouseEvent e) {
         Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
@@ -24,7 +24,7 @@ public class NodeSelect extends MouseAdapter {
 
             if(node instanceof Transition) {
                 if (isTransitionContainsPoint(e, node.getPosition())) {
-                    node.setSelected(true);                    
+                    node.setSelected(true);
                     Canvas.getInstance().grabFocus();
                     break;
 

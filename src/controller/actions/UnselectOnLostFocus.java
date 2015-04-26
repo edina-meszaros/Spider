@@ -26,6 +26,7 @@ public class UnselectOnLostFocus implements FocusListener {
 		for(Node node : graph.keySet()){
 			node.setSelected(false);
 			
+			
 			for(Arch arch : graph.get(node)){
 				arch.setSelected(false);
 			}
