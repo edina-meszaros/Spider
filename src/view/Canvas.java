@@ -27,6 +27,7 @@ public class Canvas extends JPanel {
 	private Map<Node, List<Arch>> graph = null;
 	private Point lineStart = null;
 	private Point lineEnd = null;
+	private static final int CHAR_HEIGHT = 3;
 
 	private Canvas() {
 		super();
@@ -79,24 +80,7 @@ public class Canvas extends JPanel {
 		
 		if(Graph.getInstance().getSelectedNode() instanceof Transition){
 			drawTransition(Graph.getInstance().getSelectedNode(), g2);
-		}
-		
-		
-
-//		for (Node node : graph.keySet()) {
-//			
-//			if(node instanceof Place){
-//				drawPlace(node, g2);
-//			}
-//			
-//			if(node instanceof Transition){
-//				drawTransition(node, g2);
-//			}			
-//		
-//			for (Arch arch : graph.get(node)) {
-//				drawArch(arch, node, g2);
-//			}			
-//		}		
+		}	
 		
 		if(lineStart != null && lineEnd != null){		
 			g2.setColor(Style.DARK_GREY);
@@ -128,7 +112,11 @@ public class Canvas extends JPanel {
 		
 		//Place tokens
 		g2.setColor(Style.DARK_GREY);
-		g2.drawString(((Place)node).getTokens().toString(), node.getPosition().x + 18, node.getPosition().y + 23);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		String token = ((Place)node).getTokens().toString();
+		g2.drawString(token, 
+				(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
+		
 	}
 
 	public void drawTransition(Node node, Graphics2D g2) {
@@ -147,8 +135,12 @@ public class Canvas extends JPanel {
 	
 	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
 		
-		Point start = new Point(startNode.getPosition().x + Style.CENTER, startNode.getPosition().y + Style.CENTER);
-		Point end = new Point(arch.getTarget().getPosition().x + Style.CENTER, arch.getTarget().getPosition().y + Style.CENTER);
+		int startX = startNode.getNodeCenterPosition().x;
+		int endX = arch.getTarget().getNodeCenterPosition().x;
+		int startY = startNode.getNodeCenterPosition().y;
+		Point start = new Point(startX, startY);
+		int endY = arch.getTarget().getNodeCenterPosition().y;
+		Point end = new Point(endX, endY);
 		
 		if(arch.isSelected()){
 			
@@ -173,11 +165,33 @@ public class Canvas extends JPanel {
 		//Point arrowHead = calculateArrowHead(start, end);		
 		//System.out.println(end + " @@ " + arrowHead);
 		
-		int lineCenterX = (startNode.getPosition().x + Style.CENTER + arch.getTarget().getPosition().x + Style.CENTER) / 2;
-		int lineCenterY = (startNode.getPosition().y + Style.CENTER + arch.getTarget().getPosition().y + Style.CENTER) / 2;
+		if(arch.getWeight() < 2)
+			return;
 		
-		g2.setColor(Style.DARK_GREY);		
-		g2.drawString( String.valueOf(arch.getWeight()), lineCenterX - 8, lineCenterY - 8);
+		int lineCenterX = (startX + endX) / 2;
+		int lineCenterY = (startY + endY) / 2;
+		
+		if(startX == endX)
+			startX += 1;
+		
+		if(startY == endY)
+			startY += 1;
+		
+		g2.setColor(Style.BACKGROUND);
+		//g2.setColor(Color.yellow);
+		g2.fillRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length() - 3), 
+				lineCenterY - 10, (int) (13 * String.valueOf(arch.getWeight()).length()), 20);
+		
+//		g2.setColor(Color.black);
+//		g2.setStroke(new BasicStroke(1.0f));
+//		g2.drawRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()), 
+//				lineCenterY - 20, (int) (15 * String.valueOf(arch.getWeight()).length()), 20);
+		
+		g2.setColor(Style.DARK_GREY);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));		
+		g2.drawString(String.valueOf(arch.getWeight()), 
+				(int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()), 
+				lineCenterY + 4);
 	}
 
 	public void updateGraph(Map<Node, List<Arch>> graph){

@@ -4,6 +4,8 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.UUID;
 
+import view.style.Style;
+
 public class Node {
 
 	private UUID id;
@@ -70,11 +72,15 @@ public class Node {
 		
 		return sb.toString();
 	}
+	
+	public Point getNodeCenterPosition(){
+		return new Point(this.position.x + Style.CENTER, this.position.y + Style.CENTER);
+	}
 
 	public UUID getId() { return this.id; }
 	public String getLabel() { return this.label; }
 	public void setLabel(String label) { this.label = label; }
-	public Point getPosition() { return position; }
+	public Point getPosition() { return this.position; }
 	public void setPosition(Point position) { this.position = position; }
 	public boolean isSelected() { return selected; }
 	public void setSelected(boolean selected) { this.selected = selected; }

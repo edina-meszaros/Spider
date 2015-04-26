@@ -44,6 +44,10 @@ public class ArchCreate extends MouseAdapter {
     
     @Override
     public void mouseReleased(MouseEvent e) {
+    	
+    	if(!drawingEnabled)
+    		return;
+    	
     	Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
     	
         for(Node targetNode : graph.keySet()){
@@ -63,7 +67,9 @@ public class ArchCreate extends MouseAdapter {
         	Canvas.getInstance().setLineStart(null);
 			Canvas.getInstance().setLineEnd(null);
 			Canvas.getInstance().repaint();
-        }   
+        }
+        
+        drawingEnabled = false;
     }
 
 	private boolean isContainsNode(Node targetNode, List<Arch> edges) {
