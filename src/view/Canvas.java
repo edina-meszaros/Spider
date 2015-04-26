@@ -129,19 +129,23 @@ public class Canvas extends JPanel {
         if(node.isSelected()){
             g2.setColor(Style.PINK);            
         }else{
-            g2.setColor(Style.DARK_GREY);
-            
+            g2.setColor(Style.DARK_GREY);            
         }
-
+        
 		g2.setStroke(new BasicStroke(1.5f));
 		g2.drawOval(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
 		
-		//Place tokens
+		//Draw token
 		g2.setColor(Style.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		String token = ((Place)node).getTokens().toString();
 		g2.drawString(token, 
 				(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
+		
+		//Draw label
+		g2.drawString("P1", node.getPosition().x-8, node.getPosition().y-8);
+		
+		System.out.println(node.getPosition());
 		
 	}
 
@@ -157,6 +161,9 @@ public class Canvas extends JPanel {
 
         g2.setStroke(new BasicStroke(1.5f));
         g2.drawRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
+
+        //Draw label
+		g2.drawString("T1", node.getPosition().x-8, node.getPosition().y-8);
 	}
 	
 	public void drawArch(Arch arch, Node startNode, Graphics2D g2){

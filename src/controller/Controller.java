@@ -15,9 +15,7 @@ public class Controller {
 	private CreateTransitionPopupAction createTransitionPopupAction = null;
 	private ChangePlaceTokenPopupAction changePlaceTokenPopupAction = null;
 	private ChangeNodeNamePopupAction changeNodeNamePopupAction = null;
-	private ChangeArchWeightPopupAction changeArchWeightPopupAction = null;
-	
-	
+	private ChangeArchWeightPopupAction changeArchWeightPopupAction = null;	
 	private NodeMove mouseMotionHandler = null;
 	private NodeSelect nodeSelect = null;
 	private ArchCreate createArrowAction = null;
@@ -75,8 +73,7 @@ public class Controller {
 		Canvas.getInstance().addKeyListener(new NodeDelete());
 		
 		changeNodePopupListener = new ChangePopupListener(Canvas.getInstance());
-		Canvas.getInstance().addMouseListener(changeNodePopupListener);
-		
+		Canvas.getInstance().addMouseListener(changeNodePopupListener);	
 		
 	}
 }
