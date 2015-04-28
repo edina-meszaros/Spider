@@ -26,5 +26,6 @@ public class CreatePlacePopupAction extends AbstractAction {
 
 		Graph.getInstance().addNode(place);		
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
+		Canvas.getInstance().repaint();
 	}
 }

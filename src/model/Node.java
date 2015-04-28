@@ -9,7 +9,7 @@ import view.style.Style;
 public class Node {
 
 	private UUID id;
-	private String label = null;
+	private String label = "";
 	private Point position = null;
 	private Rectangle frame = null;
 	private boolean selected;

@@ -27,5 +27,6 @@ public class CreateTransitionPopupAction extends AbstractAction {
 		
 		Graph.getInstance().addNode(transition);
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
+		Canvas.getInstance().repaint();
 	}
 }

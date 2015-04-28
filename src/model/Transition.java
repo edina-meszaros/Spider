@@ -20,7 +20,10 @@ public class Transition extends Node {
 
 	@Override
 	public int hashCode() {
-		return super.hashCode();
+		final int prime = 11;
+		int result = super.hashCode();
+		result = prime * result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+		return result;
 	}
 	
 	@Override

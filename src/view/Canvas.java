@@ -30,11 +30,13 @@ public class Canvas extends JPanel {
 	private JMenuItem newArchWeight;
 	private JMenuItem newNodeNamePlace;
 	private JMenuItem newNodeNameTransition;
+	private JMenuItem newPlaceBound;
 	private Point mousePosition = null;
 	private Map<Node, List<Arch>> graph = null;
 	private Point lineStart = null;
 	private Point lineEnd = null;
 	private static final int CHAR_HEIGHT = 3;
+	private int counter = 0;
 
 	private Canvas() {
 		super();
@@ -44,8 +46,8 @@ public class Canvas extends JPanel {
 		this.popupNewNode = new JPopupMenu();
 		this.popupNewNode.setFocusable(false);
 
-		this.newPlace = new JMenuItem("New Place");
-		this.newTransition = new JMenuItem("New Transition");
+		this.newPlace = new JMenuItem();
+		this.newTransition = new JMenuItem();
 
 		this.popupNewNode.add(newPlace);
 		this.popupNewNode.add(newTransition);
@@ -53,13 +55,15 @@ public class Canvas extends JPanel {
 		this.popupChangePlace = new JPopupMenu();
 		this.popupChangePlace.setFocusable(false);
 		
-		this.newPlaceTokens = new JMenuItem("Change token");
-		this.newArchWeight = new JMenuItem("Change weight");
-		this.newNodeNamePlace = new JMenuItem("Change node name");
-		this.newNodeNameTransition = new JMenuItem("Change node name");
+		this.newPlaceTokens = new JMenuItem();
+		this.newArchWeight = new JMenuItem();
+		this.newNodeNamePlace = new JMenuItem();
+		this.newNodeNameTransition = new JMenuItem();
+		this.newPlaceBound = new JMenuItem();
 
 		this.popupChangePlace.add(newPlaceTokens);
 		this.popupChangePlace.add(newNodeNamePlace);
+		this.popupChangePlace.add(newPlaceBound);
 		
 		this.popupChangeTransition = new JPopupMenu();
 		this.popupChangeTransition.setFocusable(false);
@@ -118,6 +122,7 @@ public class Canvas extends JPanel {
 			g2.drawLine(lineStart.x + Style.CENTER, lineStart.y + Style.CENTER, lineEnd.x, lineEnd.y);
 			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
+		
 	}
 	
 	
@@ -143,9 +148,23 @@ public class Canvas extends JPanel {
 				(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
 		
 		//Draw label
-		g2.drawString("P1", node.getPosition().x-8, node.getPosition().y-8);
+		String label = node.getLabel();
 		
-		System.out.println(node.getPosition());
+		if(label.equals("")){
+			//counter++;
+			label = "P".concat(String.valueOf(counter));
+		}
+		
+		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
+		
+		//Draw bound		
+		String bound = "";
+		
+		if(((Place) node).getBound() != 0){
+			bound = "K: ".concat(String.valueOf(((Place) node).getBound()));
+		}		
+		
+		g2.drawString(bound, (int) (node.getNodeCenterPosition().x - 3.5*bound.length()), node.getPosition().y + 55);
 		
 	}
 
@@ -161,9 +180,19 @@ public class Canvas extends JPanel {
 
         g2.setStroke(new BasicStroke(1.5f));
         g2.drawRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
+        
+        g2.setColor(Style.DARK_GREY);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
         //Draw label
-		g2.drawString("T1", node.getPosition().x-8, node.getPosition().y-8);
+        String label = node.getLabel();
+        
+        if(label.equals("")){
+			//counter++;
+			label = "T".concat(String.valueOf(counter));
+		}
+		
+		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
 	}
 	
 	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
@@ -215,11 +244,6 @@ public class Canvas extends JPanel {
 		g2.fillRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length() - 3), 
 				lineCenterY - 10, (int) (13 * String.valueOf(arch.getWeight()).length()), 20);
 		
-//		g2.setColor(Color.black);
-//		g2.setStroke(new BasicStroke(1.0f));
-//		g2.drawRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()), 
-//				lineCenterY - 20, (int) (15 * String.valueOf(arch.getWeight()).length()), 20);
-		
 		g2.setColor(Style.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));		
 		g2.drawString(String.valueOf(arch.getWeight()), 
@@ -250,10 +274,11 @@ public class Canvas extends JPanel {
 	public JPopupMenu getPopupChangeArch() { return popupChangeArch; }
 	public JMenuItem getNewPlaceMenu() { return newPlace; }
 	public JMenuItem getNewTransitionMenu() { return newTransition; }	
-	public JMenuItem getNewPlaceTokensMenu() { 		return newPlaceTokens; 	}
-	public JMenuItem getNewArchWeightMenu() { 		return newArchWeight; 	}
-	public JMenuItem getNewNodeNamePlaceMenu() { 		return newNodeNamePlace; 	}
-	public JMenuItem getNewNodeNameTransitionMenu() { 		return newNodeNameTransition; 	}
+	public JMenuItem getNewPlaceTokensMenu() { return newPlaceTokens; }
+	public JMenuItem getNewArchWeightMenu() { return newArchWeight; }
+	public JMenuItem getNewNodeNamePlaceMenu() { return newNodeNamePlace; }
+	public JMenuItem getNewNodeNameTransitionMenu() { return newNodeNameTransition; }
+	public JMenuItem getNewPlaceBound() { return newPlaceBound; }
 	public Point getMousePosition() { return mousePosition; }
 	public void setMousePosition(Point mousePosition) { this.mousePosition = mousePosition; }
 	public void setLineStart(Point lineStart) { this.lineStart = lineStart; }

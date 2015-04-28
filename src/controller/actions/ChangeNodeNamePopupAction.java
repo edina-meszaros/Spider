@@ -21,7 +21,7 @@ public class ChangeNodeNamePopupAction extends AbstractAction {
 		
 		Node selectedNode = Graph.getInstance().getSelectedNode();
 		
-		String name = JOptionPane.showInputDialog("Please insert new name:");
+		String name = JOptionPane.showInputDialog("Kérlek írd be az új csúcs nevét:");
 		
 		if(name != null){
 			try{

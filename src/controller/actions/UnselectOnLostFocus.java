@@ -13,9 +13,7 @@ import model.Node;
 public class UnselectOnLostFocus implements FocusListener {
 
 	@Override
-	public void focusGained(FocusEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void focusGained(FocusEvent e) {		
 	}
 
 	@Override

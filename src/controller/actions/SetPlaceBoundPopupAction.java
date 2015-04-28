@@ -1,17 +1,19 @@
 package controller.actions;
 
 import java.awt.event.ActionEvent;
+
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
+
 import view.Canvas;
 import model.Graph;
 import model.Place;
 
-public class ChangePlaceTokenPopupAction extends AbstractAction {
+public class SetPlaceBoundPopupAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ChangePlaceTokenPopupAction(String name) {
+	public SetPlaceBoundPopupAction(String name) {
 		super(name);
 	}
 
@@ -20,11 +22,11 @@ public class ChangePlaceTokenPopupAction extends AbstractAction {
 		
 		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();
 		
-		String token = JOptionPane.showInputDialog("Kérlek írd be a csúcs tokenszámát:");
+		String bound = JOptionPane.showInputDialog("Kérlek írd be a hely korlátját:");
 		
-		if(token != null){
+		if(bound != null){
 			try{
-				selectedNode.setTokens(Integer.parseInt(token));
+				selectedNode.setBound(Integer.parseInt(bound));
 			} catch (NumberFormatException ex){
 				//output error
 			}

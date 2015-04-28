@@ -27,7 +27,7 @@ public class ChangeArchWeightPopupAction extends AbstractAction {
 		if(selectedArch == null)
 			return;
 		
-		String weight = JOptionPane.showInputDialog("Please insert new arch weight:");
+		String weight = JOptionPane.showInputDialog("Kérlek írd be az új élsúlyt:");
 		
 		if(weight != null){
 			try{

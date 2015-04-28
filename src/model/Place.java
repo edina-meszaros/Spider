@@ -5,7 +5,8 @@ import java.util.UUID;
 
 public class Place extends Node {
 
-	private Integer tokens = 0;	
+	private Integer tokens = 0;
+	private Integer bound = 0;
 	
 	public Place(){
 		
@@ -62,5 +63,6 @@ public class Place extends Node {
 	public void setTokens(int tokens) { this.tokens = tokens; }
 	public Point getPosition() { return super.getPosition(); }
 	public void setPosition(Point position) { super.setPosition(position); }
-	
+	public Integer getBound() { return bound; }
+	public void setBound(Integer bound) { this.bound = bound; }	
 }

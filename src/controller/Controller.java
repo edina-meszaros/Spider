@@ -16,6 +16,7 @@ public class Controller {
 	private ChangePlaceTokenPopupAction changePlaceTokenPopupAction = null;
 	private ChangeNodeNamePopupAction changeNodeNamePopupAction = null;
 	private ChangeArchWeightPopupAction changeArchWeightPopupAction = null;	
+	private SetPlaceBoundPopupAction setPlaceBoundPopupAction = null;
 	private NodeMove mouseMotionHandler = null;
 	private NodeSelect nodeSelect = null;
 	private ArchCreate createArrowAction = null;
@@ -26,30 +27,33 @@ public class Controller {
 		
 		MainWindow.getInstance();
 		
-		createPlaceButtonAction = new CreatePlaceButtonAction("New Place");
+		createPlaceButtonAction = new CreatePlaceButtonAction("Új hely");
 		TabbedPanel.getInstance().getNewPlace().setAction(createPlaceButtonAction);
 		
-		createTransitionButtonAction = new CreateTransitionButtonAction("New Transition");
+		createTransitionButtonAction = new CreateTransitionButtonAction("Új állapot");
 		TabbedPanel.getInstance().getNewTransition().setAction(createTransitionButtonAction);
 		
 		newNodePopupListener = new NewNodePopupListener(Canvas.getInstance());
 		Canvas.getInstance().addMouseListener(newNodePopupListener);
 		
-		createPlacePopupAction = new CreatePlacePopupAction("New Place");
+		createPlacePopupAction = new CreatePlacePopupAction("Új hely");
 		Canvas.getInstance().getNewPlaceMenu().setAction(createPlacePopupAction);
 		
-		createTransitionPopupAction = new CreateTransitionPopupAction("New Transition");		
+		createTransitionPopupAction = new CreateTransitionPopupAction("Új állapot");		
 		Canvas.getInstance().getNewTransitionMenu().setAction(createTransitionPopupAction);
 		
-		changePlaceTokenPopupAction = new ChangePlaceTokenPopupAction("Change token");
+		changePlaceTokenPopupAction = new ChangePlaceTokenPopupAction("Új token");
 		Canvas.getInstance().getNewPlaceTokensMenu().setAction(changePlaceTokenPopupAction);
 		
-		changeNodeNamePopupAction= new ChangeNodeNamePopupAction("Change node name");
+		changeNodeNamePopupAction= new ChangeNodeNamePopupAction("Új név");
 		Canvas.getInstance().getNewNodeNamePlaceMenu().setAction(changeNodeNamePopupAction);
 		Canvas.getInstance().getNewNodeNameTransitionMenu().setAction(changeNodeNamePopupAction);
 		
-		changeArchWeightPopupAction = new ChangeArchWeightPopupAction("Change weight");
+		changeArchWeightPopupAction = new ChangeArchWeightPopupAction("Új súly");
 		Canvas.getInstance().getNewArchWeightMenu().setAction(changeArchWeightPopupAction);
+		
+		setPlaceBoundPopupAction = new SetPlaceBoundPopupAction("Új korlát");
+		Canvas.getInstance().getNewPlaceBound().setAction(setPlaceBoundPopupAction);
 
 		mouseMotionHandler = new NodeMove();
 		Canvas.getInstance().addMouseListener(mouseMotionHandler);
