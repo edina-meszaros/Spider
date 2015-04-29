@@ -32,10 +32,10 @@ public class TabbedPanel extends JTabbedPane {
 		this.secondTab.setBackground(new Color(219,218,213));
 		this.secondTab.setPreferredSize(new Dimension(150, 150));
 		
-		this.newPlace = new JButton();
-		this.secondTab.add(newPlace);
-		this.newTransition = new JButton();
-		this.secondTab.add(newTransition);
+		//this.newPlace = new JButton();
+		//this.secondTab.add(newPlace);
+		//this.newTransition = new JButton();
+		//this.secondTab.add(newTransition);
 		
 		//Add tabs to the panel
 		this.addTab("Analyser", this.firstTab);

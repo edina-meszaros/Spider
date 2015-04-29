@@ -36,7 +36,6 @@ public class Canvas extends JPanel {
 	private Point lineStart = null;
 	private Point lineEnd = null;
 	private static final int CHAR_HEIGHT = 3;
-	private int counter = 0;
 
 	private Canvas() {
 		super();
@@ -152,7 +151,7 @@ public class Canvas extends JPanel {
 		
 		if(label.equals("")){
 			//counter++;
-			label = "P".concat(String.valueOf(counter));
+			label = Graph.getInstance().getNextName();
 		}
 		
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
@@ -189,7 +188,7 @@ public class Canvas extends JPanel {
         
         if(label.equals("")){
 			//counter++;
-			label = "T".concat(String.valueOf(counter));
+			label = Graph.getInstance().getNextName();
 		}
 		
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);

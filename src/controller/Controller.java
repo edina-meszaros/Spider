@@ -27,11 +27,11 @@ public class Controller {
 		
 		MainWindow.getInstance();
 		
-		createPlaceButtonAction = new CreatePlaceButtonAction("Új hely");
-		TabbedPanel.getInstance().getNewPlace().setAction(createPlaceButtonAction);
+		//createPlaceButtonAction = new CreatePlaceButtonAction("Új hely");
+		//TabbedPanel.getInstance().getNewPlace().setAction(createPlaceButtonAction);
 		
-		createTransitionButtonAction = new CreateTransitionButtonAction("Új állapot");
-		TabbedPanel.getInstance().getNewTransition().setAction(createTransitionButtonAction);
+		//createTransitionButtonAction = new CreateTransitionButtonAction("Új állapot");
+		//TabbedPanel.getInstance().getNewTransition().setAction(createTransitionButtonAction);
 		
 		newNodePopupListener = new NewNodePopupListener(Canvas.getInstance());
 		Canvas.getInstance().addMouseListener(newNodePopupListener);
