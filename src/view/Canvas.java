@@ -149,11 +149,6 @@ public class Canvas extends JPanel {
 		//Draw label
 		String label = node.getLabel();
 		
-		if(label.equals("")){
-			//counter++;
-			label = Graph.getInstance().getNextName();
-		}
-		
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
 		
 		//Draw bound		
@@ -164,7 +159,7 @@ public class Canvas extends JPanel {
 		}		
 		
 		g2.drawString(bound, (int) (node.getNodeCenterPosition().x - 3.5*bound.length()), node.getPosition().y + 55);
-		
+
 	}
 
 	public void drawTransition(Node node, Graphics2D g2) {
@@ -184,12 +179,7 @@ public class Canvas extends JPanel {
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
         //Draw label
-        String label = node.getLabel();
-        
-        if(label.equals("")){
-			//counter++;
-			label = Graph.getInstance().getNextName();
-		}
+		String label = node.getLabel();
 		
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
 	}

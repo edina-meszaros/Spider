@@ -64,31 +64,24 @@ public class Graph {
 		return null;
 	}
 	
-	public String getNextName(){
-		int placeCounter = 1;
-		int transitionCounter = 1;
-		String label = "";
-		
+	public String getNextName(String prefix){
+		int number = 1;
+		String label = prefix + number;
+
+		while (hasLabel(label)) {
+			label = prefix + ++number;
+		}
+
+		return label;
+	}
+
+	private boolean hasLabel(String label) {
 		for(Node node : graph.keySet()){
-			if(node instanceof Place && ((Place)node).getLabel().equals("P".concat(String.valueOf(placeCounter)))){
-				
-				System.out.println("if P".concat(String.valueOf(placeCounter)));
-				placeCounter++;
-			}else{
-				System.out.println("P".concat(String.valueOf(placeCounter)));
-				node.setLabel("P".concat(String.valueOf(placeCounter)));
-				
-				label = node.getLabel();				
-			}
-			
-			if(node instanceof Transition && ((Transition)node).getLabel().equals("T".concat(String.valueOf(transitionCounter)))){				
-				transitionCounter++;
-			}else{
-				node.setLabel("T".concat(String.valueOf(transitionCounter)));				
-				label =  node.getLabel();	
+			if (node.getLabel().equals(label)) {
+				return true;
 			}
 		}
-		
-		return label;
+
+		return false;
 	}
 }

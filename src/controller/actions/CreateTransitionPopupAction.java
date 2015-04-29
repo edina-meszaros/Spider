@@ -15,6 +15,7 @@ public class CreateTransitionPopupAction extends AbstractAction {
 	
 	private Point point = null;
 	private Transition transition = null;
+	
 	public CreateTransitionPopupAction(String name) {
 		super(name);
 	}
@@ -24,6 +25,7 @@ public class CreateTransitionPopupAction extends AbstractAction {
 		
 		point = Canvas.getInstance().getMousePosition();
 		transition = new Transition(point);
+		transition = new Transition(point, Graph.getInstance().getNextName("T"));
 		
 		Graph.getInstance().addNode(transition);
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());

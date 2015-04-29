@@ -22,7 +22,8 @@ public class CreatePlacePopupAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 
 		point = Canvas.getInstance().getMousePosition();
-		place = new Place(point);	
+		place = new Place(point);
+		place = new Place(point, Graph.getInstance().getNextName("P"));
 
 		Graph.getInstance().addNode(place);		
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
