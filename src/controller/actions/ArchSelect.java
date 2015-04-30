@@ -50,5 +50,4 @@ public class ArchSelect extends MouseAdapter {
         	}        	
         }
 	}
-
 }

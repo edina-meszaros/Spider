@@ -26,7 +26,4 @@ public class ArchDelete extends KeyAdapter {
 		Canvas.getInstance().updateGraph(graph);
         Canvas.getInstance().repaint();		
 	}
-
-    
-
 }

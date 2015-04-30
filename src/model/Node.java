@@ -4,36 +4,29 @@ import java.awt.Point;
 import java.awt.Rectangle;
 import java.util.UUID;
 
-import view.style.Style;
+import view.style.UIStyle;
 
 public class Node {
 
 	private UUID id;
 	private String label = "";
 	private Point position = null;
-	private Rectangle frame = null;
 	private boolean selected;
 	
 	public Node(){
 		this.id = UUID.randomUUID();
-		frame = new Rectangle();
 		this.selected = false;
 	}
 	
 	public Node(Point position){
 		this();
 		this.position = position;
-		setFrame(this.frame);
 	}
 	
 	public Node(Point position, String label){
 		this(position);
 		this.label = label;
 	}
-	
-	private void setFrame(Rectangle frame) {
-        frame.setBounds(position.x, position.y, 40, 40);
-    }
 	
 	@Override
 	public boolean equals(Object object) {
@@ -73,7 +66,7 @@ public class Node {
 	}
 	
 	public Point getNodeCenterPosition(){
-		return new Point(this.position.x + Style.CENTER, this.position.y + Style.CENTER);
+		return new Point(this.position.x + UIStyle.NODE_CENTER, this.position.y + UIStyle.NODE_CENTER);
 	}
 
 	public UUID getId() { return this.id; }

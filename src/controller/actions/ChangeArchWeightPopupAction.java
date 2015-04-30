@@ -1,16 +1,11 @@
 package controller.actions;
 
-import java.awt.Point;
 import java.awt.event.ActionEvent;
-
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
-
 import view.Canvas;
 import model.Arch;
 import model.Graph;
-import model.Node;
-import model.Place;
 
 public class ChangeArchWeightPopupAction extends AbstractAction {
 

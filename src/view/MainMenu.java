@@ -17,7 +17,7 @@ public class MainMenu extends JMenuBar {
 	
 		//A menu example:
 		
-		menu = new JMenu("File");
+		menu = new JMenu("Fájl");
 		//menu.setMnemonic(KeyEvent.VK_A);
 		menu.getAccessibleContext().setAccessibleDescription(
 		        "The only menu in this program that has menu items");
@@ -65,11 +65,12 @@ public class MainMenu extends JMenuBar {
 		submenu.add(menuItem);
 		menu.add(submenu);
 
-		//Build second menu in the menu bar.
-		menu = new JMenu("Help");
-		menu.getAccessibleContext().setAccessibleDescription(
-		        "This menu does nothing");
+		menu = new JMenu("Súgó");
+		this.add(menu);
 		
+		//Build second menu in the menu bar.
+		menu = new JMenu("About");
+		menu.getAccessibleContext().setAccessibleDescription("This menu does nothing");		
 		this.add(menu);		
 	}
 	

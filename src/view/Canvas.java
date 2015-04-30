@@ -8,7 +8,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
-import view.style.Style;
+import view.style.UIStyle;
 import model.Arch;
 import model.Graph;
 import model.Node;
@@ -40,7 +40,7 @@ public class Canvas extends JPanel {
 	private Canvas() {
 		super();
 		this.setFocusable(true);
-		this.setBackground(Style.BACKGROUND);		
+		this.setBackground(UIStyle.BACKGROUND);		
 
 		this.popupNewNode = new JPopupMenu();
 		this.popupNewNode.setFocusable(false);
@@ -112,13 +112,13 @@ public class Canvas extends JPanel {
 		}	
 		
 		if(lineStart != null && lineEnd != null){		
-			g2.setColor(Style.DARK_GREY);
+			g2.setColor(UIStyle.DARK_GREY);
 			float[] dash1 = {2f, 0f, 2f};
 			BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,
 	                BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
 			g2.setStroke(bs1);
 
-			g2.drawLine(lineStart.x + Style.CENTER, lineStart.y + Style.CENTER, lineEnd.x, lineEnd.y);
+			g2.drawLine(lineStart.x + UIStyle.NODE_CENTER, lineStart.y + UIStyle.NODE_CENTER, lineEnd.x, lineEnd.y);
 			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
 		
@@ -127,20 +127,20 @@ public class Canvas extends JPanel {
 	
 
 	public void drawPlace(Node node, Graphics2D g2){
-		g2.setColor(Style.LIGHT_GREY);
-		g2.fillOval(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
+		g2.setColor(UIStyle.LIGHT_GREY);
+		g2.fillOval(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
 		
         if(node.isSelected()){
-            g2.setColor(Style.PINK);            
+            g2.setColor(UIStyle.SELECT);            
         }else{
-            g2.setColor(Style.DARK_GREY);            
+            g2.setColor(UIStyle.DARK_GREY);            
         }
         
 		g2.setStroke(new BasicStroke(1.5f));
-		g2.drawOval(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
+		g2.drawOval(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
 		
 		//Draw token
-		g2.setColor(Style.DARK_GREY);
+		g2.setColor(UIStyle.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		String token = ((Place)node).getTokens().toString();
 		g2.drawString(token, 
@@ -163,19 +163,19 @@ public class Canvas extends JPanel {
 	}
 
 	public void drawTransition(Node node, Graphics2D g2) {
-        g2.setColor(Style.LIGHT_GREY);
-        g2.fillRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
+        g2.setColor(UIStyle.LIGHT_GREY);
+        g2.fillRect(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
 
         if(node.isSelected()){
-            g2.setColor(Style.PINK);
+            g2.setColor(UIStyle.SELECT);
         }else{
-            g2.setColor(Style.DARK_GREY);
+            g2.setColor(UIStyle.DARK_GREY);
         }
 
         g2.setStroke(new BasicStroke(1.5f));
-        g2.drawRect(node.getPosition().x, node.getPosition().y, Style.SHAPE_SIZE, Style.SHAPE_SIZE);
+        g2.drawRect(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
         
-        g2.setColor(Style.DARK_GREY);
+        g2.setColor(UIStyle.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
         //Draw label
@@ -195,22 +195,22 @@ public class Canvas extends JPanel {
 		
 		if(arch.isSelected()){
 			
-			g2.setColor(Style.PINK);
+			g2.setColor(UIStyle.SELECT);
 			g2.drawLine(start.x, start.y, end.x, end.y);
 			
 			//Point arrowHead = calculateArrowHead(start, end);		
 			//System.out.println(end + " @@ " + arrowHead);				
-			g2.setColor(Style.DARK_GREY);
-			g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+			//g2.setColor(Style.DARK_GREY);
+			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
 		}else{				
 			
-			g2.setColor(Style.DARK_GREY);
+			g2.setColor(UIStyle.DARK_GREY);
 			g2.drawLine(start.x, start.y, end.x, end.y);			
 			
 			//Point arrowHead = calculateArrowHead(start, end);		
 			//System.out.println(end + " @@ " + arrowHead);
 			
-			g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
 		}
 		
 		//Point arrowHead = calculateArrowHead(start, end);		
@@ -228,12 +228,12 @@ public class Canvas extends JPanel {
 		if(startY == endY)
 			startY += 1;
 		
-		g2.setColor(Style.BACKGROUND);
+		g2.setColor(UIStyle.BACKGROUND);
 		//g2.setColor(Color.yellow);
 		g2.fillRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length() - 3), 
 				lineCenterY - 10, (int) (13 * String.valueOf(arch.getWeight()).length()), 20);
 		
-		g2.setColor(Style.DARK_GREY);
+		g2.setColor(UIStyle.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));		
 		g2.drawString(String.valueOf(arch.getWeight()), 
 				(int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()), 
@@ -246,16 +246,15 @@ public class Canvas extends JPanel {
 	
 	public Point calculateArrowHead(Point lineStart, Point lineEnd){
 		
-		int radius = Style.SHAPE_SIZE/2;
+		int radius = UIStyle.SHAPE_SIZE/2;
 		int a = (int) Math.pow(lineStart.x - lineEnd.x, 2);
 		int b = (int) Math.pow(lineStart.y - lineEnd.y, 2);
 		
 		int X = lineEnd.x + (radius * (lineStart.x - lineEnd.x)) / (int) Math.sqrt(a + b);
 		int Y = -1 * ((((lineStart.y - lineEnd.y) / (lineStart.x - lineEnd.x)) * (X - lineEnd.x)) - lineEnd.y);
 		
-		return new Point(X, Y);
-		
-	}	
+		return new Point(X, Y);	
+	}
 
 	public JPopupMenu getPopupNewNode() { return popupNewNode; }
 	public JPopupMenu getPopupChangePlace() { return popupChangePlace; }

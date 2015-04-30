@@ -15,7 +15,7 @@ import model.Node;
 import model.Place;
 import model.Transition;
 import view.Canvas;
-import view.style.Style;
+import view.style.UIStyle;
 
 public class ChangePopupListener extends MouseAdapter {
 	
@@ -64,15 +64,15 @@ public class ChangePopupListener extends MouseAdapter {
 	}
 	
 	private boolean isTransitionContainsPoint(MouseEvent e, Point position) {
-        return position.x < e.getX() && e.getX() < position.x + Style.SHAPE_SIZE
-                && position.y < e.getY() && e.getY() < position.y + Style.SHAPE_SIZE;
+        return position.x < e.getX() && e.getX() < position.x + UIStyle.SHAPE_SIZE
+                && position.y < e.getY() && e.getY() < position.y + UIStyle.SHAPE_SIZE;
     }
 
     private boolean isPlaceContainsPoint(MouseEvent e, Point position){
-        Point center = new Point(position.x + Style.CENTER, position.y + Style.CENTER);
+        Point center = new Point(position.x + UIStyle.NODE_CENTER, position.y + UIStyle.NODE_CENTER);
         double distance = Math.sqrt(Math.pow(center.getX() - e.getX(), 2) + Math.pow(center.getY() - e.getY(), 2));
 
-        return distance <= Style.CENTER;
+        return distance <= UIStyle.NODE_CENTER;
     }
     
 	private boolean isArchContainsPoint(MouseEvent e) {

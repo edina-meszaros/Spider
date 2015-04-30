@@ -20,8 +20,7 @@ public class SetPlaceBoundPopupAction extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
-		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();
-		
+		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();		
 		String bound = JOptionPane.showInputDialog("Kérlek írd be a hely korlátját:");
 		
 		if(bound != null){

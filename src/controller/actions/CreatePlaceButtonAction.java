@@ -7,7 +7,6 @@ import view.Canvas;
 import model.Graph;
 import model.Place;
 
-
 public class CreatePlaceButtonAction extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;

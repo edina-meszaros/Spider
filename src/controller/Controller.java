@@ -3,81 +3,46 @@ package controller;
 import controller.actions.*;
 import view.Canvas;
 import view.MainWindow;
-import view.panels.TabbedPanel;
 
 public class Controller {
 
-	private CreatePlaceButtonAction createPlaceButtonAction = null;
-	private CreateTransitionButtonAction createTransitionButtonAction = null;
-	private NewNodePopupListener newNodePopupListener = null;
-	private ChangePopupListener changeNodePopupListener = null;
-	private CreatePlacePopupAction createPlacePopupAction = null;
-	private CreateTransitionPopupAction createTransitionPopupAction = null;
-	private ChangePlaceTokenPopupAction changePlaceTokenPopupAction = null;
 	private ChangeNodeNamePopupAction changeNodeNamePopupAction = null;
-	private ChangeArchWeightPopupAction changeArchWeightPopupAction = null;	
-	private SetPlaceBoundPopupAction setPlaceBoundPopupAction = null;
 	private NodeMove mouseMotionHandler = null;
-	private NodeSelect nodeSelect = null;
 	private ArchCreate createArrowAction = null;
-	private ArchSelect archSelect = null;
-	private ArchDelete archDelete = null;
 	
 	public Controller(){
 		
-		MainWindow.getInstance();
+		MainWindow.getInstance();		
+		Canvas canvas = Canvas.getInstance();
 		
-		//createPlaceButtonAction = new CreatePlaceButtonAction("Új hely");
-		//TabbedPanel.getInstance().getNewPlace().setAction(createPlaceButtonAction);
+		canvas.addMouseListener(new NewNodePopupListener(canvas));
 		
-		//createTransitionButtonAction = new CreateTransitionButtonAction("Új állapot");
-		//TabbedPanel.getInstance().getNewTransition().setAction(createTransitionButtonAction);
-		
-		newNodePopupListener = new NewNodePopupListener(Canvas.getInstance());
-		Canvas.getInstance().addMouseListener(newNodePopupListener);
-		
-		createPlacePopupAction = new CreatePlacePopupAction("Új hely");
-		Canvas.getInstance().getNewPlaceMenu().setAction(createPlacePopupAction);
-		
-		createTransitionPopupAction = new CreateTransitionPopupAction("Új állapot");		
-		Canvas.getInstance().getNewTransitionMenu().setAction(createTransitionPopupAction);
-		
-		changePlaceTokenPopupAction = new ChangePlaceTokenPopupAction("Új token");
-		Canvas.getInstance().getNewPlaceTokensMenu().setAction(changePlaceTokenPopupAction);
+		canvas.getNewPlaceMenu().setAction(new CreatePlacePopupAction("Új hely"));		
+		canvas.getNewTransitionMenu().setAction(new CreateTransitionPopupAction("Új állapot"));		
+		canvas.getNewPlaceTokensMenu().setAction(new ChangePlaceTokenPopupAction("Új token"));
 		
 		changeNodeNamePopupAction= new ChangeNodeNamePopupAction("Új név");
-		Canvas.getInstance().getNewNodeNamePlaceMenu().setAction(changeNodeNamePopupAction);
-		Canvas.getInstance().getNewNodeNameTransitionMenu().setAction(changeNodeNamePopupAction);
+		canvas.getNewNodeNamePlaceMenu().setAction(changeNodeNamePopupAction);
+		canvas.getNewNodeNameTransitionMenu().setAction(changeNodeNamePopupAction);
 		
-		changeArchWeightPopupAction = new ChangeArchWeightPopupAction("Új súly");
-		Canvas.getInstance().getNewArchWeightMenu().setAction(changeArchWeightPopupAction);
-		
-		setPlaceBoundPopupAction = new SetPlaceBoundPopupAction("Új korlát");
-		Canvas.getInstance().getNewPlaceBound().setAction(setPlaceBoundPopupAction);
+		canvas.getNewArchWeightMenu().setAction(new ChangeArchWeightPopupAction("Új súly"));
+		canvas.getNewPlaceBound().setAction(new SetPlaceBoundPopupAction("Új korlát"));
 
+		canvas.addMouseListener(new ChangePopupListener(canvas));
+		
+		canvas.addMouseListener(new NodeSelect());
+		canvas.addMouseListener(new ArchSelect());
+		
 		mouseMotionHandler = new NodeMove();
-		Canvas.getInstance().addMouseListener(mouseMotionHandler);
-		Canvas.getInstance().addMouseMotionListener(mouseMotionHandler);
-
-		nodeSelect = new NodeSelect();
-		Canvas.getInstance().addMouseListener(nodeSelect);
+		canvas.addMouseListener(mouseMotionHandler);
+		canvas.addMouseMotionListener(mouseMotionHandler);
 		
 		createArrowAction = new ArchCreate();
-		Canvas.getInstance().addMouseListener(createArrowAction);
-		Canvas.getInstance().addMouseMotionListener(createArrowAction);
-		
-		archSelect = new ArchSelect();
-		Canvas.getInstance().addMouseListener(archSelect);
-		
-		archDelete = new ArchDelete();
-		Canvas.getInstance().addKeyListener(archDelete);
-		
-		Canvas.getInstance().addFocusListener(new UnselectOnLostFocus());
-		
-		Canvas.getInstance().addKeyListener(new NodeDelete());
-		
-		changeNodePopupListener = new ChangePopupListener(Canvas.getInstance());
-		Canvas.getInstance().addMouseListener(changeNodePopupListener);	
-		
+		canvas.addMouseListener(createArrowAction);
+		canvas.addMouseMotionListener(createArrowAction);
+
+		canvas.addKeyListener(new ArchDelete());		
+		canvas.addKeyListener(new NodeDelete());
+		canvas.addFocusListener(new UnselectOnLostFocus());		
 	}
 }

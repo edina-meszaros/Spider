@@ -32,5 +32,4 @@ public class UnselectOnLostFocus implements FocusListener {
 		
 		Canvas.getInstance().repaint();
 	}
-
 }
