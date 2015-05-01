@@ -10,7 +10,9 @@ import controller.actions.MoveNode;
 import controller.actions.SelectArch;
 import controller.actions.SelectNode;
 import controller.actions.UnselectOnLostFocus;
+import controller.actions.menu.About;
 import controller.actions.menu.Exit;
+import controller.actions.menu.Help;
 import controller.actions.menu.Load;
 import controller.actions.menu.NewPage;
 import controller.actions.menu.Save;
@@ -33,16 +35,16 @@ public class Controller {
 
 		canvas.addMouseListener(new NewNodeListener());
 
-		canvas.getNewPlaceMenu().setAction(new CreatePlace("Új hely"));
-		canvas.getNewTransitionMenu().setAction(new CreateTransition("Új állapot"));
-		canvas.getNewPlaceTokensMenu().setAction(new ChangePlaceToken("Új token"));
+		canvas.getNewPlaceMenu().setAction(new CreatePlace());
+		canvas.getNewTransitionMenu().setAction(new CreateTransition());
+		canvas.getNewPlaceTokensMenu().setAction(new ChangePlaceToken());
 
-		ChangeNodeName changeNodeName = new ChangeNodeName("Új név");
+		ChangeNodeName changeNodeName = new ChangeNodeName();
 		canvas.getNewNodeNamePlaceMenu().setAction(changeNodeName);
 		canvas.getNewNodeNameTransitionMenu().setAction(changeNodeName);
 
-		canvas.getNewArchWeightMenu().setAction(new ChangeArchWeight("Új súly"));
-		canvas.getNewPlaceBound().setAction(new ChangePlaceBound("Új korlát"));
+		canvas.getNewArchWeightMenu().setAction(new ChangeArchWeight());
+		canvas.getNewPlaceBound().setAction(new ChangePlaceBound());
 
 		canvas.addMouseListener(new ChangeListener());
 
@@ -65,5 +67,7 @@ public class Controller {
 		menu.getSave().setAction(new Save());
 		menu.getLoad().setAction(new Load());
 		menu.getExit().setAction(new Exit());
+		menu.getHelp().setAction(new Help());
+		menu.getAbout().setAction(new About());
 	}
 }

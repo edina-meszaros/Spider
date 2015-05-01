@@ -13,8 +13,8 @@ public class ChangeNodeName extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	public ChangeNodeName(String name) {
-		super(name);
+	public ChangeNodeName() {
+		super("Új név");
 	}
 
 	@Override

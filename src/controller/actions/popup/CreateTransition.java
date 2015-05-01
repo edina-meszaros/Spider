@@ -5,16 +5,16 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
-import view.Canvas;
 import model.Graph;
 import model.Transition;
+import view.Canvas;
 
 public class CreateTransition extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	public CreateTransition(String name) {
-		super(name);
+	public CreateTransition() {
+		super("Új állapot");
 	}
 
 	@Override
@@ -22,7 +22,7 @@ public class CreateTransition extends AbstractAction {
 
 		Point point = Canvas.getInstance().getMousePosition();
 		Transition transition = new Transition(point, Graph.getInstance().getNextName("T"));
-		
+
 		Graph.getInstance().addNode(transition);
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 		Canvas.getInstance().repaint();

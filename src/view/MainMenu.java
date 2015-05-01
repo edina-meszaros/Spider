@@ -9,48 +9,55 @@ public class MainMenu extends JMenuBar {
 	private static final long serialVersionUID = 1L;
 
 	private static MainMenu instance = null;
-	private JMenu menu;
+	private JMenu fileMenu;
+	private JMenu helpMenu;
 	private JMenuItem newPage;
 	private JMenuItem save;
 	private JMenuItem load;
 	private JMenuItem exit;
+	private JMenuItem help;
+	private JMenuItem about;
 
 	private MainMenu() {
 		super();
 
 		//A menu example:
 
-		menu = new JMenu("Fájl");
+		fileMenu = new JMenu("Fájl");
 		//menu.setMnemonic(KeyEvent.VK_A);
-		menu.getAccessibleContext().setAccessibleDescription(
+		fileMenu.getAccessibleContext().setAccessibleDescription(
 		        "The only menu in this program that has menu items");
 
-		this.add(menu);
+		this.add(fileMenu);
 
 		newPage = new JMenuItem();
-		menu.add(newPage);
+		fileMenu.add(newPage);
 
-		menu.addSeparator();
+		fileMenu.addSeparator();
 
 		//a group of JMenuItems
 		save = new JMenuItem();
 		//menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
-		menu.add(save);
+		fileMenu.add(save);
 
 		load = new JMenuItem();
-		menu.add(load);
+		fileMenu.add(load);
 
-		menu.addSeparator();
+		fileMenu.addSeparator();
 		exit = new JMenuItem();
-		menu.add(exit);
+		fileMenu.add(exit);
 
-		menu = new JMenu("Súgó");
-		this.add(menu);
+		this.add(fileMenu);
 
-		//Build second menu in the menu bar.
-		menu = new JMenu("Névjegy");
-		menu.getAccessibleContext().setAccessibleDescription("This menu does nothing");
-		this.add(menu);
+		helpMenu = new JMenu("Súgó");
+
+		help = new JMenuItem();
+		helpMenu.add(help);
+
+		about = new JMenuItem();
+		helpMenu.add(about);
+
+		this.add(helpMenu);
 
 
 	}
@@ -66,4 +73,6 @@ public class MainMenu extends JMenuBar {
 	public JMenuItem getSave() { return save; }
 	public JMenuItem getLoad() { return load; }
 	public JMenuItem getExit() { return exit; }
+	public JMenuItem getHelp() { return help; }
+	public JMenuItem getAbout() { return about; }
 }

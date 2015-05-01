@@ -13,8 +13,8 @@ public class ChangeArchWeight extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	public ChangeArchWeight(String name) {
-		super(name);
+	public ChangeArchWeight() {
+		super("Új súly");
 	}
 
 	@Override

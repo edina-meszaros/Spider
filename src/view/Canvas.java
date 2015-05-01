@@ -58,14 +58,14 @@ public class Canvas extends JPanel {
 		this.popupChangePlace = new JPopupMenu();
 		this.popupChangePlace.setFocusable(false);
 
-		this.newPlaceTokens = new JMenuItem();
-		this.newArchWeight = new JMenuItem();
 		this.newNodeNamePlace = new JMenuItem();
 		this.newNodeNameTransition = new JMenuItem();
+		this.newPlaceTokens = new JMenuItem();
 		this.newPlaceBound = new JMenuItem();
+		this.newArchWeight = new JMenuItem();
 
-		this.popupChangePlace.add(newPlaceTokens);
 		this.popupChangePlace.add(newNodeNamePlace);
+		this.popupChangePlace.add(newPlaceTokens);
 		this.popupChangePlace.add(newPlaceBound);
 
 		this.popupChangeTransition = new JPopupMenu();

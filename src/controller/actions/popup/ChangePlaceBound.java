@@ -13,8 +13,8 @@ public class ChangePlaceBound extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	public ChangePlaceBound(String name) {
-		super(name);
+	public ChangePlaceBound() {
+		super("Új korlát");
 	}
 
 	@Override
