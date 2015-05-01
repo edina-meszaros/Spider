@@ -6,8 +6,8 @@ public class Arch {
 	private int weight;
 	private boolean selected;
 	
-	public Arch(){
-		
+	public Arch(Node target){
+		this(target, 1);
 	}
 	
 	public Arch(Node target, int weight) {
@@ -16,7 +16,6 @@ public class Arch {
 		this.selected = false;
 	}
 	
-	public Arch(Node target) { this(target, 1); }
 	public Node getTarget() { return target; }
 	public void setTarget(Node target) { this.target = target; }
 	public int getWeight() { return weight; }

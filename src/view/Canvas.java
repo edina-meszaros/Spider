@@ -3,17 +3,11 @@ package view;
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
-
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-
-import view.style.UIStyle;
-import model.Arch;
-import model.Graph;
-import model.Node;
-import model.Place;
-import model.Transition;
+import view.style.Theme;
+import model.*;
 
 public class Canvas extends JPanel {
 
@@ -40,7 +34,7 @@ public class Canvas extends JPanel {
 	private Canvas() {
 		super();
 		this.setFocusable(true);
-		this.setBackground(UIStyle.BACKGROUND);		
+		this.setBackground(Theme.BACKGROUND);
 
 		this.popupNewNode = new JPopupMenu();
 		this.popupNewNode.setFocusable(false);
@@ -83,7 +77,7 @@ public class Canvas extends JPanel {
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D) g;
+		Graphics2D g2 = (Graphics2D) g.create();
 
 		if(graph == null) return;
 		
@@ -95,149 +89,148 @@ public class Canvas extends JPanel {
 		
 		for (Node node : graph.keySet()) {
 			if(!node.isSelected()){
-				if(node instanceof Place){
-					drawPlace(node, g2);
-				}else{
-					drawTransition(node, g2);
-				}	
+				drawNode(node, g2);
 			}
 		}
 		
-		if(Graph.getInstance().getSelectedNode() instanceof Place){
-			drawPlace(Graph.getInstance().getSelectedNode(), g2);
-		}
-		
-		if(Graph.getInstance().getSelectedNode() instanceof Transition){
-			drawTransition(Graph.getInstance().getSelectedNode(), g2);
-		}	
-		
-		if(lineStart != null && lineEnd != null){		
-			g2.setColor(UIStyle.DARK_GREY);
-			float[] dash1 = {2f, 0f, 2f};
-			BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,
-	                BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
-			g2.setStroke(bs1);
-
-			g2.drawLine(lineStart.x + UIStyle.NODE_CENTER, lineStart.y + UIStyle.NODE_CENTER, lineEnd.x, lineEnd.y);
-			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
-		}
-		
+		drawNode(Graph.getInstance().getSelectedNode(), g2);
+		drawTempArch(g2);
 	}
-	
-	
 
-	public void drawPlace(Node node, Graphics2D g2){
-		g2.setColor(UIStyle.LIGHT_GREY);
-		g2.fillOval(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
-		
-        if(node.isSelected()){
-            g2.setColor(UIStyle.SELECT);            
-        }else{
-            g2.setColor(UIStyle.DARK_GREY);            
-        }
-        
-		g2.setStroke(new BasicStroke(1.5f));
-		g2.drawOval(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
-		
-		//Draw token
-		g2.setColor(UIStyle.DARK_GREY);
+	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
+
+		int startX = startNode.getNodeCenterPosition().x;
+		int endX = arch.getTarget().getNodeCenterPosition().x;
+		int startY = startNode.getNodeCenterPosition().y;
+		int endY = arch.getTarget().getNodeCenterPosition().y;
+		Point start = new Point(startX, startY);
+		Point end = new Point(endX, endY);
+
+		if(arch.isSelected()){
+
+			g2.setColor(Theme.SELECT);
+			g2.drawLine(start.x, start.y, end.x, end.y);
+
+			//Point arrowHead = calculateArrowHead(start, end);
+			//System.out.println(end + " @@ " + arrowHead);
+			//g2.setColor(Style.DARK_GREY);
+			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+		}else{
+
+			g2.setColor(Theme.DARK_GREY);
+			g2.drawLine(start.x, start.y, end.x, end.y);
+
+			//Point arrowHead = calculateArrowHead(start, end);
+			//System.out.println(end + " @@ " + arrowHead);
+
+			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+		}
+
+		//Point arrowHead = calculateArrowHead(start, end);
+		//System.out.println(end + " @@ " + arrowHead);
+
+		if(arch.getWeight() < 2)
+			return;
+
+		//Draw arch weight
+		int lineCenterX = (startX + endX) / 2;
+		int lineCenterY = (startY + endY) / 2;
+
+		g2.setColor(Theme.BACKGROUND);
+		//g2.setColor(Color.yellow);
+		g2.fillRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length() - 3),
+				lineCenterY - 10, 13 * String.valueOf(arch.getWeight()).length(), 20);
+
+		g2.setColor(Theme.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		String token = ((Place)node).getTokens().toString();
-		g2.drawString(token, 
+		g2.drawString(String.valueOf(arch.getWeight()),
+				(int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()),
+				lineCenterY + 4);
+	}
+
+	public void drawNode(Node node, Graphics2D g2) {
+		if(node instanceof Place){
+			drawPlace((Place) node, g2);
+		}
+
+		if(node instanceof Transition){
+			drawTransition((Transition) node, g2);
+		}
+	}
+
+	public void drawPlace(Place node, Graphics2D g2){
+
+		//Draw node
+		g2.setColor(Theme.LIGHT_GREY);
+		g2.fillOval(node.getPosition().x, node.getPosition().y, Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
+
+        if(node.isSelected()){
+            g2.setColor(Theme.SELECT);
+        }else{
+            g2.setColor(Theme.DARK_GREY);
+        }
+
+		g2.setStroke(new BasicStroke(1.5f));
+		g2.drawOval(node.getPosition().x, node.getPosition().y, Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
+
+		//Draw token
+		g2.setColor(Theme.DARK_GREY);
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		String token = (node).getTokens().toString();
+		g2.drawString(token,
 				(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
-		
+
 		//Draw label
 		String label = node.getLabel();
-		
+
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
-		
-		//Draw bound		
+
+		//Draw bound
 		String bound = "";
-		
-		if(((Place) node).getBound() != 0){
-			bound = "K: ".concat(String.valueOf(((Place) node).getBound()));
-		}		
-		
+
+		if((node).getBound() != 0){
+			bound = "K: ".concat(String.valueOf((node).getBound()));
+		}
+
 		g2.drawString(bound, (int) (node.getNodeCenterPosition().x - 3.5*bound.length()), node.getPosition().y + 55);
 
 	}
 
-	public void drawTransition(Node node, Graphics2D g2) {
-        g2.setColor(UIStyle.LIGHT_GREY);
-        g2.fillRect(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
+	public void drawTransition(Transition node, Graphics2D g2) {
 
-        if(node.isSelected()){
-            g2.setColor(UIStyle.SELECT);
-        }else{
-            g2.setColor(UIStyle.DARK_GREY);
-        }
+		//Draw node
+		g2.setColor(Theme.LIGHT_GREY);
+		g2.fillRect(node.getPosition().x, node.getPosition().y, Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
 
-        g2.setStroke(new BasicStroke(1.5f));
-        g2.drawRect(node.getPosition().x, node.getPosition().y, UIStyle.SHAPE_SIZE, UIStyle.SHAPE_SIZE);
-        
-        g2.setColor(UIStyle.DARK_GREY);
+		if(node.isSelected()){
+			g2.setColor(Theme.SELECT);
+		}else{
+			g2.setColor(Theme.DARK_GREY);
+		}
+
+		g2.setStroke(new BasicStroke(1.5f));
+		g2.drawRect(node.getPosition().x, node.getPosition().y, Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
+
+		g2.setColor(Theme.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 
-        //Draw label
+		//Draw label
 		String label = node.getLabel();
-		
+
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);
 	}
-	
-	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
-		
-		int startX = startNode.getNodeCenterPosition().x;
-		int endX = arch.getTarget().getNodeCenterPosition().x;
-		int startY = startNode.getNodeCenterPosition().y;
-		Point start = new Point(startX, startY);
-		int endY = arch.getTarget().getNodeCenterPosition().y;
-		Point end = new Point(endX, endY);
-		
-		if(arch.isSelected()){
-			
-			g2.setColor(UIStyle.SELECT);
-			g2.drawLine(start.x, start.y, end.x, end.y);
-			
-			//Point arrowHead = calculateArrowHead(start, end);		
-			//System.out.println(end + " @@ " + arrowHead);				
-			//g2.setColor(Style.DARK_GREY);
-			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
-		}else{				
-			
-			g2.setColor(UIStyle.DARK_GREY);
-			g2.drawLine(start.x, start.y, end.x, end.y);			
-			
-			//Point arrowHead = calculateArrowHead(start, end);		
-			//System.out.println(end + " @@ " + arrowHead);
-			
-			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+
+	private void drawTempArch(Graphics2D g2) {
+		if(lineStart != null && lineEnd != null){
+			g2.setColor(Theme.DARK_GREY);
+			float[] dash1 = {2f, 0f, 2f};
+			BasicStroke bs1 = new BasicStroke(1, BasicStroke.CAP_BUTT,
+					BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
+			g2.setStroke(bs1);
+
+			g2.drawLine(lineStart.x + Theme.NODE_CENTER, lineStart.y + Theme.NODE_CENTER, lineEnd.x, lineEnd.y);
+			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
-		
-		//Point arrowHead = calculateArrowHead(start, end);		
-		//System.out.println(end + " @@ " + arrowHead);
-		
-		if(arch.getWeight() < 2)
-			return;
-		
-		int lineCenterX = (startX + endX) / 2;
-		int lineCenterY = (startY + endY) / 2;
-		
-		if(startX == endX)
-			startX += 1;
-		
-		if(startY == endY)
-			startY += 1;
-		
-		g2.setColor(UIStyle.BACKGROUND);
-		//g2.setColor(Color.yellow);
-		g2.fillRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length() - 3), 
-				lineCenterY - 10, (int) (13 * String.valueOf(arch.getWeight()).length()), 20);
-		
-		g2.setColor(UIStyle.DARK_GREY);
-		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));		
-		g2.drawString(String.valueOf(arch.getWeight()), 
-				(int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()), 
-				lineCenterY + 4);
 	}
 
 	public void updateGraph(Map<Node, List<Arch>> graph){
@@ -246,7 +239,7 @@ public class Canvas extends JPanel {
 	
 	public Point calculateArrowHead(Point lineStart, Point lineEnd){
 		
-		int radius = UIStyle.SHAPE_SIZE/2;
+		int radius = Theme.SHAPE_SIZE/2;
 		int a = (int) Math.pow(lineStart.x - lineEnd.x, 2);
 		int b = (int) Math.pow(lineStart.y - lineEnd.y, 2);
 		

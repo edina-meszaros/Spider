@@ -2,7 +2,7 @@ package controller.actions;
 
 import model.*;
 import view.Canvas;
-import view.style.UIStyle;
+import view.style.Theme;
 
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.Map;
 
-public class NodeSelect extends MouseAdapter {
+public class SelectNode extends MouseAdapter {
 	
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -27,7 +27,6 @@ public class NodeSelect extends MouseAdapter {
                     node.setSelected(true);
                     Canvas.getInstance().grabFocus();
                     break;
-
                 }
             }
 
@@ -36,7 +35,6 @@ public class NodeSelect extends MouseAdapter {
                     node.setSelected(true);                    
                     Canvas.getInstance().grabFocus();
                     break;
-
                 }
             }
         }
@@ -45,14 +43,14 @@ public class NodeSelect extends MouseAdapter {
     }
 
     private boolean isTransitionContainsPoint(MouseEvent e, Point position) {
-        return position.x < e.getX() && e.getX() < position.x + UIStyle.SHAPE_SIZE
-                && position.y < e.getY() && e.getY() < position.y + UIStyle.SHAPE_SIZE;
+        return position.x < e.getX() && e.getX() < position.x + Theme.SHAPE_SIZE
+                && position.y < e.getY() && e.getY() < position.y + Theme.SHAPE_SIZE;
     }
 
     private boolean isPlaceContainsPoint(MouseEvent e, Point position){
-        Point center = new Point(position.x + UIStyle.NODE_CENTER, position.y + UIStyle.NODE_CENTER);
+        Point center = new Point(position.x + Theme.NODE_CENTER, position.y + Theme.NODE_CENTER);
         double distance = Math.sqrt(Math.pow(center.getX() - e.getX(), 2) + Math.pow(center.getY() - e.getY(), 2));
 
-        return distance <= UIStyle.NODE_CENTER;
+        return distance <= Theme.NODE_CENTER;
     }
 }

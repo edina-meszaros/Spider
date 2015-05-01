@@ -8,7 +8,7 @@ import java.awt.geom.Line2D;
 import java.util.List;
 import java.util.Map;
 
-public class ArchSelect extends MouseAdapter {
+public class SelectArch extends MouseAdapter {
 
     private static final int HIT_BOX_SIZE = 6;
 

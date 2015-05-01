@@ -1,4 +1,4 @@
-package controller.actions;
+package controller.actions.popup;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -7,23 +7,19 @@ import view.Canvas;
 import model.Graph;
 import model.Place;
 
-public class CreatePlacePopupAction extends AbstractAction {
+public class CreatePlace extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	private Point point = null;
-	private Place place = null;
-	
-	public CreatePlacePopupAction(String name) {
+	public CreatePlace(String name) {
 		super(name);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		point = Canvas.getInstance().getMousePosition();
-		place = new Place(point);
-		place = new Place(point, Graph.getInstance().getNextName("P"));
+		Point point = Canvas.getInstance().getMousePosition();
+		Place place = new Place(point, Graph.getInstance().getNextName("P"));
 
 		Graph.getInstance().addNode(place);		
 		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());

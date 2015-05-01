@@ -9,7 +9,7 @@ public class LeftPanel extends JPanel {
 	
 	private static LeftPanel instance = null;	
 
-	private LeftPanel(Canvas canvas) {
+	private LeftPanel() {
 		super();
 		this.setSize(200, 300);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -21,7 +21,7 @@ public class LeftPanel extends JPanel {
 	
 	public static LeftPanel getInstance() {
 		if (instance == null) {
-			instance = new LeftPanel(Canvas.getInstance());
+			instance = new LeftPanel();
 		}
 		return instance;		
 	}	

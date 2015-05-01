@@ -1,4 +1,4 @@
-package controller.actions;
+package controller.actions.popup;
 
 import java.awt.event.ActionEvent;
 
@@ -9,11 +9,11 @@ import view.Canvas;
 import model.Graph;
 import model.Place;
 
-public class SetPlaceBoundPopupAction extends AbstractAction {
+public class SetPlaceBound extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	public SetPlaceBoundPopupAction(String name) {
+	public SetPlaceBound(String name) {
 		super(name);
 	}
 
@@ -21,7 +21,7 @@ public class SetPlaceBoundPopupAction extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		
 		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();		
-		String bound = JOptionPane.showInputDialog("KÈrlek Ìrd be a hely korl·tj·t:");
+		String bound = JOptionPane.showInputDialog("Hely korl√°tja:");
 		
 		if(bound != null){
 			try{

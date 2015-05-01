@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
 		setSize(1280, 750);
 		//setExtendedState(JFrame.MAXIMIZED_BOTH); 
 
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
 		
 		this.setJMenuBar(MainMenu.getInstance());		

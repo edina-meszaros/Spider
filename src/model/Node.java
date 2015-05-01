@@ -1,10 +1,9 @@
 package model;
 
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.util.UUID;
 
-import view.style.UIStyle;
+import view.style.Theme;
 
 public class Node {
 
@@ -13,18 +12,14 @@ public class Node {
 	private Point position = null;
 	private boolean selected;
 	
-	public Node(){
-		this.id = UUID.randomUUID();
-		this.selected = false;
-	}
-	
 	public Node(Point position){
-		this();
-		this.position = position;
+		this(position, "");
 	}
 	
 	public Node(Point position, String label){
-		this(position);
+		this.id = UUID.randomUUID();
+		this.selected = false;
+		this.position = position;
 		this.label = label;
 	}
 	
@@ -54,19 +49,19 @@ public class Node {
 	
 	@Override
 	public String toString() {
-		
+
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(this.id.toString());
 		sb.append(" ;");
 		sb.append(this.label);
 		sb.append(" ;");
-		
+
 		return sb.toString();
 	}
 	
 	public Point getNodeCenterPosition(){
-		return new Point(this.position.x + UIStyle.NODE_CENTER, this.position.y + UIStyle.NODE_CENTER);
+		return new Point(this.position.x + Theme.NODE_CENTER, this.position.y + Theme.NODE_CENTER);
 	}
 
 	public UUID getId() { return this.id; }

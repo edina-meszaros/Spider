@@ -27,7 +27,7 @@ public class ToolBar extends JPanel implements ActionListener {
 	}
 
 	protected void addButtons(JToolBar toolBar) {
-		JButton button = null;
+		JButton button;
 
 		// first button
 		button = makeNavigationButton("Back24", "PREVIOUS",

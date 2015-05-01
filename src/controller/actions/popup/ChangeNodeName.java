@@ -1,4 +1,4 @@
-package controller.actions;
+package controller.actions.popup;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -8,11 +8,11 @@ import view.Canvas;
 import model.Graph;
 import model.Node;
 
-public class ChangeNodeNamePopupAction extends AbstractAction {
+public class ChangeNodeName extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ChangeNodeNamePopupAction(String name) {
+	public ChangeNodeName(String name) {
 		super(name);
 	}
 
@@ -21,7 +21,7 @@ public class ChangeNodeNamePopupAction extends AbstractAction {
 		
 		Node selectedNode = Graph.getInstance().getSelectedNode();
 		
-		String name = JOptionPane.showInputDialog("Kérlek írd be a csúcs új nevét:");
+		String name = JOptionPane.showInputDialog("CsÃºcs Ãºj neve:");
 		
 		if(name != null){
 			try{

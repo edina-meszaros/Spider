@@ -1,4 +1,4 @@
-package controller.actions;
+package controller.actions.popup;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -7,11 +7,11 @@ import view.Canvas;
 import model.Graph;
 import model.Place;
 
-public class ChangePlaceTokenPopupAction extends AbstractAction {
+public class ChangePlaceToken extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ChangePlaceTokenPopupAction(String name) {
+	public ChangePlaceToken(String name) {
 		super(name);
 	}
 
@@ -20,7 +20,7 @@ public class ChangePlaceTokenPopupAction extends AbstractAction {
 		
 		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();
 		
-		String token = JOptionPane.showInputDialog("Kérlek írd be a csúcs tokenszámát:");
+		String token = JOptionPane.showInputDialog("CsÃºcs tokenszÃ¡ma:");
 		
 		if(token != null){
 			try{

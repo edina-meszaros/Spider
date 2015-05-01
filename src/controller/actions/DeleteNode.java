@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 
-public class NodeDelete extends KeyAdapter {
+public class DeleteNode extends KeyAdapter {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -20,7 +20,7 @@ public class NodeDelete extends KeyAdapter {
 		
 		Node selectedNode = Graph.getInstance().getSelectedNode();
 		for(Node node : graph.keySet()){
-			graph.get(node).remove(getRemoveableArch(graph.get(node), selectedNode));			
+			graph.get(node).remove(getRemovableArch(graph.get(node), selectedNode));
 		}		
 		
 		graph.remove(selectedNode);
@@ -29,7 +29,7 @@ public class NodeDelete extends KeyAdapter {
         Canvas.getInstance().repaint();		
 	}
 
-	private Arch getRemoveableArch(List<Arch> arches, Node selectedNode) {
+	private Arch getRemovableArch(List<Arch> arches, Node selectedNode) {
 		for(Arch arch : arches){
 			if(arch.getTarget().equals(selectedNode)){
 				return arch;

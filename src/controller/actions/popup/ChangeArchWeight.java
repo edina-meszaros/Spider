@@ -1,4 +1,4 @@
-package controller.actions;
+package controller.actions.popup;
 
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
@@ -7,11 +7,11 @@ import view.Canvas;
 import model.Arch;
 import model.Graph;
 
-public class ChangeArchWeightPopupAction extends AbstractAction {
+public class ChangeArchWeight extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 	
-	public ChangeArchWeightPopupAction(String name) {
+	public ChangeArchWeight(String name) {
 		super(name);
 	}
 
@@ -22,7 +22,7 @@ public class ChangeArchWeightPopupAction extends AbstractAction {
 		if(selectedArch == null)
 			return;
 		
-		String weight = JOptionPane.showInputDialog("Kérlek írd be az új élsúlyt:");
+		String weight = JOptionPane.showInputDialog("Ãšj sÃºly:");
 		
 		if(weight != null){
 			try{

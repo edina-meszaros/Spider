@@ -2,7 +2,7 @@ package view.style;
 
 import java.awt.Color;
 
-public class UIStyle {
+public class Theme {
 
 	public static final Color BACKGROUND = new Color(219, 218, 213);
 	public static final Color SELECT = Color.MAGENTA;

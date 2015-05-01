@@ -7,7 +7,7 @@ import java.awt.event.KeyEvent;
 import java.util.List;
 import java.util.Map;
 
-public class ArchDelete extends KeyAdapter {
+public class DeleteArch extends KeyAdapter {
 
 	@Override
 	public void keyPressed(KeyEvent e) {

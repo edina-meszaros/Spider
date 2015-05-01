@@ -13,7 +13,7 @@ import model.Node;
 public class UnselectOnLostFocus implements FocusListener {
 
 	@Override
-	public void focusGained(FocusEvent e) {		
+	public void focusGained(FocusEvent e) {
 	}
 
 	@Override
@@ -23,7 +23,6 @@ public class UnselectOnLostFocus implements FocusListener {
 		
 		for(Node node : graph.keySet()){
 			node.setSelected(false);
-			
 			
 			for(Arch arch : graph.get(node)){
 				arch.setSelected(false);
