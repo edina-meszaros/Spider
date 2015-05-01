@@ -1,13 +1,23 @@
 package view;
 
-import java.awt.*;
+import java.awt.BasicStroke;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Point;
 import java.util.List;
 import java.util.Map;
+
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+
+import model.Arch;
+import model.Graph;
+import model.Node;
+import model.Place;
+import model.Transition;
 import view.style.Theme;
-import model.*;
 
 public class Canvas extends JPanel {
 
@@ -44,10 +54,10 @@ public class Canvas extends JPanel {
 
 		this.popupNewNode.add(newPlace);
 		this.popupNewNode.add(newTransition);
-		
+
 		this.popupChangePlace = new JPopupMenu();
 		this.popupChangePlace.setFocusable(false);
-		
+
 		this.newPlaceTokens = new JMenuItem();
 		this.newArchWeight = new JMenuItem();
 		this.newNodeNamePlace = new JMenuItem();
@@ -57,21 +67,21 @@ public class Canvas extends JPanel {
 		this.popupChangePlace.add(newPlaceTokens);
 		this.popupChangePlace.add(newNodeNamePlace);
 		this.popupChangePlace.add(newPlaceBound);
-		
+
 		this.popupChangeTransition = new JPopupMenu();
 		this.popupChangeTransition.setFocusable(false);
 		this.popupChangeTransition.add(newNodeNameTransition);
-		
+
 		this.popupChangeArch = new JPopupMenu();
 		this.popupChangeArch.setFocusable(false);
 		this.popupChangeArch.add(newArchWeight);
 	}
-	
+
 	public static Canvas getInstance() {
 		if (instance == null) {
 			instance = new Canvas();
 		}
-		return instance;		
+		return instance;
 	}
 
 	@Override
@@ -80,19 +90,19 @@ public class Canvas extends JPanel {
 		Graphics2D g2 = (Graphics2D) g.create();
 
 		if(graph == null) return;
-		
-		for (Node node : graph.keySet()){			
+
+		for (Node node : graph.keySet()){
 			for(Arch arch : graph.get(node)){
 				drawArch(arch, node, g2);
-			}			
-		}		
-		
+			}
+		}
+
 		for (Node node : graph.keySet()) {
 			if(!node.isSelected()){
 				drawNode(node, g2);
 			}
 		}
-		
+
 		drawNode(Graph.getInstance().getSelectedNode(), g2);
 		drawTempArch(g2);
 	}
@@ -236,17 +246,17 @@ public class Canvas extends JPanel {
 	public void updateGraph(Map<Node, List<Arch>> graph){
 		this.graph = graph;
 	}
-	
+
 	public Point calculateArrowHead(Point lineStart, Point lineEnd){
-		
+
 		int radius = Theme.SHAPE_SIZE/2;
 		int a = (int) Math.pow(lineStart.x - lineEnd.x, 2);
 		int b = (int) Math.pow(lineStart.y - lineEnd.y, 2);
-		
+
 		int X = lineEnd.x + (radius * (lineStart.x - lineEnd.x)) / (int) Math.sqrt(a + b);
 		int Y = -1 * ((((lineStart.y - lineEnd.y) / (lineStart.x - lineEnd.x)) * (X - lineEnd.x)) - lineEnd.y);
-		
-		return new Point(X, Y);	
+
+		return new Point(X, Y);
 	}
 
 	public JPopupMenu getPopupNewNode() { return popupNewNode; }
@@ -254,14 +264,15 @@ public class Canvas extends JPanel {
 	public JPopupMenu getPopupChangeTransition() { return popupChangeTransition; }
 	public JPopupMenu getPopupChangeArch() { return popupChangeArch; }
 	public JMenuItem getNewPlaceMenu() { return newPlace; }
-	public JMenuItem getNewTransitionMenu() { return newTransition; }	
+	public JMenuItem getNewTransitionMenu() { return newTransition; }
 	public JMenuItem getNewPlaceTokensMenu() { return newPlaceTokens; }
 	public JMenuItem getNewArchWeightMenu() { return newArchWeight; }
 	public JMenuItem getNewNodeNamePlaceMenu() { return newNodeNamePlace; }
 	public JMenuItem getNewNodeNameTransitionMenu() { return newNodeNameTransition; }
 	public JMenuItem getNewPlaceBound() { return newPlaceBound; }
+	@Override
 	public Point getMousePosition() { return mousePosition; }
 	public void setMousePosition(Point mousePosition) { this.mousePosition = mousePosition; }
 	public void setLineStart(Point lineStart) { this.lineStart = lineStart; }
-	public void setLineEnd(Point lineEnd) { this.lineEnd = lineEnd; }	
+	public void setLineEnd(Point lineEnd) { this.lineEnd = lineEnd; }
 }

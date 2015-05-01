@@ -5,43 +5,40 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.JOptionPane;
 
-import model.Arch;
 import model.Graph;
+import model.Place;
 import view.Canvas;
 
-public class ChangeArchWeight extends AbstractAction {
+public class ChangePlaceBound extends AbstractAction {
 
 	private static final long serialVersionUID = 1L;
 
-	public ChangeArchWeight(String name) {
+	public ChangePlaceBound(String name) {
 		super(name);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		Arch selectedArch = Graph.getInstance().getSelectedArch();
-		if(selectedArch == null)
-			return;
-
-		String input = JOptionPane.showInputDialog("Új súly:");
+		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();
+		String input = JOptionPane.showInputDialog("Hely korlátja:");
 
 		if(input != null){
 			try{
+				int bound = Integer.parseInt(input);
 
-				int weight = Integer.parseInt(input);
-
-				if(weight < 1){
+				if(bound < 1){
 					//output error
 					return;
 				}
 
-				if(weight >= 10000){
-					//output error
-					return;
+				if(selectedNode.getTokens() > bound){
+					selectedNode.setTokens(bound);
+					//output information
 				}
 
-				selectedArch.setWeight(Integer.parseInt(input));
+				selectedNode.setBound(bound);
+
 			} catch (NumberFormatException ex){
 				//output error
 			}
