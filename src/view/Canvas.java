@@ -187,7 +187,9 @@ public class Canvas extends JPanel {
 		g2.setColor(Theme.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		String token = (node).getTokens().toString();
-		g2.drawString(token,
+
+		if(Integer.parseInt(token) != 0)
+			g2.drawString(token,
 				(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
 
 		//Draw label
