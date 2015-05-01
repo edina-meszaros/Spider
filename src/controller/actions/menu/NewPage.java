@@ -1,5 +1,8 @@
 package controller.actions.menu;
 
+import model.Graph;
+import view.Canvas;
+
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -12,8 +15,9 @@ public class NewPage extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		Graph.reset();
+		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
+		Canvas.getInstance().repaint();
 	}
 
 }

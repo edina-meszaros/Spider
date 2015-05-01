@@ -1,14 +1,19 @@
 package model;
 
 import java.util.UUID;
+import java.io.Serializable;
 
-public class Arch {
+public class Arch implements Serializable {
 
 	private UUID id;
 	private Node target;
 	private int weight;
 	private boolean selected;
 
+	public Arch() {
+		this(null, 1);
+	}
+	
 	public Arch(Node target){
 		this(target, 1);
 	}

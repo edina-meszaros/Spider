@@ -1,16 +1,21 @@
 package model;
 
+import java.beans.XMLDecoder;
+import java.beans.XMLEncoder;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class Graph {
+public class Graph implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
-	private static Map<Node, List<Arch>> graph = new HashMap<Node, List<Arch>>();
+	private Map<Node, List<Arch>> graph = new HashMap<Node, List<Arch>>();
 	private static Graph instance = null;
 
 	private Graph() {
@@ -22,6 +27,25 @@ public class Graph {
 			instance = new Graph();
 		}
 		return instance;		
+	}
+
+	public static void reset() {
+		instance = new Graph();
+	}
+
+	public static void serialize(OutputStream output) {
+		XMLEncoder encoder = new XMLEncoder(output);
+		encoder.writeObject(instance.graph);
+		encoder.close();
+	}
+
+	public static void deserialize(InputStream input) {
+		XMLDecoder decoder = new XMLDecoder(input);
+		Object graphObj = decoder.readObject();
+		decoder.close();
+
+		if (graphObj instanceof Map)
+			instance.graph = (Map) graphObj;
 	}
 	
 	public void addNode(Node node){

@@ -1,8 +1,13 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 
-public class Transition extends Node {
+public class Transition extends Node implements Serializable {
+
+	public Transition() {
+		this(new Point(100, 100), "");
+	}
 	
 	public Transition(Point position){
 		this(position, "");

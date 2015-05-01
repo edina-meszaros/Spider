@@ -1,11 +1,16 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 
-public class Place extends Node {
+public class Place extends Node implements Serializable {
 
 	private Integer tokens = 0;
 	private Integer bound = 0;
+
+	public Place() {
+		this(new Point(100, 100), "", 0);
+	}
 
 	public Place(Point position) {
 		this(position, "", 0);

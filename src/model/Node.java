@@ -1,16 +1,21 @@
 package model;
 
 import java.awt.Point;
+import java.io.Serializable;
 import java.util.UUID;
 
 import view.style.Theme;
 
-public class Node {
+public class Node implements Serializable {
 
 	private UUID id;
 	private String label = "";
 	private Point position = null;
 	private boolean selected;
+
+	public Node() {
+		this(new Point(100, 100), "");
+	}
 	
 	public Node(Point position){
 		this(position, "");
