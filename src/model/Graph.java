@@ -12,9 +12,9 @@ import java.util.Map;
 import java.util.Set;
 
 public class Graph implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Map<Node, List<Arch>> graph = new HashMap<Node, List<Arch>>();
 	private static Graph instance = null;
 
@@ -26,7 +26,7 @@ public class Graph implements Serializable {
 		if (instance == null) {
 			instance = new Graph();
 		}
-		return instance;		
+		return instance;
 	}
 
 	public static void reset() {
@@ -44,18 +44,20 @@ public class Graph implements Serializable {
 		Object graphObj = decoder.readObject();
 		decoder.close();
 
-		if (graphObj instanceof Map)
+		if (graphObj instanceof Map) {
+			instance = new Graph();
 			instance.graph = (Map) graphObj;
+		}
 	}
-	
+
 	public void addNode(Node node){
 		graph.put(node, new ArrayList<Arch>());
 	}
-	
+
 	public void deleteNode(Node node){
 		//TODO
 	}
-	
+
 	public Set<Node> getNodes(){
 		return graph.keySet();
 	}
@@ -71,23 +73,23 @@ public class Graph implements Serializable {
 
 		return null;
 	}
-	
+
 	public List<Arch> getEdges(Node node){
 		return graph.get(node);
 	}
-	
+
 	public Arch getSelectedArch(){
 		for(Node node : graph.keySet()){
 			for(Arch arch : getEdges(node)){
-				if(arch.isSelected()){					
+				if(arch.isSelected()){
 					return arch;
 				}
 			}
 		}
-		
+
 		return null;
 	}
-	
+
 	public String getNextName(String prefix){
 		int number = 1;
 		String label = prefix + number;

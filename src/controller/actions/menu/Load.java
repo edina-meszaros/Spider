@@ -1,15 +1,16 @@
 package controller.actions.menu;
 
+import java.awt.event.ActionEvent;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.zip.ZipInputStream;
+
+import javax.swing.AbstractAction;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import model.Graph;
 import view.Canvas;
-
-import java.awt.event.ActionEvent;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Load extends AbstractAction {
 
@@ -31,10 +32,14 @@ public class Load extends AbstractAction {
 
 		try {
 			FileInputStream fis = new FileInputStream(chooser.getSelectedFile().getAbsolutePath());
-			Graph.deserialize(new BufferedInputStream(fis));
+			ZipInputStream zis = new ZipInputStream(fis);
+			zis.getNextEntry();
+			Graph.deserialize(zis);
+			zis.close();
+			fis.close();
 			Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 			Canvas.getInstance().repaint();
-		} catch (FileNotFoundException e1) {
+		} catch (IOException e1) {
 			// return
 		}
 	}

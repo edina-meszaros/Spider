@@ -1,15 +1,17 @@
 package controller.actions.menu;
 
+import java.awt.event.ActionEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+import javax.swing.AbstractAction;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import model.Graph;
 import view.Canvas;
-
-import java.awt.event.ActionEvent;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
-import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class Save extends AbstractAction {
 
@@ -35,10 +37,15 @@ public class Save extends AbstractAction {
 				filename += ".spider";
 			}
 			FileOutputStream fos = new FileOutputStream(filename);
-			Graph.serialize(new BufferedOutputStream(fos));
+			ZipOutputStream zos = new ZipOutputStream(fos);
+			ZipEntry zip = new ZipEntry("graph.xml");
+			zos.putNextEntry(zip);
+			Graph.serialize(zos);
+			zos.close();
+			fos.close();
 			Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 			Canvas.getInstance().repaint();
-		} catch (FileNotFoundException e1) {
+		} catch (IOException ex) {
 			// return
 		}
 	}

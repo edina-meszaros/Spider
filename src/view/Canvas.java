@@ -121,23 +121,37 @@ public class Canvas extends JPanel {
 			g2.setColor(Theme.SELECT);
 			g2.drawLine(start.x, start.y, end.x, end.y);
 
-			//Point arrowHead = calculateArrowHead(start, end);
-			//System.out.println(end + " @@ " + arrowHead);
-			//g2.setColor(Style.DARK_GREY);
-			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+			if(arch.getTarget() instanceof Place){
+				int angle = getAngle(start, end);
+				Point arrowHead = calculateArrowHead(start, end, true);
+				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
+			}
+
+			if(arch.getTarget() instanceof Transition){
+				Point arrowHead = calculateArrowHead(start, end, false);
+				int angle = getAngle(start, end);
+
+				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
+			}
+
 		}else{
 
 			g2.setColor(Theme.DARK_GREY);
 			g2.drawLine(start.x, start.y, end.x, end.y);
 
-			//Point arrowHead = calculateArrowHead(start, end);
-			//System.out.println(end + " @@ " + arrowHead);
+			if(arch.getTarget() instanceof Place){
+				int angle = getAngle(start, end);
+				Point arrowHead = calculateArrowHead(start, end, true);
+				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
+			}
 
-			//g2.fillArc(end.x-22, end.y-22, 20, 20, 135, 45);
+			if(arch.getTarget() instanceof Transition){
+				Point arrowHead = calculateArrowHead(start, end, false);
+				int angle = getAngle(start, end);
+
+				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
+			}
 		}
-
-		//Point arrowHead = calculateArrowHead(start, end);
-		//System.out.println(end + " @@ " + arrowHead);
 
 		if(arch.getWeight() < 2)
 			return;
@@ -249,16 +263,66 @@ public class Canvas extends JPanel {
 		this.graph = graph;
 	}
 
-	public Point calculateArrowHead(Point lineStart, Point lineEnd){
+	public Point calculateArrowHead(Point lineStart, Point lineEnd, boolean Place){
 
-		int radius = Theme.SHAPE_SIZE/2;
-		int a = (int) Math.pow(lineStart.x - lineEnd.x, 2);
-		int b = (int) Math.pow(lineStart.y - lineEnd.y, 2);
+		int angle = getAngle(lineStart, lineEnd);
 
-		int X = lineEnd.x + (radius * (lineStart.x - lineEnd.x)) / (int) Math.sqrt(a + b);
-		int Y = -1 * ((((lineStart.y - lineEnd.y) / (lineStart.x - lineEnd.x)) * (X - lineEnd.x)) - lineEnd.y);
+		if(Place){
+			return new Point(lineEnd.x + (int)(Math.cos(Math.toRadians(angle)) * 20), lineEnd.y - (int)(Math.sin(Math.toRadians(angle)) * 20));
+		}
 
-		return new Point(X, Y);
+		if(angle > 45 && angle <= 135){
+
+			int y = lineEnd.y - 20;
+			int x = (int) (lineEnd.x + ((double) (lineStart.x - lineEnd.x) / (double) (lineStart.y - lineEnd.y)) * -20);
+
+			return new Point(x, y);
+
+		}else if(angle > 135 && angle <= 225){
+
+			int x = lineEnd.x - 20;
+			int y = (int) (lineEnd.y + ((double) (lineStart.y - lineEnd.y) / (double) (lineStart.x - lineEnd.x)) * -20);
+
+			return new Point(x, y);
+
+		}else if(angle > 225 && angle <= 315){
+
+			int y = lineEnd.y + 20;
+			int x = (int) (lineEnd.x + ((double) (lineStart.x - lineEnd.x) / (double) (lineStart.y - lineEnd.y)) * 20);
+
+			return new Point(x, y);
+
+		}else{
+
+			int x = lineEnd.x + 20;
+			int y = (int) (lineEnd.y + ((double) (lineStart.y - lineEnd.y) / (double) (lineStart.x - lineEnd.x)) * 20);
+
+			return new Point(x, y);
+		}
+
+
+	}
+
+	private int getAngle(Point lineStart, Point lineEnd) {
+		if(lineEnd.x == lineStart.x){
+			if(lineEnd.y > lineStart.y){
+				return 90;
+			}else{
+				return 270;
+			}
+		}
+
+		double slope = (double) (lineEnd.y - lineStart.y) / (double) (lineEnd.x - lineStart.x);
+		int degree = (int) Math.toDegrees(Math.atan(slope));
+
+		if (lineStart.x > lineEnd.x)
+			degree += 180;
+		else if (lineStart.y > lineEnd.y)
+			degree += 360;
+
+		int a = (360-degree + 180) % 360;
+
+		return a;
 	}
 
 	public JPopupMenu getPopupNewNode() { return popupNewNode; }
