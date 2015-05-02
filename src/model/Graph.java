@@ -91,7 +91,7 @@ public class Graph implements Serializable {
 	}
 
 	public String getNextName(String prefix){
-		int number = 1;
+		int number = 0;
 		String label = prefix + number;
 
 		while (hasLabel(label)) {

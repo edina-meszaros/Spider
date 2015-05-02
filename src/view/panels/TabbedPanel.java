@@ -2,7 +2,6 @@ package view.panels;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -23,17 +22,16 @@ public class TabbedPanel extends JTabbedPane {
 		//Create first tab
 		this.firstTab = new JPanel();
 		this.firstTab.setBackground(new Color(219,218,213));
-		this.firstTab.setPreferredSize(new Dimension(200, 300));
+		this.firstTab.setPreferredSize(new Dimension(150, 300));
 
 		//Create second tab
 		this.secondTab = new JPanel();
-		this.secondTab.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.secondTab.setBackground(new Color(219,218,213));
-		this.secondTab.setPreferredSize(new Dimension(200, 300));
+		this.secondTab.setPreferredSize(new Dimension(150, 300));
 
 		this.thirdTab = new JPanel();
 		this.thirdTab.setBackground(new Color(219,218,213));
-		this.thirdTab.setPreferredSize(new Dimension(200, 300));
+		this.thirdTab.setPreferredSize(new Dimension(150, 300));
 
 		//Add tabs to the panel
 		this.addTab("  Elemző  ", this.firstTab);

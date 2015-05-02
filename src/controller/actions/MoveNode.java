@@ -1,15 +1,18 @@
 package controller.actions;
 
-import model.*;
-import view.Canvas;
-import view.style.Theme;
-
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import model.Graph;
+import model.Node;
+import model.Place;
+import model.Transition;
+import view.Canvas;
+import view.style.Theme;
+
 public class MoveNode extends MouseAdapter {
-	
+
 	private int offsetX;
 	private int offsetY;
 	private Node selectedNode;
@@ -19,26 +22,33 @@ public class MoveNode extends MouseAdapter {
 		selectedNode = Graph.getInstance().getSelectedNode();
 		if(selectedNode == null)
 			return;
-		
-		
+
+
 		if (selectedNode instanceof Place && !isPlaceContainsPoint(e, selectedNode.getPosition())
 				|| selectedNode instanceof Transition && !isTransitionContainsPoint(e, selectedNode.getPosition())){
 			selectedNode = null;
 			return;
-		}           
-        
+		}
+
         offsetX = selectedNode.getPosition().x - e.getPoint().x;
-        offsetY = selectedNode.getPosition().y - e.getPoint().y;        
+        offsetY = selectedNode.getPosition().y - e.getPoint().y;
     }
 
     @Override
     public void mouseDragged(MouseEvent e) {
         if(selectedNode == null)
             return;
-        
+
         Point p = new Point(e.getPoint().x + offsetX, e.getPoint().y + offsetY);
-        
+
+        if(p.x < 0)
+        	p.x = 0;
+
+        if(p.y < 15)
+        	p.y = 15;
+
         selectedNode.setPosition(p);
+
         Canvas.getInstance().repaint();
     }
 
