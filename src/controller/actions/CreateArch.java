@@ -100,7 +100,6 @@ public class CreateArch extends MouseAdapter {
 	private void refreshCanvas() {
 		Canvas.getInstance().setLineStart(null);
 		Canvas.getInstance().setLineEnd(null);
-		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 		Canvas.getInstance().repaint();
 	}
 

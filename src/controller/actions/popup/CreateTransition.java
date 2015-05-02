@@ -24,7 +24,6 @@ public class CreateTransition extends AbstractAction {
 		Transition transition = new Transition(point, Graph.getInstance().getNextName("T"));
 
 		Graph.getInstance().addNode(transition);
-		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 		Canvas.getInstance().repaint();
 	}
 }

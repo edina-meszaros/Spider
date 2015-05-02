@@ -1,5 +1,10 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.KeyStroke;
+
 import view.Canvas;
 import view.MainMenu;
 import view.MainWindow;
@@ -64,10 +69,20 @@ public class Controller {
 		canvas.addFocusListener(new UnselectOnLostFocus());
 
 		menu.getNewPage().setAction(new NewPage());
+		menu.getNewPage().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
+
 		menu.getSave().setAction(new Save());
+		menu.getSave().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, ActionEvent.CTRL_MASK));
+
 		menu.getLoad().setAction(new Load());
+		menu.getLoad().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
+
 		menu.getExit().setAction(new Exit());
+		menu.getExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
+
 		menu.getHelp().setAction(new Help());
+		menu.getHelp().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
+
 		menu.getAbout().setAction(new About());
 	}
 }

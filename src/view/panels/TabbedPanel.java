@@ -11,46 +11,47 @@ import javax.swing.JTabbedPane;
 import view.Canvas;
 
 public class TabbedPanel extends JTabbedPane {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private static TabbedPanel instance = null;
 	private JPanel firstTab;
 	private JPanel secondTab;
 	private JButton newPlace;
 	private JButton newTransition;
-	
+
 	private TabbedPanel(Canvas canvas){
-		
+
 		//Create first tab
 		this.firstTab = new JPanel();
 		this.firstTab.setBackground(new Color(219,218,213));
-		
+		this.firstTab.setPreferredSize(new Dimension(200, 300));
+
 		//Create second tab
 		this.secondTab = new JPanel();
 		this.secondTab.setLayout(new FlowLayout(FlowLayout.LEFT));
 		this.secondTab.setBackground(new Color(219,218,213));
-		this.secondTab.setPreferredSize(new Dimension(150, 150));
-		
+		this.secondTab.setPreferredSize(new Dimension(200, 300));
+
 		//this.newPlace = new JButton();
 		//this.secondTab.add(newPlace);
 		//this.newTransition = new JButton();
 		//this.secondTab.add(newTransition);
-		
+
 		//Add tabs to the panel
-		this.addTab("Analyser", this.firstTab);
-		this.addTab("Editor", this.secondTab);		
+		this.addTab("  Elemző  ", this.firstTab);
+		this.addTab("Szimuláció", this.secondTab);
 	}
-	
+
 	public static TabbedPanel getInstance() {
 		if (instance == null) {
 			instance = new TabbedPanel(Canvas.getInstance());
 		}
-		return instance;		
+		return instance;
 	}
 
 	public JPanel getFirstTab() { return firstTab; }
 	public JPanel getSecondTab() { return secondTab; }
 	public JButton getNewPlace() { return newPlace; }
-	public JButton getNewTransition() { return newTransition; }	
+	public JButton getNewTransition() { return newTransition; }
 }

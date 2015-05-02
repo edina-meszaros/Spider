@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.zip.ZipInputStream;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.bind.DatatypeConverter;
 
@@ -39,7 +41,6 @@ public class Load extends AbstractAction {
 			Graph.deserialize(zis);
 			zis.close();
 			fis.close();
-			Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 			Canvas.getInstance().repaint();
 		} catch (IOException e1) {
 			// return

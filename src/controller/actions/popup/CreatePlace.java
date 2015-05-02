@@ -24,7 +24,6 @@ public class CreatePlace extends AbstractAction {
 		Place place = new Place(point, Graph.getInstance().getNextName("P"));
 
 		Graph.getInstance().addNode(place);
-		Canvas.getInstance().updateGraph(Graph.getInstance().getGraph());
 		Canvas.getInstance().repaint();
 	}
 }

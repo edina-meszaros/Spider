@@ -1,7 +1,9 @@
 package view;
 
 import java.awt.BasicStroke;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -36,7 +38,6 @@ public class Canvas extends JPanel {
 	private JMenuItem newNodeNameTransition;
 	private JMenuItem newPlaceBound;
 	private Point mousePosition = null;
-	private Map<Node, List<Arch>> graph = null;
 	private Point lineStart = null;
 	private Point lineEnd = null;
 	private static final int CHAR_HEIGHT = 3;
@@ -88,6 +89,9 @@ public class Canvas extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g.create();
+		int width = 0, height = 0;
+
+		Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
 
 		if(graph == null) return;
 
@@ -101,10 +105,16 @@ public class Canvas extends JPanel {
 			if(!node.isSelected()){
 				drawNode(node, g2);
 			}
+
+			width = Math.max(width, node.getNodeCenterPosition().x + 30);
+			height = Math.max(height, node.getNodeCenterPosition().y + 30);
 		}
 
 		drawNode(Graph.getInstance().getSelectedNode(), g2);
 		drawTempArch(g2);
+
+		setPreferredSize(new Dimension(width, height));
+		this.revalidate();
 	}
 
 	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
@@ -164,9 +174,12 @@ public class Canvas extends JPanel {
 		int lineCenterY = (startY + endY) / 2;
 
 		g2.setColor(Theme.BACKGROUND);
-		//g2.setColor(Color.yellow);
-		g2.fillRect((int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length() - 3),
-				lineCenterY - 10, 13 * String.valueOf(arch.getWeight()).length(), 20);
+
+		FontMetrics metrics=getFontMetrics(new Font("Monospaced", Font.PLAIN, 12));
+		int width=metrics.stringWidth(String.valueOf(arch.getWeight()));
+		int height=metrics.getHeight();
+
+		g2.fillRect(lineCenterX - (width + 10) / 2, lineCenterY - (height / 2), width + 10, height);
 
 		g2.setColor(Theme.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
@@ -260,10 +273,6 @@ public class Canvas extends JPanel {
 			g2.drawLine(lineStart.x + Theme.NODE_CENTER, lineStart.y + Theme.NODE_CENTER, lineEnd.x, lineEnd.y);
 			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
-	}
-
-	public void updateGraph(Map<Node, List<Arch>> graph){
-		this.graph = graph;
 	}
 
 	public Point calculateArrowHead(Point lineStart, Point lineEnd, boolean Place){
