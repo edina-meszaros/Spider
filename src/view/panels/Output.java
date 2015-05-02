@@ -62,7 +62,6 @@ public class Output extends JComponent {
 
 	public void setError(String error){
 		String history = this.textEditor.getText();
-		System.out.println(history);
 		this.textEditor.setText(history + "\r\n" + error);
 	}
 }

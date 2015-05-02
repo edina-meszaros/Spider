@@ -19,6 +19,7 @@ import model.Graph;
 import model.Node;
 import model.Place;
 import model.Transition;
+import view.panels.TabbedPanel;
 import view.style.Theme;
 
 public class Canvas extends JPanel {
@@ -89,6 +90,14 @@ public class Canvas extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g.create();
+
+		if(TabbedPanel.getInstance().getSelectedIndex() == 0){
+			drawEditor(g2);
+		}
+
+	}
+
+	private void drawEditor(Graphics2D g2) {
 		int width = 0, height = 0;
 
 		Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();

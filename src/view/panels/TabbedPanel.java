@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
-import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -17,8 +16,7 @@ public class TabbedPanel extends JTabbedPane {
 	private static TabbedPanel instance = null;
 	private JPanel firstTab;
 	private JPanel secondTab;
-	private JButton newPlace;
-	private JButton newTransition;
+	private JPanel thirdTab;
 
 	private TabbedPanel(Canvas canvas){
 
@@ -33,14 +31,14 @@ public class TabbedPanel extends JTabbedPane {
 		this.secondTab.setBackground(new Color(219,218,213));
 		this.secondTab.setPreferredSize(new Dimension(200, 300));
 
-		//this.newPlace = new JButton();
-		//this.secondTab.add(newPlace);
-		//this.newTransition = new JButton();
-		//this.secondTab.add(newTransition);
+		this.thirdTab = new JPanel();
+		this.thirdTab.setBackground(new Color(219,218,213));
+		this.thirdTab.setPreferredSize(new Dimension(200, 300));
 
 		//Add tabs to the panel
 		this.addTab("  Elemző  ", this.firstTab);
 		this.addTab("Szimuláció", this.secondTab);
+		this.addTab(" Fedési fa ", this.thirdTab);
 	}
 
 	public static TabbedPanel getInstance() {
@@ -52,6 +50,5 @@ public class TabbedPanel extends JTabbedPane {
 
 	public JPanel getFirstTab() { return firstTab; }
 	public JPanel getSecondTab() { return secondTab; }
-	public JButton getNewPlace() { return newPlace; }
-	public JButton getNewTransition() { return newTransition; }
+	public JPanel getThirdTab() { return thirdTab; }
 }

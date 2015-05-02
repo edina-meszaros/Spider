@@ -8,12 +8,14 @@ import javax.swing.KeyStroke;
 import view.Canvas;
 import view.MainMenu;
 import view.MainWindow;
+import view.panels.TabbedPanel;
 import controller.actions.CreateArch;
 import controller.actions.DeleteArch;
 import controller.actions.DeleteNode;
 import controller.actions.MoveNode;
 import controller.actions.SelectArch;
 import controller.actions.SelectNode;
+import controller.actions.TabChange;
 import controller.actions.UnselectOnLostFocus;
 import controller.actions.menu.About;
 import controller.actions.menu.Exit;
@@ -22,7 +24,7 @@ import controller.actions.menu.Load;
 import controller.actions.menu.NewPage;
 import controller.actions.menu.Save;
 import controller.actions.popup.ChangeArchWeight;
-import controller.actions.popup.ChangeListener;
+import controller.actions.popup.AttributeChangeListener;
 import controller.actions.popup.ChangeNodeName;
 import controller.actions.popup.ChangePlaceBound;
 import controller.actions.popup.ChangePlaceToken;
@@ -51,7 +53,7 @@ public class Controller {
 		canvas.getNewArchWeightMenu().setAction(new ChangeArchWeight());
 		canvas.getNewPlaceBound().setAction(new ChangePlaceBound());
 
-		canvas.addMouseListener(new ChangeListener());
+		canvas.addMouseListener(new AttributeChangeListener());
 
 		canvas.addMouseListener(new SelectNode());
 		canvas.addMouseListener(new SelectArch());
@@ -84,5 +86,7 @@ public class Controller {
 		menu.getHelp().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 
 		menu.getAbout().setAction(new About());
+
+		TabbedPanel.getInstance().addChangeListener(new TabChange());
 	}
 }

@@ -17,7 +17,7 @@ import model.Transition;
 import view.Canvas;
 import view.style.Theme;
 
-public class ChangeListener extends MouseAdapter {
+public class AttributeChangeListener extends MouseAdapter {
 	
 	private JPopupMenu popupPlace;
 	private JPopupMenu popupTransition;
@@ -25,7 +25,7 @@ public class ChangeListener extends MouseAdapter {
 
 	private static final int HIT_BOX_SIZE = 6;
 	
-	public ChangeListener(){
+	public AttributeChangeListener(){
 		this.popupPlace = Canvas.getInstance().getPopupChangePlace();
 		this.popupTransition = Canvas.getInstance().getPopupChangeTransition();
 		this.popupArch = Canvas.getInstance().getPopupChangeArch();
