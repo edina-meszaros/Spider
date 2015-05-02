@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import model.Graph;
 import model.Place;
 import view.Canvas;
+import view.panels.Output;
 
 public class ChangePlaceToken extends AbstractAction {
 
@@ -28,7 +29,8 @@ public class ChangePlaceToken extends AbstractAction {
 			try{
 				selectedNode.setTokens(Integer.parseInt(token));
 			} catch (NumberFormatException ex){
-				//output error
+
+				Output.getInstance().setError("Érvénytelen tokenszám!");
 			}
 		}
 

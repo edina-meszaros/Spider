@@ -6,8 +6,10 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 
@@ -18,16 +20,28 @@ public class Output extends JComponent {
 	private static Output instance = null;
 	private JPanel title = new JPanel();
 	private JPanel content = new JPanel();
+	private JEditorPane textEditor = new JEditorPane("text/plain", "");
 	private Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 
 	private Output(){
 
 		this.title.setPreferredSize(new Dimension(150, 25));
 		this.title.setBackground(new Color(147, 157, 168));
-		//this.title.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
 		this.title.add(new JLabel("Kimenet / hibák"));
 
 		this.content.setBackground(new Color(219,218,213));
+		this.textEditor.setBackground(new Color(219,218,213));
+		this.textEditor.setPreferredSize(new Dimension(200, 300));
+		this.textEditor.setEditable(false);
+		this.textEditor.setText("");
+		this.content.add(textEditor);
+
+		JScrollPane editorScrollPane = new JScrollPane(textEditor);
+		editorScrollPane.setVerticalScrollBarPolicy(
+		                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		editorScrollPane.setMinimumSize(new Dimension(200, 300));
+
+		this.content.add(editorScrollPane, BorderLayout.CENTER);
 
 		this.setLayout(new BorderLayout());
 		this.add(title, BorderLayout.NORTH);
@@ -40,5 +54,15 @@ public class Output extends JComponent {
 			instance = new Output();
 		}
 		return instance;
+	}
+
+	public JEditorPane getTextEditor() {
+		return textEditor;
+	}
+
+	public void setError(String error){
+		String history = this.textEditor.getText();
+		System.out.println(history);
+		this.textEditor.setText(history + "\r\n" + error);
 	}
 }

@@ -12,6 +12,7 @@ import model.Node;
 import model.Place;
 import model.Transition;
 import view.Canvas;
+import view.panels.Output;
 import view.style.Theme;
 
 public class CreateArch extends MouseAdapter {
@@ -75,6 +76,9 @@ public class CreateArch extends MouseAdapter {
         				edges.add(new Arch(targetNode));
         				refreshCanvas();
         			}
+
+        		}else{
+        			Output.getInstance().setError("Azonos típusú csúcsok nem köthetők össze éllel!");
         		}
         	}
 

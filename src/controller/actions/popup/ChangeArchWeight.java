@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import model.Arch;
 import model.Graph;
 import view.Canvas;
+import view.panels.Output;
 
 public class ChangeArchWeight extends AbstractAction {
 
@@ -32,18 +33,19 @@ public class ChangeArchWeight extends AbstractAction {
 				int weight = Integer.parseInt(input);
 
 				if(weight < 1){
-					//output error
+					Output.getInstance().setError("Az élsúly nem lehet kisebb, mint 1!");
 					return;
 				}
 
 				if(weight >= 10000){
-					//output error
+					Output.getInstance().setError("Az élsúly nem lehet nagyobb, mint 9999!");
 					return;
 				}
 
 				selectedArch.setWeight(Integer.parseInt(input));
+
 			} catch (NumberFormatException ex){
-				//output error
+				Output.getInstance().setError("Érvénytelen élsúly!");
 			}
 		}
 

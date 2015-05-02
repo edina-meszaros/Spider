@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import model.Graph;
 import model.Node;
 import view.Canvas;
+import view.panels.Output;
 
 public class ChangeNodeName extends AbstractAction {
 
@@ -28,13 +29,14 @@ public class ChangeNodeName extends AbstractAction {
 			try{
 
 				if(name.length() > 20){
-					//output error
+					Output.getInstance().setError("A csúcs neve max. 20 karakter lehet!");
 					return;
 				}
 
 				selectedNode.setLabel(name);
+
 			} catch (Exception ex){
-				//output error
+				Output.getInstance().setError("Érvénytelen csúcs név!");
 			}
 		}
 

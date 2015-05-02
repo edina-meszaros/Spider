@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 import model.Graph;
 import model.Place;
 import view.Canvas;
+import view.panels.Output;
 
 public class ChangePlaceBound extends AbstractAction {
 
@@ -28,19 +29,26 @@ public class ChangePlaceBound extends AbstractAction {
 				int bound = Integer.parseInt(input);
 
 				if(bound < 1){
-					//output error
+
+					Output.getInstance().setError("A korlát nem lehet kisebb, mint 1!");
 					return;
 				}
 
-				if(selectedNode.getTokens() > bound){
+				int token = selectedNode.getTokens();
+
+				if(token > bound){
 					selectedNode.setTokens(bound);
-					//output information
+
+					String error = "Korlátos csúcs tokenszáma nem lehet nagyobb, mint a korlát!\r\n"
+        					+ "Az eredeti tokenszám: " + token + " volt!";
+
+					Output.getInstance().setError(error);
 				}
 
 				selectedNode.setBound(bound);
 
 			} catch (NumberFormatException ex){
-				//output error
+				Output.getInstance().setError("Érvénytelen korlát!");
 			}
 		}
 
