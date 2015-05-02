@@ -3,14 +3,14 @@ package view;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
+import javax.swing.*;
+import javax.xml.bind.DatatypeConverter;
 
 public class MainMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
+
+	private static final String iconSamples = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAABUklEQVR4nH3SP0sdURAF8N/bfYjExMIPEAimFQ1YGSy0NyliitinzVeInb2mylcQwUpIbx/EQmwURDCgCObliY1uindW1/XPwHDnzjlz5zBzGdgQht1ZB92czbi24dSAT9jDPlYw6WmbDGc/NYvQR9XyX1jCy/hScm1eX4IzzGMZxw3CYby+H4czn5qq2wB38Bof8QbfMBvp21jFASbCrVAVGU6JIuBPvMcH/I0vYCbYRLglOt10uM5kd7CBt3iVLhL/xjrGw72Wl+S1y0x5Nedl8KKFTeVeMthvreBFQ8F47jfBH8OeVTBlsKJaQf85BdUTCkYaCkZa86kV3G6hQA/vsJYuVw0FV1GwFk4v+U6BfxjDpsG+v2I33Zu+G2w73LHU+owj93/bd8zhIj6XXPOXHqUWjOILtjz8723fCne0Li7dt2n8wClO8AfnyU23uOV/gix5Sw6iHnEAAAAASUVORK5CYII=";
 
 	private static MainMenu instance = null;
 	private JMenu fileMenu;
@@ -32,7 +32,7 @@ public class MainMenu extends JMenuBar {
 		fileMenu = new JMenu("Fájl");
 		//menu.setMnemonic(KeyEvent.VK_A);
 		fileMenu.getAccessibleContext().setAccessibleDescription(
-		        "The only menu in this program that has menu items");
+				"The only menu in this program that has menu items");
 
 		this.add(fileMenu);
 
@@ -50,6 +50,7 @@ public class MainMenu extends JMenuBar {
 		fileMenu.add(load);
 
 		exampleSubMenu = new JMenu("Példák");
+		exampleSubMenu.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(iconSamples)));
 		exampleSubMenu.setMnemonic(KeyEvent.VK_S);
 
 		ex1 = new JMenuItem("Példa 1");

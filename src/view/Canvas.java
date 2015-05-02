@@ -139,6 +139,9 @@ public class Canvas extends JPanel {
 			g2.setColor(Theme.DARK_GREY);
 			g2.drawLine(start.x, start.y, end.x, end.y);
 
+//			QuadCurve2D quadCurve = new QuadCurve2D.Double(start.x, start.y, (start.x + end.x) / 2, (start.y + end.y) / 2 - 40, end.x, end.y);
+//		    g2.draw(quadCurve);
+
 			if(arch.getTarget() instanceof Place){
 				int angle = getAngle(start, end);
 				Point arrowHead = calculateArrowHead(start, end, true);
