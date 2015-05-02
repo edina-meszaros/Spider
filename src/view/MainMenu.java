@@ -1,8 +1,12 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 public class MainMenu extends JMenuBar {
 
@@ -10,6 +14,7 @@ public class MainMenu extends JMenuBar {
 
 	private static MainMenu instance = null;
 	private JMenu fileMenu;
+	private JMenu exampleSubMenu;
 	private JMenu helpMenu;
 	private JMenuItem newPage;
 	private JMenuItem save;
@@ -17,6 +22,7 @@ public class MainMenu extends JMenuBar {
 	private JMenuItem exit;
 	private JMenuItem help;
 	private JMenuItem about;
+	private JMenuItem ex1;
 
 	private MainMenu() {
 		super();
@@ -42,6 +48,16 @@ public class MainMenu extends JMenuBar {
 
 		load = new JMenuItem();
 		fileMenu.add(load);
+
+		exampleSubMenu = new JMenu("Példák");
+		exampleSubMenu.setMnemonic(KeyEvent.VK_S);
+
+		ex1 = new JMenuItem("Példa 1");
+		ex1.setAccelerator(KeyStroke.getKeyStroke(
+		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		exampleSubMenu.add(ex1);
+
+		fileMenu.add(exampleSubMenu);
 
 		fileMenu.addSeparator();
 		exit = new JMenuItem();
