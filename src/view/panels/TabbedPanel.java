@@ -34,9 +34,9 @@ public class TabbedPanel extends JTabbedPane {
 		this.thirdTab.setPreferredSize(new Dimension(150, 300));
 
 		//Add tabs to the panel
-		this.addTab("  Elemző  ", this.firstTab);
+		this.addTab("Elemző", this.firstTab);
 		this.addTab("Szimuláció", this.secondTab);
-		this.addTab(" Fedési fa ", this.thirdTab);
+		this.addTab("Fedési fa", this.thirdTab);
 	}
 
 	public static TabbedPanel getInstance() {

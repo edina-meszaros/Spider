@@ -21,7 +21,7 @@ public class MainWindow extends JFrame {
 		setTitle("Spider");
 		setSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 600));
-		//setExtendedState(JFrame.MAXIMIZED_BOTH);
+		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setLayout(new BorderLayout());
