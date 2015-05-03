@@ -1,4 +1,4 @@
-package model;
+package view;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -8,6 +8,10 @@ import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
 
+import model.Graph;
+import model.Place;
+import model.ReachabilityNode;
+import model.State;
 import view.style.Theme;
 import calculate.ReachabilityGraph;
 
@@ -28,10 +32,13 @@ public class ReachabilityGraphDrawer {
 
 		this.g2.setColor(Theme.DARK_GREY);
 		this.g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		this.x = 500;
-		this.y = 500;
+		this.x = 20;
+		this.y = 20;
 
 		ReachabilityGraph reachabilityGraph = ReachabilityGraph.getInstance();
+		if(Graph.getInstance().getPlaces().isEmpty())
+			return;
+
 		drawNode(reachabilityGraph.getRootNode(), 0);
 	}
 

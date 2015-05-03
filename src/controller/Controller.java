@@ -12,6 +12,7 @@ import view.panels.TabbedPanel;
 import controller.actions.CreateArch;
 import controller.actions.DeleteArch;
 import controller.actions.DeleteNode;
+import controller.actions.FireTransition;
 import controller.actions.MoveNode;
 import controller.actions.SelectArch;
 import controller.actions.SelectNode;
@@ -49,6 +50,7 @@ public class Controller {
 	private DeleteArch deleteArch = new DeleteArch();
 	private DeleteNode deleteNode = new DeleteNode();
 	private UnselectOnLostFocus unselectOnLostFocus = new UnselectOnLostFocus();
+	private FireTransition fireTransition = new FireTransition();
 
 	public Controller(){
 
@@ -118,5 +120,7 @@ public class Controller {
 	public DeleteArch getDeleteArch() { return deleteArch; }
 	public DeleteNode getDeleteNode() { return deleteNode; }
 	public UnselectOnLostFocus getUnselectOnLostFocus() { return unselectOnLostFocus; }
+	public FireTransition getFireTransition() { return fireTransition; }
+
 
 }

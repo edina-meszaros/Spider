@@ -4,8 +4,10 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import model.State;
 import view.Canvas;
 import calculate.ReachabilityGraph;
+import calculate.Simulation;
 import controller.Controller;
 
 public class TabChange implements ChangeListener {
@@ -24,18 +26,59 @@ public class TabChange implements ChangeListener {
 
         Canvas canvas = Canvas.getInstance();
 
+        //Editor
+        if(index == 0){
+        	setAllEvents(canvas);
+        }
+
         //Simulation
 		if(index == 1){
         	removeAllEvents(canvas);
+        	Simulation simulation = new Simulation(new State());
+        	FireTransition fireTransition = this.controller.getFireTransition();
+        	fireTransition.setSimulation(simulation);
+        	canvas.addMouseListener(fireTransition);
+			canvas.setSimulation(simulation);
         }
 
         //Reachability graph
         if (index == 2) {
             ReachabilityGraph.getInstance().calculate();
+            removeAllEvents(canvas);
         }
+
 
         canvas.repaint();
     }
+
+	private void setAllEvents(Canvas canvas){
+		canvas.addMouseListener(this.controller.getNewNodeListener());
+
+//		canvas.getNewPlaceMenu().setAction(createPlace);
+//		canvas.getNewTransitionMenu().setAction(createTransition);
+//		canvas.getNewPlaceTokensMenu().setAction(changePlaceToken);
+//
+//		canvas.getNewNodeNamePlaceMenu().setAction(changeNodeName);
+//		canvas.getNewNodeNameTransitionMenu().setAction(changeNodeName);
+//
+//		canvas.getNewArchWeightMenu().setAction(changeArchWeight);
+//		canvas.getNewPlaceBound().setAction(changePlaceBound);
+//
+//		canvas.addMouseListener(attributeChangeListener);
+//
+//		canvas.addMouseListener(selectNode);
+//		canvas.addMouseListener(selectArch);
+//
+//		canvas.addMouseListener(moveNode);
+//		canvas.addMouseMotionListener(moveNode);
+//
+//		canvas.addMouseListener(createArch);
+//		canvas.addMouseMotionListener(createArch);
+//
+//		canvas.addKeyListener(deleteArch);
+//		canvas.addKeyListener(deleteNode);
+//		canvas.addFocusListener(unselectOnLostFocus);
+	}
 
 	private void removeAllEvents(Canvas canvas) {
 		canvas.removeMouseListener(this.controller.getNewNodeListener());
