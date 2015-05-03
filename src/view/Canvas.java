@@ -18,6 +18,7 @@ import model.Arch;
 import model.Graph;
 import model.Node;
 import model.Place;
+import model.ReachabilityGraphDrawer;
 import model.Transition;
 import view.panels.TabbedPanel;
 import view.style.Theme;
@@ -93,6 +94,15 @@ public class Canvas extends JPanel {
 
 		if(TabbedPanel.getInstance().getSelectedIndex() == 0){
 			drawEditor(g2);
+
+		}else if(TabbedPanel.getInstance().getSelectedIndex() == 2){
+
+			ReachabilityGraphDrawer drawer = new ReachabilityGraphDrawer(g2);
+			drawer.draw();
+
+			setPreferredSize(drawer.getScreenSize());
+			this.revalidate();
+
 		}
 
 	}
@@ -132,47 +142,43 @@ public class Canvas extends JPanel {
 		int endX = arch.getTarget().getNodeCenterPosition().x;
 		int startY = startNode.getNodeCenterPosition().y;
 		int endY = arch.getTarget().getNodeCenterPosition().y;
-		Point start = new Point(startX, startY);
-		Point end = new Point(endX, endY);
+		Point start;
+		Point end;
+
+		if (hasInverseArch(startNode, arch.getTarget())) {
+			double L = Math.sqrt((startX - endX) * (startX - endX) + (startY - endY) * (startY - endY));
+			double offsetPixels = 5.0;
+
+			double x1p = startX + offsetPixels * (endY-startY) / L;
+			double x2p = endX + offsetPixels * (endY-startY) / L;
+			double y1p = startY + offsetPixels * (startX-endX) / L;
+			double y2p = endY + offsetPixels * (startX-endX) / L;
+
+			start = new Point((int)x1p, (int)y1p);
+			end = new Point((int)x2p, (int)y2p);
+		} else {
+			start = new Point(startX, startY);
+			end = new Point(endX, endY);
+		}
 
 		if(arch.isSelected()){
-
 			g2.setColor(Theme.SELECT);
-			g2.drawLine(start.x, start.y, end.x, end.y);
-
-			if(arch.getTarget() instanceof Place){
-				int angle = getAngle(start, end);
-				Point arrowHead = calculateArrowHead(start, end, true);
-				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
-			}
-
-			if(arch.getTarget() instanceof Transition){
-				Point arrowHead = calculateArrowHead(start, end, false);
-				int angle = getAngle(start, end);
-
-				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
-			}
-
 		}else{
-
 			g2.setColor(Theme.DARK_GREY);
-			g2.drawLine(start.x, start.y, end.x, end.y);
+		}
 
-//			QuadCurve2D quadCurve = new QuadCurve2D.Double(start.x, start.y, (start.x + end.x) / 2, (start.y + end.y) / 2 - 40, end.x, end.y);
-//		    g2.draw(quadCurve);
+		g2.drawLine(start.x, start.y, end.x, end.y);
 
-			if(arch.getTarget() instanceof Place){
-				int angle = getAngle(start, end);
-				Point arrowHead = calculateArrowHead(start, end, true);
-				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
-			}
+		if(arch.getTarget() instanceof Place){
+			int angle = getAngle(start, end);
+			Point arrowHead = calculateArrowHead(start, end, true);
+			g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
+		}
 
-			if(arch.getTarget() instanceof Transition){
-				Point arrowHead = calculateArrowHead(start, end, false);
-				int angle = getAngle(start, end);
-
-				g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
-			}
+		if(arch.getTarget() instanceof Transition){
+			int angle = getAngle(start, end);
+			Point arrowHead = calculateArrowHead(start, end, false);
+			g2.fillArc(arrowHead.x - 15, arrowHead.y - 15, 30, 30, angle - 20, 40);
 		}
 
 		if(arch.getWeight() < 2)
@@ -195,6 +201,19 @@ public class Canvas extends JPanel {
 		g2.drawString(String.valueOf(arch.getWeight()),
 				(int) (lineCenterX - 3.5 * String.valueOf(arch.getWeight()).length()),
 				lineCenterY + 4);
+	}
+
+	private boolean hasInverseArch(Node startNode, Node target) {
+		Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
+		for (Node node : graph.keySet()){
+			for(Arch arch : graph.get(node)){
+				if (node.equals(target) && arch.getTarget().equals(startNode)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public void drawNode(Node node, Graphics2D g2) {
@@ -222,14 +241,43 @@ public class Canvas extends JPanel {
 		g2.setStroke(new BasicStroke(1.5f));
 		g2.drawOval(node.getPosition().x, node.getPosition().y, Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
 
-		//Draw token
 		g2.setColor(Theme.DARK_GREY);
 		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
-		String token = (node).getTokens().toString();
-
-		if(Integer.parseInt(token) != 0)
-			g2.drawString(token,
-				(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
+		//Draw token
+		switch (node.getTokens()) {
+			case 0:
+				break;
+			case 1:
+				g2.fillOval(node.getNodeCenterPosition().x - Theme.TOKEN_SIZE/2, node.getNodeCenterPosition().y - Theme.TOKEN_SIZE/2, Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				break;
+			case 2:
+				g2.fillOval(node.getNodeCenterPosition().x - (int)(Theme.TOKEN_SIZE*1.3), node.getNodeCenterPosition().y - Theme.TOKEN_SIZE/2, Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x + (int)(Theme.TOKEN_SIZE*0.3), node.getNodeCenterPosition().y - Theme.TOKEN_SIZE/2, Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				break;
+			case 3:
+				g2.fillOval(node.getNodeCenterPosition().x - Theme.TOKEN_SIZE/2, node.getNodeCenterPosition().y - (int)(Theme.TOKEN_SIZE*1.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x - (int)(Theme.TOKEN_SIZE*1.3), node.getNodeCenterPosition().y, Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x + (int)(Theme.TOKEN_SIZE*0.3), node.getNodeCenterPosition().y, Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				break;
+			case 4:
+				g2.fillOval(node.getNodeCenterPosition().x - (int)(Theme.TOKEN_SIZE*1.3), node.getNodeCenterPosition().y - (int)(Theme.TOKEN_SIZE*1.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x + (int)(Theme.TOKEN_SIZE*0.3), node.getNodeCenterPosition().y - (int)(Theme.TOKEN_SIZE*1.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x - (int)(Theme.TOKEN_SIZE*1.3), node.getNodeCenterPosition().y + (int)(Theme.TOKEN_SIZE*0.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x + (int)(Theme.TOKEN_SIZE*0.3), node.getNodeCenterPosition().y + (int)(Theme.TOKEN_SIZE*0.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				break;
+			case 5:
+				g2.fillOval(node.getNodeCenterPosition().x - Theme.TOKEN_SIZE/2, node.getNodeCenterPosition().y - Theme.TOKEN_SIZE/2, Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x - (int)(Theme.TOKEN_SIZE*1.3), node.getNodeCenterPosition().y - (int)(Theme.TOKEN_SIZE*1.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x + (int)(Theme.TOKEN_SIZE*0.3), node.getNodeCenterPosition().y - (int)(Theme.TOKEN_SIZE*1.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x - (int)(Theme.TOKEN_SIZE*1.3), node.getNodeCenterPosition().y + (int)(Theme.TOKEN_SIZE*0.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				g2.fillOval(node.getNodeCenterPosition().x + (int)(Theme.TOKEN_SIZE*0.3), node.getNodeCenterPosition().y + (int)(Theme.TOKEN_SIZE*0.3), Theme.TOKEN_SIZE, Theme.TOKEN_SIZE);
+				break;
+			default:
+				String token = node.getTokens().toString();
+				g2.drawString(token,
+						(int) (node.getNodeCenterPosition().x - 3.5*token.length()), node.getNodeCenterPosition().y + CHAR_HEIGHT);
+				break;
+		}
 
 		//Draw label
 		String label = node.getLabel();
@@ -341,9 +389,7 @@ public class Canvas extends JPanel {
 		else if (lineStart.y > lineEnd.y)
 			degree += 360;
 
-		int a = (360-degree + 180) % 360;
-
-		return a;
+		return (360-degree + 180) % 360;
 	}
 
 	public JPopupMenu getPopupNewNode() { return popupNewNode; }

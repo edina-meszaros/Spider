@@ -76,6 +76,14 @@ public class Graph implements Serializable {
 		return places;
 	}
 
+	public List<Place> getSortedPlaces() {
+		List<Place> sortedPlaces = getPlaces();
+
+		sortedPlaces.sort(null);
+
+		return sortedPlaces;
+	}
+
 	public List<Transition> getTransitions() {
 		List<Transition> transitions = new ArrayList<>();
 

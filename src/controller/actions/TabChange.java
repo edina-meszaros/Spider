@@ -1,12 +1,9 @@
 package controller.actions;
 
-import java.util.List;
-
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import model.ReachabilityNode;
 import view.Canvas;
 import calculate.ReachabilityGraph;
 import controller.Controller;
@@ -35,8 +32,6 @@ public class TabChange implements ChangeListener {
         //Reachability graph
         if (index == 2) {
             ReachabilityGraph.getInstance().calculate();
-            List<ReachabilityNode> flatTree = ReachabilityGraph.getInstance().getFlatTree();
-            System.out.println("calculated");
         }
 
         canvas.repaint();
