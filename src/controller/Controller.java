@@ -23,8 +23,8 @@ import controller.actions.menu.Help;
 import controller.actions.menu.Load;
 import controller.actions.menu.NewPage;
 import controller.actions.menu.Save;
-import controller.actions.popup.ChangeArchWeight;
 import controller.actions.popup.AttributeChangeListener;
+import controller.actions.popup.ChangeArchWeight;
 import controller.actions.popup.ChangeNodeName;
 import controller.actions.popup.ChangePlaceBound;
 import controller.actions.popup.ChangePlaceToken;
@@ -34,41 +34,54 @@ import controller.actions.popup.NewNodeListener;
 
 public class Controller {
 
+	private NewNodeListener newNodeListener = new NewNodeListener();
+	private CreatePlace createPlace = new CreatePlace();
+	private CreateTransition createTransition = new CreateTransition();
+	private ChangePlaceToken changePlaceToken = new ChangePlaceToken();
+	private ChangeNodeName changeNodeName = new ChangeNodeName();
+	private ChangeArchWeight changeArchWeight = new ChangeArchWeight();
+	private ChangePlaceBound changePlaceBound = new ChangePlaceBound();
+	private SelectNode selectNode = new SelectNode();
+	private SelectArch selectArch = new SelectArch();
+	private AttributeChangeListener attributeChangeListener = new AttributeChangeListener();
+	private MoveNode moveNode = new MoveNode();
+	private CreateArch createArch = new CreateArch();
+	private DeleteArch deleteArch = new DeleteArch();
+	private DeleteNode deleteNode = new DeleteNode();
+	private UnselectOnLostFocus unselectOnLostFocus = new UnselectOnLostFocus();
+
 	public Controller(){
 
 		MainWindow.getInstance();
 		Canvas canvas = Canvas.getInstance();
 		MainMenu menu = MainMenu.getInstance();
 
-		canvas.addMouseListener(new NewNodeListener());
+		canvas.addMouseListener(newNodeListener);
 
-		canvas.getNewPlaceMenu().setAction(new CreatePlace());
-		canvas.getNewTransitionMenu().setAction(new CreateTransition());
-		canvas.getNewPlaceTokensMenu().setAction(new ChangePlaceToken());
+		canvas.getNewPlaceMenu().setAction(createPlace);
+		canvas.getNewTransitionMenu().setAction(createTransition);
+		canvas.getNewPlaceTokensMenu().setAction(changePlaceToken);
 
-		ChangeNodeName changeNodeName = new ChangeNodeName();
 		canvas.getNewNodeNamePlaceMenu().setAction(changeNodeName);
 		canvas.getNewNodeNameTransitionMenu().setAction(changeNodeName);
 
-		canvas.getNewArchWeightMenu().setAction(new ChangeArchWeight());
-		canvas.getNewPlaceBound().setAction(new ChangePlaceBound());
+		canvas.getNewArchWeightMenu().setAction(changeArchWeight);
+		canvas.getNewPlaceBound().setAction(changePlaceBound);
 
-		canvas.addMouseListener(new AttributeChangeListener());
+		canvas.addMouseListener(attributeChangeListener);
 
-		canvas.addMouseListener(new SelectNode());
-		canvas.addMouseListener(new SelectArch());
+		canvas.addMouseListener(selectNode);
+		canvas.addMouseListener(selectArch);
 
-		MoveNode mouseMotionHandler = new MoveNode();
-		canvas.addMouseListener(mouseMotionHandler);
-		canvas.addMouseMotionListener(mouseMotionHandler);
+		canvas.addMouseListener(moveNode);
+		canvas.addMouseMotionListener(moveNode);
 
-		CreateArch createArrowAction = new CreateArch();
-		canvas.addMouseListener(createArrowAction);
-		canvas.addMouseMotionListener(createArrowAction);
+		canvas.addMouseListener(createArch);
+		canvas.addMouseMotionListener(createArch);
 
-		canvas.addKeyListener(new DeleteArch());
-		canvas.addKeyListener(new DeleteNode());
-		canvas.addFocusListener(new UnselectOnLostFocus());
+		canvas.addKeyListener(deleteArch);
+		canvas.addKeyListener(deleteNode);
+		canvas.addFocusListener(unselectOnLostFocus);
 
 		menu.getNewPage().setAction(new NewPage());
 		menu.getNewPage().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
@@ -87,6 +100,23 @@ public class Controller {
 
 		menu.getAbout().setAction(new About());
 
-		TabbedPanel.getInstance().addChangeListener(new TabChange());
+		TabbedPanel.getInstance().addChangeListener(new TabChange(this));
 	}
+
+	public NewNodeListener getNewNodeListener() { return newNodeListener; }
+	public CreatePlace getCreatePlace() { return createPlace; }
+	public CreateTransition getCreateTransition() { return createTransition; }
+	public ChangePlaceToken getChangePlaceToken() { return changePlaceToken; }
+	public ChangeNodeName getChangeNodeName() { return changeNodeName; }
+	public ChangeArchWeight getChangeArchWeight() { return changeArchWeight; }
+	public ChangePlaceBound getChangePlaceBound() { return changePlaceBound; }
+	public SelectNode getSelectNode() { return selectNode; }
+	public SelectArch getSelectArch() { return selectArch; }
+	public AttributeChangeListener getAttributeChangeListener() { return attributeChangeListener; }
+	public MoveNode getMoveNode() { return moveNode; }
+	public CreateArch getCreateArch() { return createArch; }
+	public DeleteArch getDeleteArch() { return deleteArch; }
+	public DeleteNode getDeleteNode() { return deleteNode; }
+	public UnselectOnLostFocus getUnselectOnLostFocus() { return unselectOnLostFocus; }
+
 }

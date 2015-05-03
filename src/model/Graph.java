@@ -64,6 +64,30 @@ public class Graph implements Serializable {
 
 	public Map<Node, List<Arch>> getGraph() { return graph; }
 
+	public List<Place> getPlaces() {
+		List<Place> places = new ArrayList<>();
+
+		for (Node node : Graph.getInstance().getGraph().keySet()) {
+			if (node instanceof Place) {
+				places.add((Place)node);
+			}
+		}
+
+		return places;
+	}
+
+	public List<Transition> getTransitions() {
+		List<Transition> transitions = new ArrayList<>();
+
+		for (Node node : Graph.getInstance().getGraph().keySet()) {
+			if (node instanceof Transition) {
+				transitions.add((Transition) node);
+			}
+		}
+
+		return transitions;
+	}
+
 	public Node getSelectedNode(){
 		for(Node node : graph.keySet()){
 			if(node.isSelected()){
