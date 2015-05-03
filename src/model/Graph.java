@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class Graph implements Serializable {
 
@@ -50,19 +49,9 @@ public class Graph implements Serializable {
 		}
 	}
 
-	public void addNode(Node node){
-		graph.put(node, new ArrayList<Arch>());
+	public Map<Node, List<Arch>> getGraph() {
+		return graph;
 	}
-
-	public void deleteNode(Node node){
-		//TODO
-	}
-
-	public Set<Node> getNodes(){
-		return graph.keySet();
-	}
-
-	public Map<Node, List<Arch>> getGraph() { return graph; }
 
 	public List<Place> getPlaces() {
 		List<Place> places = new ArrayList<>();
@@ -137,6 +126,18 @@ public class Graph implements Serializable {
 		for(Node node : graph.keySet()){
 			if (node.getLabel().equals(label)) {
 				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean hasInverseArch(Node startNode, Node target) {
+		for (Node node : this.graph.keySet()){
+			for(Arch arch : this.graph.get(node)){
+				if (node.equals(target) && arch.getTarget().equals(startNode)) {
+					return true;
+				}
 			}
 		}
 

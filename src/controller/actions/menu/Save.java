@@ -31,29 +31,37 @@ public class Save extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
 		JFileChooser chooser = new JFileChooser();
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-		FileNameExtensionFilter filter = new FileNameExtensionFilter(
-				"Spider fájlformátum", "spider");
+
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("Spider fájlformátum", "spider");
 		chooser.setFileFilter(filter);
+
 		int returnVal = chooser.showSaveDialog(Canvas.getInstance());
+
 		if(returnVal != JFileChooser.APPROVE_OPTION) {
 			return;
 		}
 
 		try {
+
 			String filename = chooser.getSelectedFile().getAbsolutePath();
 			if (!filename.substring(filename.length() - 7).equals(".spider")) {
 				filename += ".spider";
 			}
+
 			FileOutputStream fos = new FileOutputStream(filename);
 			ZipOutputStream zos = new ZipOutputStream(fos);
+
 			ZipEntry zip = new ZipEntry("graph.xml");
 			zos.putNextEntry(zip);
 			Graph.serialize(zos);
 			zos.close();
 			fos.close();
+
 			Canvas.getInstance().repaint();
+
 		} catch (IOException ex) {
 			// return
 		}

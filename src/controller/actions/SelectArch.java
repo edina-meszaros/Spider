@@ -47,12 +47,39 @@ public class SelectArch extends MouseAdapter {
         		return;
         }
 
+        Line2D line;
+
         for(Node node : graph.keySet()) {
 
         	for(Arch a : Graph.getInstance().getEdges(node)){
 
-        		Line2D line = new Line2D.Double(node.getPosition().getX()+20, node.getPosition().getY()+20,
-        				a.getTarget().getPosition().getX()+20, a.getTarget().getPosition().getY()+20);
+        		if(Graph.getInstance().hasInverseArch(node, a.getTarget())){
+
+        			int startX = node.getNodeCenterPosition().x;
+        			int endX = a.getTarget().getNodeCenterPosition().x;
+        			int startY = node.getNodeCenterPosition().y;
+        			int endY = a.getTarget().getNodeCenterPosition().y;
+        			Point start;
+        			Point end;
+
+        			double L = Math.sqrt((startX - endX) * (startX - endX) + (startY - endY) * (startY - endY));
+        			double offsetPixels = 5.0;
+
+        			double x1p = startX + offsetPixels * (endY-startY) / L;
+        			double x2p = endX + offsetPixels * (endY-startY) / L;
+        			double y1p = startY + offsetPixels * (startX-endX) / L;
+        			double y2p = endY + offsetPixels * (startX-endX) / L;
+
+        			start = new Point((int)x1p, (int)y1p);
+        			end = new Point((int)x2p, (int)y2p);
+
+        			line = new Line2D.Double(start.x, start.y, end.x, end.y);
+
+        		}else{
+
+	        		line = new Line2D.Double(node.getPosition().getX()+20, node.getPosition().getY()+20,
+	        				a.getTarget().getPosition().getX()+20, a.getTarget().getPosition().getY()+20);
+        		}
 
 	        	if (line.intersects(boxX, boxY, HIT_BOX_SIZE, HIT_BOX_SIZE)) {
 	        		a.setSelected(true);

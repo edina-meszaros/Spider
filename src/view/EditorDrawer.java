@@ -32,7 +32,6 @@ public class EditorDrawer {
 
 		screenSize = new Dimension(0, 0);
 
-
 		Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
 
 		if(graph == null) return;
@@ -54,11 +53,9 @@ public class EditorDrawer {
 
 		drawNode(Graph.getInstance().getSelectedNode(), g2);
 		drawTempArch(g2);
-
-
 	}
 
-	public void drawArch(Arch arch, Node startNode, Graphics2D g2){
+	protected void drawArch(Arch arch, Node startNode, Graphics2D g2){
 
 		int startX = startNode.getNodeCenterPosition().x;
 		int endX = arch.getTarget().getNodeCenterPosition().x;
@@ -67,7 +64,7 @@ public class EditorDrawer {
 		Point start;
 		Point end;
 
-		if (hasInverseArch(startNode, arch.getTarget())) {
+		if (Graph.getInstance().hasInverseArch(startNode, arch.getTarget())) {
 			double L = Math.sqrt((startX - endX) * (startX - endX) + (startY - endY) * (startY - endY));
 			double offsetPixels = 5.0;
 
@@ -107,8 +104,8 @@ public class EditorDrawer {
 			return;
 
 		//Draw arch weight
-		int lineCenterX = (startX + endX) / 2;
-		int lineCenterY = (startY + endY) / 2;
+		int lineCenterX = (start.x + end.x) / 2;
+		int lineCenterY = (start.y + end.y) / 2;
 
 		g2.setColor(Theme.BACKGROUND);
 
@@ -125,7 +122,7 @@ public class EditorDrawer {
 				lineCenterY + 4);
 	}
 
-	public void drawNode(Node node, Graphics2D g2) {
+	protected void drawNode(Node node, Graphics2D g2) {
 		if(node instanceof Place){
 			drawPlace((Place) node, g2);
 		}
@@ -135,7 +132,7 @@ public class EditorDrawer {
 		}
 	}
 
-	private void drawTempArch(Graphics2D g2) {
+	protected void drawTempArch(Graphics2D g2) {
 		if(lineStart != null && lineEnd != null){
 			g2.setColor(Theme.DARK_GREY);
 			float[] dash1 = {2f, 0f, 2f};
@@ -147,21 +144,6 @@ public class EditorDrawer {
 			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
 		}
 	}
-
-	private boolean hasInverseArch(Node startNode, Node target) {
-		Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
-		for (Node node : graph.keySet()){
-			for(Arch arch : graph.get(node)){
-				if (node.equals(target) && arch.getTarget().equals(startNode)) {
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-
 
 	protected void drawPlace(Place node, Graphics2D g2){
 
@@ -280,7 +262,7 @@ public class EditorDrawer {
 		return (360-degree + 180) % 360;
 	}
 
-	public Point calculateArrowHead(Point lineStart, Point lineEnd, boolean Place){
+	protected Point calculateArrowHead(Point lineStart, Point lineEnd, boolean Place){
 
 		int angle = getAngle(lineStart, lineEnd);
 

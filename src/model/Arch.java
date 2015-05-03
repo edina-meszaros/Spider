@@ -1,19 +1,19 @@
 package model;
 
-import java.util.UUID;
 import java.io.Serializable;
+import java.util.UUID;
 
 public class Arch implements Serializable {
 
 	private UUID id;
 	private Node target;
-	private int weight;
+	private Integer weight;
 	private boolean selected;
 
 	public Arch() {
 		this(null, 1);
 	}
-	
+
 	public Arch(Node target){
 		this(target, 1);
 	}
@@ -57,8 +57,8 @@ public class Arch implements Serializable {
 	public UUID getId() { return id; }
 	public Node getTarget() { return target; }
 	public void setTarget(Node target) { this.target = target; }
-	public int getWeight() { return weight; }
-	public void setWeight(int weight) { this.weight = weight; }
+	public Integer getWeight() { return weight; }
+	public void setWeight(Integer weight) { this.weight = weight; }
 	public boolean isSelected() { return selected; }
 	public void setSelected(boolean selected) { this.selected = selected; }
 

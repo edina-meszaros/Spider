@@ -2,9 +2,11 @@ package controller.actions.popup;
 
 import java.awt.Point;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 import javax.swing.AbstractAction;
 
+import model.Arch;
 import model.Graph;
 import model.Place;
 import view.Canvas;
@@ -23,7 +25,7 @@ public class CreatePlace extends AbstractAction {
 		Point point = Canvas.getInstance().getMousePosition();
 		Place place = new Place(point, Graph.getInstance().getNextName("P"));
 
-		Graph.getInstance().addNode(place);
+		Graph.getInstance().getGraph().put(place, new ArrayList<Arch>());
 		Canvas.getInstance().repaint();
 	}
 }

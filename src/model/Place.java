@@ -54,7 +54,7 @@ public class Place extends Node implements Serializable, Comparable<Place> {
 	}
 
 	public Integer getTokens() { return this.tokens; }
-	public void setTokens(int tokens) { this.tokens = tokens; }
+	public void setTokens(Integer tokens) { this.tokens = tokens; }
 	public Integer getBound() { return bound; }
 	public void setBound(Integer bound) { this.bound = bound; }
 

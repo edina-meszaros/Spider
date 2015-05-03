@@ -54,30 +54,30 @@ public class TabChange implements ChangeListener {
 	private void setAllEvents(Canvas canvas){
 		canvas.addMouseListener(this.controller.getNewNodeListener());
 
-//		canvas.getNewPlaceMenu().setAction(createPlace);
-//		canvas.getNewTransitionMenu().setAction(createTransition);
-//		canvas.getNewPlaceTokensMenu().setAction(changePlaceToken);
-//
-//		canvas.getNewNodeNamePlaceMenu().setAction(changeNodeName);
-//		canvas.getNewNodeNameTransitionMenu().setAction(changeNodeName);
-//
-//		canvas.getNewArchWeightMenu().setAction(changeArchWeight);
-//		canvas.getNewPlaceBound().setAction(changePlaceBound);
-//
-//		canvas.addMouseListener(attributeChangeListener);
-//
-//		canvas.addMouseListener(selectNode);
-//		canvas.addMouseListener(selectArch);
-//
-//		canvas.addMouseListener(moveNode);
-//		canvas.addMouseMotionListener(moveNode);
-//
-//		canvas.addMouseListener(createArch);
-//		canvas.addMouseMotionListener(createArch);
-//
-//		canvas.addKeyListener(deleteArch);
-//		canvas.addKeyListener(deleteNode);
-//		canvas.addFocusListener(unselectOnLostFocus);
+		canvas.getNewPlaceMenu().setAction(this.controller.getCreatePlace());
+		canvas.getNewTransitionMenu().setAction(this.controller.getCreateTransition());
+		canvas.getNewPlaceTokensMenu().setAction(this.controller.getChangePlaceToken());
+
+		canvas.getNewNodeNamePlaceMenu().setAction(this.controller.getChangeNodeName());
+		canvas.getNewNodeNameTransitionMenu().setAction(this.controller.getChangeNodeName());
+
+		canvas.getNewArchWeightMenu().setAction(this.controller.getChangeArchWeight());
+		canvas.getNewPlaceBound().setAction(this.controller.getChangePlaceBound());
+
+		canvas.addMouseListener(this.controller.getAttributeChangeListener());
+
+		canvas.addMouseListener(this.controller.getSelectNode());
+		canvas.addMouseListener(this.controller.getSelectArch());
+
+		canvas.addMouseListener(this.controller.getMoveNode());
+		canvas.addMouseMotionListener(this.controller.getMoveNode());
+
+		canvas.addMouseListener(this.controller.getCreateArch());
+		canvas.addMouseMotionListener(this.controller.getCreateArch());
+
+		canvas.addKeyListener(this.controller.getDeleteArch());
+		canvas.addKeyListener(this.controller.getDeleteNode());
+		canvas.addFocusListener(this.controller.getUnselectOnLostFocus());
 	}
 
 	private void removeAllEvents(Canvas canvas) {
