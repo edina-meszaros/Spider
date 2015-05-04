@@ -1,10 +1,15 @@
 package calculate;
 
-import model.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import model.Arch;
+import model.Graph;
+import model.Node;
+import model.Place;
+import model.State;
+import model.Transition;
 
 public class Simulation {
 
@@ -27,7 +32,7 @@ public class Simulation {
         // Select Transitions which may be activated
         for (Place place : places) {
             for (Arch arch : graph.get(place)) {
-                if (state.getMarking(place) >= arch.getWeight() && !activatables.contains((Transition) arch.getTarget())) {
+                if (state.getMarking(place) >= arch.getWeight() && !activatables.contains(arch.getTarget())) {
                     activatables.add((Transition) arch.getTarget());
                 }
             }
@@ -37,7 +42,7 @@ public class Simulation {
         for (Place place : places) {
             for (Arch arch : graph.get(place)) {
                 if (state.getMarking(place) < arch.getWeight()) {
-                    activatables.remove((Transition) arch.getTarget());
+                    activatables.remove(arch.getTarget());
                 }
             }
         }
@@ -49,7 +54,7 @@ public class Simulation {
         Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
         List<Place> places = Graph.getInstance().getPlaces();
 
-        // Subtract weights from source nodes
+        // Subtract tokens from source nodes
         for (Place place : places) {
             for (Arch arch : graph.get(place)) {
                 if (arch.getTarget().equals(transition)) {
@@ -58,7 +63,7 @@ public class Simulation {
             }
         }
 
-        // Add weights to target nodes
+        // Add tokens to target nodes
         for (Arch arch : graph.get(transition)) {
             state.increaseMarking((Place) arch.getTarget(), (double) arch.getWeight());
         }

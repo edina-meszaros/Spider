@@ -28,6 +28,7 @@ public class TabChange implements ChangeListener {
 
         //Editor
         if(index == 0){
+        	removeAllEvents(canvas);
         	setAllEvents(canvas);
         }
 
@@ -106,5 +107,6 @@ public class TabChange implements ChangeListener {
 		canvas.removeKeyListener(this.controller.getDeleteNode());
 
 		canvas.removeFocusListener(this.controller.getUnselectOnLostFocus());
+		canvas.removeMouseListener(this.controller.getFireTransition());
 	}
 }
