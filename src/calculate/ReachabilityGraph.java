@@ -52,7 +52,7 @@ public class ReachabilityGraph {
                 newNode.setOld(isNodeOld(simulation.getState()));
 
                 if (!newNode.isOld()) {
-                    fillInfiniteWeights(newNode);
+                    fillInfiniteTokens(newNode);
                     nodesToBeProcessed.add(newNode);
                 }
 
@@ -89,7 +89,7 @@ public class ReachabilityGraph {
         return false;
     }
 
-    private void fillInfiniteWeights(ReachabilityNode newNode) {
+    private void fillInfiniteTokens(ReachabilityNode newNode) {
         List<Place> places = Graph.getInstance().getPlaces();
 
         for (ReachabilityNode node : flatTree) {

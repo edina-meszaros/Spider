@@ -6,12 +6,14 @@ import java.awt.Dimension;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+
+import view.style.Theme;
 
 public class Output extends JComponent {
 
@@ -20,7 +22,7 @@ public class Output extends JComponent {
 	private static Output instance = null;
 	private JPanel title = new JPanel();
 	private JPanel content = new JPanel();
-	private JEditorPane textEditor = new JEditorPane("text/plain", "");
+	private JTextArea textEditor = new JTextArea();
 	private Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 
 	private Output(){
@@ -56,12 +58,17 @@ public class Output extends JComponent {
 		return instance;
 	}
 
-	public JEditorPane getTextEditor() {
+	public JTextArea getTextEditor() {
 		return textEditor;
 	}
 
 	public void setError(String error){
 		String history = this.textEditor.getText();
-		this.textEditor.setText(history + "\r\n" + error);
+		this.textEditor.setWrapStyleWord(true);
+
+		this.textEditor.setForeground(Theme.DARK_GREY);
+		this.textEditor.setText(history + "\r\n");
+//		this.textEditor.setForeground(Color.RED);
+//		this.textEditor.append(error);
 	}
 }
