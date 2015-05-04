@@ -6,6 +6,7 @@ import javax.swing.event.ChangeListener;
 
 import model.State;
 import view.Canvas;
+import view.panels.TabbedPanel;
 import calculate.ReachabilityGraph;
 import calculate.Simulation;
 import controller.Controller;
@@ -36,10 +37,18 @@ public class TabChange implements ChangeListener {
 		if(index == 1){
         	removeAllEvents(canvas);
         	Simulation simulation = new Simulation(new State());
+
         	FireTransition fireTransition = this.controller.getFireTransition();
         	fireTransition.setSimulation(simulation);
         	canvas.addMouseListener(fireTransition);
+
+        	PlaySimulation playSimulation = this.controller.getPlaySimulation();
+        	playSimulation.setSimulation(simulation);
+
+        	TabbedPanel.getInstance().getPlay().addMouseListener(this.controller.getPlaySimulation());
+
 			canvas.setSimulation(simulation);
+
         }
 
         //Reachability graph

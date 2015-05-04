@@ -3,6 +3,7 @@ package view.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -16,6 +17,7 @@ public class TabbedPanel extends JTabbedPane {
 	private JPanel firstTab;
 	private JPanel secondTab;
 	private JPanel thirdTab;
+	private JButton play;
 
 	private TabbedPanel(Canvas canvas){
 
@@ -28,6 +30,9 @@ public class TabbedPanel extends JTabbedPane {
 		this.secondTab = new JPanel();
 		this.secondTab.setBackground(new Color(219,218,213));
 		this.secondTab.setPreferredSize(new Dimension(150, 300));
+
+		this.play = new JButton("Play");
+		this.secondTab.add(play);
 
 		this.thirdTab = new JPanel();
 		this.thirdTab.setBackground(new Color(219,218,213));
@@ -49,4 +54,6 @@ public class TabbedPanel extends JTabbedPane {
 	public JPanel getFirstTab() { return firstTab; }
 	public JPanel getSecondTab() { return secondTab; }
 	public JPanel getThirdTab() { return thirdTab; }
+	public JButton getPlay() { return play; }
+
 }

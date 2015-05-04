@@ -14,6 +14,7 @@ import controller.actions.DeleteArch;
 import controller.actions.DeleteNode;
 import controller.actions.FireTransition;
 import controller.actions.MoveNode;
+import controller.actions.PlaySimulation;
 import controller.actions.SelectArch;
 import controller.actions.SelectNode;
 import controller.actions.TabChange;
@@ -51,6 +52,7 @@ public class Controller {
 	private DeleteNode deleteNode = new DeleteNode();
 	private UnselectOnLostFocus unselectOnLostFocus = new UnselectOnLostFocus();
 	private FireTransition fireTransition = new FireTransition();
+	private PlaySimulation playSimulation = new PlaySimulation();
 
 	public Controller(){
 
@@ -121,6 +123,6 @@ public class Controller {
 	public DeleteNode getDeleteNode() { return deleteNode; }
 	public UnselectOnLostFocus getUnselectOnLostFocus() { return unselectOnLostFocus; }
 	public FireTransition getFireTransition() { return fireTransition; }
-
+	public PlaySimulation getPlaySimulation() { return playSimulation; }
 
 }
