@@ -19,6 +19,7 @@ public class TabbedPanel extends JTabbedPane {
 	private JPanel firstTab;
 	private JPanel secondTab;
 	private JPanel thirdTab;
+	private JButton removeBounds;
 	private JButton play;
 	private JButton stop;
 	private JRadioButton normalSpeed;
@@ -31,6 +32,9 @@ public class TabbedPanel extends JTabbedPane {
 		this.firstTab = new JPanel();
 		this.firstTab.setBackground(new Color(219,218,213));
 		this.firstTab.setPreferredSize(new Dimension(150, 300));
+
+		this.removeBounds = new JButton("Korlátok");
+		this.firstTab.add(removeBounds);
 
 		//Create second tab
 		this.secondTab = new JPanel();
@@ -83,4 +87,6 @@ public class TabbedPanel extends JTabbedPane {
 	public JRadioButton getDoubleSpeed() { return doubleSpeed; }
 	public JRadioButton getHalfSpeed() { return halfSpeed; }
 	public JRadioButton getNormalSpeed() { return normalSpeed; }
+	public JButton getRemoveBounds() { return removeBounds; }
+
 }

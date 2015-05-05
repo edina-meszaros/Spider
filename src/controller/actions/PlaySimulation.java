@@ -28,7 +28,7 @@ public class PlaySimulation extends MouseAdapter {
 		TabbedPanel.getInstance().getPlay().setEnabled(false);
 		TabbedPanel.getInstance().getStop().setEnabled(true);
 
-		int delay;
+		int delay = 1000;
 
 		if(TabbedPanel.getInstance().getNormalSpeed().isSelected()){
 			delay = 1000;

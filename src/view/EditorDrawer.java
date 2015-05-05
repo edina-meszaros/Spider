@@ -161,11 +161,12 @@ public class EditorDrawer {
 		g2.drawOval(node.getPosition().x, node.getPosition().y, Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
 
 		g2.setColor(Theme.DARK_GREY);
-		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
+		g2.setFont(new Font("Monospaced", Font.BOLD, 14));
 
 		drawToken(node, g2);
 
 		//Draw label
+		g2.setFont(new Font("Monospaced", Font.PLAIN, 12));
 		String label = node.getLabel();
 
 		g2.drawString(label, (int) (node.getNodeCenterPosition().x - 3.5*label.length()), node.getPosition().y - 5);

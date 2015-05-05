@@ -15,6 +15,7 @@ import controller.actions.DeleteNode;
 import controller.actions.FireTransition;
 import controller.actions.MoveNode;
 import controller.actions.PlaySimulation;
+import controller.actions.RemoveBoundedPlaces;
 import controller.actions.SelectArch;
 import controller.actions.SelectNode;
 import controller.actions.StopSimulation;
@@ -107,6 +108,7 @@ public class Controller {
 		menu.getAbout().setAction(new About());
 
 		TabbedPanel.getInstance().addChangeListener(new TabChange(this));
+		TabbedPanel.getInstance().getRemoveBounds().addMouseListener(new RemoveBoundedPlaces());
 	}
 
 	public NewNodeListener getNewNodeListener() { return newNodeListener; }
