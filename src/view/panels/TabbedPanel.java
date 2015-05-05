@@ -3,8 +3,10 @@ package view.panels;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 
 import view.Canvas;
@@ -18,6 +20,10 @@ public class TabbedPanel extends JTabbedPane {
 	private JPanel secondTab;
 	private JPanel thirdTab;
 	private JButton play;
+	private JButton stop;
+	private JRadioButton normalSpeed;
+	private JRadioButton doubleSpeed;
+	private JRadioButton halfSpeed;
 
 	private TabbedPanel(Canvas canvas){
 
@@ -34,9 +40,27 @@ public class TabbedPanel extends JTabbedPane {
 		this.play = new JButton("Play");
 		this.secondTab.add(play);
 
+		this.stop = new JButton("Stop");
+		this.secondTab.add(stop);
+
+		this.normalSpeed = new JRadioButton("1 sec", true);
+		this.doubleSpeed = new JRadioButton("0.5 sec", false);
+		this.halfSpeed = new JRadioButton("2 sec", false);
+
+		ButtonGroup group = new ButtonGroup();
+		group.add(normalSpeed);
+		group.add(doubleSpeed);
+		group.add(halfSpeed);
+
+		this.secondTab.add(normalSpeed);
+		this.secondTab.add(doubleSpeed);
+		this.secondTab.add(halfSpeed);
+
 		this.thirdTab = new JPanel();
 		this.thirdTab.setBackground(new Color(219,218,213));
 		this.thirdTab.setPreferredSize(new Dimension(150, 300));
+
+
 
 		//Add tabs to the panel
 		this.addTab("Elemző", this.firstTab);
@@ -55,5 +79,8 @@ public class TabbedPanel extends JTabbedPane {
 	public JPanel getSecondTab() { return secondTab; }
 	public JPanel getThirdTab() { return thirdTab; }
 	public JButton getPlay() { return play; }
-
+	public JButton getStop() { return stop; }
+	public JRadioButton getDoubleSpeed() { return doubleSpeed; }
+	public JRadioButton getHalfSpeed() { return halfSpeed; }
+	public JRadioButton getNormalSpeed() { return normalSpeed; }
 }

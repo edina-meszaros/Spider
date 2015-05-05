@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 import model.Transition;
 import view.Canvas;
+import view.panels.TabbedPanel;
 import calculate.Simulation;
 
 public class PlaySimulation extends MouseAdapter {
@@ -24,18 +25,34 @@ public class PlaySimulation extends MouseAdapter {
 	@Override
     public void mouseClicked(MouseEvent e) {
 
-		int delay = 1000;
+		TabbedPanel.getInstance().getPlay().setEnabled(false);
+		TabbedPanel.getInstance().getStop().setEnabled(true);
+
+		int delay;
+
+		if(TabbedPanel.getInstance().getNormalSpeed().isSelected()){
+			delay = 1000;
+		}else if(TabbedPanel.getInstance().getDoubleSpeed().isSelected()){
+			delay = 500;
+		}else if(TabbedPanel.getInstance().getHalfSpeed().isSelected()){
+			delay = 2000;
+		}
+
 	    ActionListener taskPerformer = new ActionListener() {
 	    	@Override
 	        public void actionPerformed(ActionEvent evt) {
-	    		List<Transition> activatableTransitions = simulation.getActivatableTransitions();
 
-				Random randomGenerator = new Random();
-				int randomInt = randomGenerator.nextInt(activatableTransitions.size());
+	    		if(TabbedPanel.getInstance().getStop().isEnabled()){
 
-				simulation.fireTransition(activatableTransitions.get(randomInt));
+		    		List<Transition> activatableTransitions = simulation.getActivatableTransitions();
 
-				Canvas.getInstance().repaint();
+					Random randomGenerator = new Random();
+					int randomInt = randomGenerator.nextInt(activatableTransitions.size());
+
+					simulation.fireTransition(activatableTransitions.get(randomInt));
+
+					Canvas.getInstance().repaint();
+	    		}
 	        }
 	    };
 	    new Timer(delay, taskPerformer).start();

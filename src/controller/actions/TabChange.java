@@ -47,6 +47,11 @@ public class TabChange implements ChangeListener {
 
         	TabbedPanel.getInstance().getPlay().addMouseListener(this.controller.getPlaySimulation());
 
+        	StopSimulation stopSimulation = this.controller.getStopSimulation();
+        	stopSimulation.setSimulation(simulation);
+
+        	TabbedPanel.getInstance().getStop().addMouseListener(this.controller.getStopSimulation());
+
 			canvas.setSimulation(simulation);
 
         }

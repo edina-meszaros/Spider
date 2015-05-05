@@ -17,6 +17,7 @@ import controller.actions.MoveNode;
 import controller.actions.PlaySimulation;
 import controller.actions.SelectArch;
 import controller.actions.SelectNode;
+import controller.actions.StopSimulation;
 import controller.actions.TabChange;
 import controller.actions.UnselectOnLostFocus;
 import controller.actions.menu.About;
@@ -53,6 +54,7 @@ public class Controller {
 	private UnselectOnLostFocus unselectOnLostFocus = new UnselectOnLostFocus();
 	private FireTransition fireTransition = new FireTransition();
 	private PlaySimulation playSimulation = new PlaySimulation();
+	private StopSimulation stopSimulation = new StopSimulation();
 
 	public Controller(){
 
@@ -124,5 +126,5 @@ public class Controller {
 	public UnselectOnLostFocus getUnselectOnLostFocus() { return unselectOnLostFocus; }
 	public FireTransition getFireTransition() { return fireTransition; }
 	public PlaySimulation getPlaySimulation() { return playSimulation; }
-
+	public StopSimulation getStopSimulation() { return stopSimulation; }
 }
