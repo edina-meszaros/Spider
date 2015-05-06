@@ -9,9 +9,14 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 
 import view.style.Theme;
 
@@ -22,7 +27,7 @@ public class Output extends JComponent {
 	private static Output instance = null;
 	private JPanel title = new JPanel();
 	private JPanel content = new JPanel();
-	private JTextArea textEditor = new JTextArea();
+	private JTextPane textEditor = new JTextPane();
 	private Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 
 	private Output(){
@@ -31,11 +36,11 @@ public class Output extends JComponent {
 		this.title.setBackground(new Color(147, 157, 168));
 		this.title.add(new JLabel("Kimenet / hibák"));
 
-		this.content.setBackground(new Color(219,218,213));
-		this.textEditor.setBackground(new Color(219,218,213));
+		//kthis.content.setBackground(new Color(219,218,213));
 		this.textEditor.setPreferredSize(new Dimension(200, 300));
 		this.textEditor.setEditable(false);
 		this.textEditor.setText("");
+		this.textEditor.setBackground(new Color(219,218,213));
 		this.content.add(textEditor);
 
 		JScrollPane editorScrollPane = new JScrollPane(textEditor);
@@ -58,17 +63,28 @@ public class Output extends JComponent {
 		return instance;
 	}
 
-	public JTextArea getTextEditor() {
+	public JTextPane getTextEditor() {
 		return textEditor;
 	}
 
 	public void setError(String error){
-		String history = this.textEditor.getText();
-		this.textEditor.setWrapStyleWord(true);
+		StyleContext sc = new StyleContext();
+		StyleContext sc2 = new StyleContext();
+		Style newStyle = sc.getStyle(StyleContext.DEFAULT_STYLE);
+		Style oldStyle = sc2.getStyle(StyleContext.DEFAULT_STYLE);
+		StyleConstants.setForeground(newStyle, Color.RED);
+		StyleConstants.setForeground(oldStyle, Theme.DARK_GREY);
 
-		this.textEditor.setForeground(Theme.DARK_GREY);
-		this.textEditor.setText(history + "\r\n");
-//		this.textEditor.setForeground(Color.RED);
-//		this.textEditor.append(error);
+		String history = this.textEditor.getText();
+		StyledDocument doc = this.textEditor.getStyledDocument();
+
+		try {
+			this.textEditor.setText("");
+			   doc.insertString(0, error, newStyle);
+			   if (history.length() != 0)
+			    doc.insertString(doc.getLength(), "\r\n\n" + history, oldStyle);
+		} catch (BadLocationException e) {
+			e.printStackTrace();
+		}
 	}
 }
