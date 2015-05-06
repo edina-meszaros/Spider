@@ -81,7 +81,7 @@ public class ReachabilityGraphDrawer {
 			FontMetrics metrics=g2.getFontMetrics(new Font("Monospaced", Font.PLAIN, 12));
 			int nodeWidth=metrics.stringWidth(markingSet);
 
-			g2.drawString("old", x + nodeWidth / 2, y + 15);
+			g2.drawString("régi", x + nodeWidth / 2, y + 15);
 		}
 
 		if(node.getParentNode() != null){

@@ -29,7 +29,7 @@ public class Spider {
 
 			@Override
             public void run() {
-                new Controller();
+                Controller.getInstance();
             }
         });
 	}

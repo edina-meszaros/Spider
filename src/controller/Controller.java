@@ -38,6 +38,8 @@ import controller.actions.popup.NewNodeListener;
 
 public class Controller {
 
+	private static Controller instance = null;
+
 	private NewNodeListener newNodeListener = new NewNodeListener();
 	private CreatePlace createPlace = new CreatePlace();
 	private CreateTransition createTransition = new CreateTransition();
@@ -57,7 +59,7 @@ public class Controller {
 	private PlaySimulation playSimulation = new PlaySimulation();
 	private StopSimulation stopSimulation = new StopSimulation();
 
-	public Controller(){
+	private Controller(){
 
 		MainWindow.getInstance();
 		Canvas canvas = Canvas.getInstance();
@@ -107,8 +109,15 @@ public class Controller {
 
 		menu.getAbout().setAction(new About());
 
-		TabbedPanel.getInstance().addChangeListener(new TabChange(this));
+		TabbedPanel.getInstance().addChangeListener(new TabChange());
 		TabbedPanel.getInstance().getRemoveBounds().addMouseListener(new RemoveBoundedPlaces());
+	}
+
+	public static Controller getInstance() {
+		if (instance == null) {
+			instance = new Controller();
+		}
+		return instance;
 	}
 
 	public NewNodeListener getNewNodeListener() { return newNodeListener; }

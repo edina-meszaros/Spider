@@ -66,7 +66,7 @@ public class CreateArch extends MouseAdapter {
     	Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
 
         for(Node targetNode : graph.keySet()){
-        	if(isNodeContainsPoint(e, targetNode)){
+        	if(isNodeContainsPoint(e, targetNode) && !startNode.equals(targetNode)){
 
         		if(startNode.getClass() != targetNode.getClass()){
 

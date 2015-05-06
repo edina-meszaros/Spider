@@ -143,4 +143,12 @@ public class Graph implements Serializable {
 
 		return false;
 	}
+
+	public boolean hasBoundedPlace(){
+		for (Place place : this.getPlaces()){
+			return place.getBound() > 0;
+		}
+
+		return false;
+	}
 }

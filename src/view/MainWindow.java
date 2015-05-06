@@ -28,7 +28,6 @@ public class MainWindow extends JFrame {
 
 		this.setJMenuBar(MainMenu.getInstance());
 		add(new JScrollPane(Canvas.getInstance()), BorderLayout.CENTER);
-		//add(ToolBar.getInstance(), BorderLayout.PAGE_START);
 		add(LeftPanel.getInstance(), BorderLayout.LINE_START);
 	}
 

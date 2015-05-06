@@ -25,10 +25,12 @@ public class TabbedPanel extends JTabbedPane {
 	private JRadioButton normalSpeed;
 	private JRadioButton doubleSpeed;
 	private JRadioButton halfSpeed;
+	private JRadioButton strictSimulation;
+	private JRadioButton weakSimulation;
 
 	private TabbedPanel(Canvas canvas){
 
-		//Create first tab
+		//Editor
 		this.firstTab = new JPanel();
 		this.firstTab.setBackground(new Color(219,218,213));
 		this.firstTab.setPreferredSize(new Dimension(150, 300));
@@ -36,7 +38,7 @@ public class TabbedPanel extends JTabbedPane {
 		this.removeBounds = new JButton("Korlátok");
 		this.firstTab.add(removeBounds);
 
-		//Create second tab
+		//Simulation
 		this.secondTab = new JPanel();
 		this.secondTab.setBackground(new Color(219,218,213));
 		this.secondTab.setPreferredSize(new Dimension(150, 300));
@@ -60,13 +62,23 @@ public class TabbedPanel extends JTabbedPane {
 		this.secondTab.add(doubleSpeed);
 		this.secondTab.add(halfSpeed);
 
+		this.strictSimulation = new JRadioButton("Szigorú működési szabály", true);
+		this.weakSimulation = new JRadioButton("Gyenge működési szabály", false);
+
+		ButtonGroup group2 = new ButtonGroup();
+		group2.add(strictSimulation);
+		group2.add(weakSimulation);
+
+		this.secondTab.add(strictSimulation);
+		this.secondTab.add(weakSimulation);
+
+		//Reachability graph
 		this.thirdTab = new JPanel();
 		this.thirdTab.setBackground(new Color(219,218,213));
 		this.thirdTab.setPreferredSize(new Dimension(150, 300));
 
 
 
-		//Add tabs to the panel
 		this.addTab("Elemző", this.firstTab);
 		this.addTab("Szimuláció", this.secondTab);
 		this.addTab("Fedési fa", this.thirdTab);

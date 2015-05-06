@@ -23,11 +23,20 @@ public class ChangePlaceToken extends AbstractAction {
 
 		Place selectedNode = (Place) Graph.getInstance().getSelectedNode();
 
-		String token = JOptionPane.showInputDialog("Csúcs tokenszáma:");
+		String input = JOptionPane.showInputDialog("Csúcs tokenszáma:");
 
-		if(token != null){
+		if(input != null){
 			try{
-				selectedNode.setTokens(Integer.parseInt(token));
+
+				int token = Integer.parseInt(input);
+				if(selectedNode.getBound() > 0 && token > selectedNode.getBound()){
+					token = selectedNode.getBound();
+
+					String error = "Korlátos csúcs tokenszáma nem lehet nagyobb, mint a korlát!";
+					Output.getInstance().setError(error);
+				}
+
+				selectedNode.setTokens(token);
 			} catch (NumberFormatException ex){
 
 				Output.getInstance().setError("Érvénytelen tokenszám!");

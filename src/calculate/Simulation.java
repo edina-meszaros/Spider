@@ -1,6 +1,5 @@
 package calculate;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,16 +26,8 @@ public class Simulation {
         Map<Node, List<Arch>> graph = Graph.getInstance().getGraph();
         List<Place> places = Graph.getInstance().getPlaces();
 
-        List<Transition> activatables = new ArrayList<>();
-
         // Select Transitions which may be activated
-        for (Place place : places) {
-            for (Arch arch : graph.get(place)) {
-                if (state.getMarking(place) >= arch.getWeight() && !activatables.contains(arch.getTarget())) {
-                    activatables.add((Transition) arch.getTarget());
-                }
-            }
-        }
+        List<Transition> activatables = Graph.getInstance().getTransitions();
 
         // Remove Transitions which have at least one bad arch
         for (Place place : places) {

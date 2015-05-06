@@ -21,6 +21,8 @@ public class StopSimulation extends MouseAdapter {
 		TabbedPanel.getInstance().getPlay().setEnabled(true);
 		TabbedPanel.getInstance().getStop().setEnabled(false);
 
+		//Controller.getInstance().getPlaySimulation().setSimulation(new Simulation(new State()));
+
 		Canvas.getInstance().repaint();
 	}
 

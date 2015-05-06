@@ -13,12 +13,6 @@ import controller.Controller;
 
 public class TabChange implements ChangeListener {
 
-	private Controller controller;
-
-	public TabChange(Controller controller) {
-		this.controller = controller;
-	}
-
 	@Override
 	public void stateChanged(ChangeEvent changeEvent) {
 
@@ -32,7 +26,7 @@ public class TabChange implements ChangeListener {
         	removeAllEvents(canvas);
         	setAllEvents(canvas);
 
-        	TabbedPanel.getInstance().getStop().addMouseListener(this.controller.getStopSimulation());
+        	//TabbedPanel.getInstance().getStop().addMouseListener(this.controller.getStopSimulation());
         }
 
         //Simulation
@@ -40,19 +34,19 @@ public class TabChange implements ChangeListener {
         	removeAllEvents(canvas);
         	Simulation simulation = new Simulation(new State());
 
-        	FireTransition fireTransition = this.controller.getFireTransition();
+        	FireTransition fireTransition = Controller.getInstance().getFireTransition();
         	fireTransition.setSimulation(simulation);
         	canvas.addMouseListener(fireTransition);
 
-        	PlaySimulation playSimulation = this.controller.getPlaySimulation();
+        	PlaySimulation playSimulation = Controller.getInstance().getPlaySimulation();
         	playSimulation.setSimulation(simulation);
 
-        	TabbedPanel.getInstance().getPlay().addMouseListener(this.controller.getPlaySimulation());
+        	TabbedPanel.getInstance().getPlay().addMouseListener(Controller.getInstance().getPlaySimulation());
 
-        	StopSimulation stopSimulation = this.controller.getStopSimulation();
+        	StopSimulation stopSimulation = Controller.getInstance().getStopSimulation();
         	stopSimulation.setSimulation(simulation);
 
-        	TabbedPanel.getInstance().getStop().addMouseListener(this.controller.getStopSimulation());
+        	TabbedPanel.getInstance().getStop().addMouseListener(Controller.getInstance().getStopSimulation());
 
 			canvas.setSimulation(simulation);
 
@@ -69,60 +63,64 @@ public class TabChange implements ChangeListener {
     }
 
 	private void setAllEvents(Canvas canvas){
-		canvas.addMouseListener(this.controller.getNewNodeListener());
+		Controller controller = Controller.getInstance();
 
-		canvas.getNewPlaceMenu().setAction(this.controller.getCreatePlace());
-		canvas.getNewTransitionMenu().setAction(this.controller.getCreateTransition());
-		canvas.getNewPlaceTokensMenu().setAction(this.controller.getChangePlaceToken());
+		canvas.addMouseListener(controller.getNewNodeListener());
 
-		canvas.getNewNodeNamePlaceMenu().setAction(this.controller.getChangeNodeName());
-		canvas.getNewNodeNameTransitionMenu().setAction(this.controller.getChangeNodeName());
+		canvas.getNewPlaceMenu().setAction(controller.getCreatePlace());
+		canvas.getNewTransitionMenu().setAction(controller.getCreateTransition());
+		canvas.getNewPlaceTokensMenu().setAction(controller.getChangePlaceToken());
 
-		canvas.getNewArchWeightMenu().setAction(this.controller.getChangeArchWeight());
-		canvas.getNewPlaceBound().setAction(this.controller.getChangePlaceBound());
+		canvas.getNewNodeNamePlaceMenu().setAction(controller.getChangeNodeName());
+		canvas.getNewNodeNameTransitionMenu().setAction(controller.getChangeNodeName());
 
-		canvas.addMouseListener(this.controller.getAttributeChangeListener());
+		canvas.getNewArchWeightMenu().setAction(controller.getChangeArchWeight());
+		canvas.getNewPlaceBound().setAction(controller.getChangePlaceBound());
 
-		canvas.addMouseListener(this.controller.getSelectNode());
-		canvas.addMouseListener(this.controller.getSelectArch());
+		canvas.addMouseListener(controller.getAttributeChangeListener());
 
-		canvas.addMouseListener(this.controller.getMoveNode());
-		canvas.addMouseMotionListener(this.controller.getMoveNode());
+		canvas.addMouseListener(controller.getSelectNode());
+		canvas.addMouseListener(controller.getSelectArch());
 
-		canvas.addMouseListener(this.controller.getCreateArch());
-		canvas.addMouseMotionListener(this.controller.getCreateArch());
+		canvas.addMouseListener(controller.getMoveNode());
+		canvas.addMouseMotionListener(controller.getMoveNode());
 
-		canvas.addKeyListener(this.controller.getDeleteArch());
-		canvas.addKeyListener(this.controller.getDeleteNode());
-		canvas.addFocusListener(this.controller.getUnselectOnLostFocus());
+		canvas.addMouseListener(controller.getCreateArch());
+		canvas.addMouseMotionListener(controller.getCreateArch());
+
+		canvas.addKeyListener(controller.getDeleteArch());
+		canvas.addKeyListener(controller.getDeleteNode());
+		canvas.addFocusListener(controller.getUnselectOnLostFocus());
 	}
 
 	private void removeAllEvents(Canvas canvas) {
-		canvas.removeMouseListener(this.controller.getNewNodeListener());
-		canvas.getNewPlaceMenu().removeActionListener(this.controller.getCreatePlace());
-		canvas.getNewTransitionMenu().removeActionListener(this.controller.getCreateTransition());
-		canvas.getNewPlaceTokensMenu().removeActionListener(this.controller.getChangePlaceToken());
+		Controller controller = Controller.getInstance();
 
-		canvas.getNewNodeNamePlaceMenu().removeActionListener(this.controller.getChangeNodeName());
-		canvas.getNewNodeNameTransitionMenu().removeActionListener(this.controller.getChangeNodeName());
+		canvas.removeMouseListener(controller.getNewNodeListener());
+		canvas.getNewPlaceMenu().removeActionListener(controller.getCreatePlace());
+		canvas.getNewTransitionMenu().removeActionListener(controller.getCreateTransition());
+		canvas.getNewPlaceTokensMenu().removeActionListener(controller.getChangePlaceToken());
 
-		canvas.getNewArchWeightMenu().removeActionListener(this.controller.getChangeArchWeight());
-		canvas.getNewPlaceBound().removeActionListener(this.controller.getChangePlaceBound());
+		canvas.getNewNodeNamePlaceMenu().removeActionListener(controller.getChangeNodeName());
+		canvas.getNewNodeNameTransitionMenu().removeActionListener(controller.getChangeNodeName());
 
-		canvas.removeMouseListener(this.controller.getAttributeChangeListener());
-		canvas.removeMouseListener(this.controller.getSelectNode());
-		canvas.removeMouseListener(this.controller.getSelectArch());
+		canvas.getNewArchWeightMenu().removeActionListener(controller.getChangeArchWeight());
+		canvas.getNewPlaceBound().removeActionListener(controller.getChangePlaceBound());
 
-		canvas.removeMouseMotionListener(this.controller.getMoveNode());
-		canvas.removeMouseListener(this.controller.getMoveNode());
+		canvas.removeMouseListener(controller.getAttributeChangeListener());
+		canvas.removeMouseListener(controller.getSelectNode());
+		canvas.removeMouseListener(controller.getSelectArch());
 
-		canvas.removeMouseMotionListener(this.controller.getCreateArch());
-		canvas.removeMouseListener(this.controller.getCreateArch());
+		canvas.removeMouseMotionListener(controller.getMoveNode());
+		canvas.removeMouseListener(controller.getMoveNode());
 
-		canvas.removeKeyListener(this.controller.getDeleteArch());
-		canvas.removeKeyListener(this.controller.getDeleteNode());
+		canvas.removeMouseMotionListener(controller.getCreateArch());
+		canvas.removeMouseListener(controller.getCreateArch());
 
-		canvas.removeFocusListener(this.controller.getUnselectOnLostFocus());
-		canvas.removeMouseListener(this.controller.getFireTransition());
+		canvas.removeKeyListener(controller.getDeleteArch());
+		canvas.removeKeyListener(controller.getDeleteNode());
+
+		canvas.removeFocusListener(controller.getUnselectOnLostFocus());
+		canvas.removeMouseListener(controller.getFireTransition());
 	}
 }
