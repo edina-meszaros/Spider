@@ -81,7 +81,7 @@ public class TabbedPanel extends JTabbedPane {
 
 		this.addTab("Elemző", this.firstTab);
 		this.addTab("Szimuláció", this.secondTab);
-		this.addTab("Fedési fa", this.thirdTab);
+		this.addTab("Elérhetőségi fa", this.thirdTab);
 	}
 
 	public static TabbedPanel getInstance() {

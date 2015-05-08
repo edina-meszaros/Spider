@@ -36,6 +36,11 @@ public class ChangePlaceToken extends AbstractAction {
 					Output.getInstance().setError(error);
 				}
 
+				if(token >= 10000){
+					Output.getInstance().setError("A tokenszám nem lehet nagyobb, mint 9999!");
+					return;
+				}
+
 				selectedNode.setTokens(token);
 			} catch (NumberFormatException ex){
 

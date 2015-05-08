@@ -39,10 +39,11 @@ public class RemoveBoundedPlaces extends MouseAdapter {
 
 						if(targetPlace.getBound() > 0){
 							setNewPlace(node, arch, targetPlace);
+							targetPlace.setBound(0);
 							break;
 						}
 
-						targetPlace.setBound(0);
+
 					}
 				}
 			}
