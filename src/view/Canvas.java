@@ -127,7 +127,7 @@ public class Canvas extends JPanel {
 			setPreferredSize(drawer.getScreenSize());
 			this.revalidate();
 
-		//Reachability grapf
+		//Reachability graph
 		}else if(TabbedPanel.getInstance().getSelectedIndex() == 2){
 
 			ReachabilityGraphDrawer drawer = new ReachabilityGraphDrawer(g2);

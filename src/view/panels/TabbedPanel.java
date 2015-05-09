@@ -4,17 +4,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
 import javax.xml.bind.DatatypeConverter;
 
 import view.Canvas;
+import view.style.Theme;
 
 public class TabbedPanel extends JTabbedPane {
 
@@ -41,19 +41,18 @@ public class TabbedPanel extends JTabbedPane {
 
 		//Editor
 		this.firstTab = new JPanel();
-		this.firstTab.setBackground(new Color(219,218,213));
+		this.firstTab.setBackground(new Color(219, 218, 213));
 		this.firstTab.setPreferredSize(new Dimension(150, 300));
-		this.firstTab.setLayout(new GridLayout(0,1));
+		this.firstTab.setLayout(new GridLayout(0, 1));
 
-		this.firstTab.add(new JCheckBox("Átlátszóság"));
-		this.firstTab.add(new JCheckBox("Normalitás"));
-		this.firstTab.add(new JCheckBox("Biztonságosság"));
-		this.firstTab.add(new JCheckBox("Visszatérési képesség"));
-		this.firstTab.add(new JCheckBox("Otthonállapot"));
+		this.firstTab.add(new JLabel("Átlátszóság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)), LEFT));
+		this.firstTab.add(new JLabel("Normalitás", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)), LEFT));
+		this.firstTab.add(new JLabel("Biztonságosság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT));
+		this.firstTab.add(new JLabel("Visszatérési képesség", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT));
+		this.firstTab.add(new JLabel("Otthonállapot", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT));
 
 		this.removeBounds = new JButton("Korlátok kiküszöbölése");
-
-		    this.firstTab.add(removeBounds);
+		this.firstTab.add(removeBounds);
 
 		//Simulation
 		this.secondTab = new JPanel();
@@ -66,25 +65,17 @@ public class TabbedPanel extends JTabbedPane {
 		JPanel row = new JPanel();
 		JPanel row2 = new JPanel();
 		JPanel row3 = new JPanel();
-		JPanel row4 = new JPanel();
-		JPanel row5 = new JPanel();
-		JPanel row6 = new JPanel();
+		JPanel pad = new JPanel();
+		row.setBackground(Theme.BACKGROUND);
+		row2.setBackground(Theme.BACKGROUND);
+		row3.setBackground(Theme.BACKGROUND);
+		pad.setBackground(Theme.BACKGROUND);
+		//pad.setPreferredSize(new Dimension(0, 10));
 
-		BoxLayout layout = new BoxLayout(this.secondTab, BoxLayout.Y_AXIS);
-		BoxLayout layout2 = new BoxLayout(row, BoxLayout.X_AXIS);
-		BoxLayout layout3 = new BoxLayout(row2, BoxLayout.X_AXIS);
-		BoxLayout layout4 = new BoxLayout(row3, BoxLayout.X_AXIS);
-		BoxLayout layout5 = new BoxLayout(row4, BoxLayout.X_AXIS);
-		BoxLayout layout6 = new BoxLayout(row5, BoxLayout.X_AXIS);
-
-		BoxLayout layout7 = new BoxLayout(row6, BoxLayout.X_AXIS);
-
-
-		secondTab.setLayout(layout);
+		GridLayout layout4 = new GridLayout(0, 1);
 
 		row.add(this.play);
 		row.add(this.stop);
-		row.setLayout(layout2);
 		secondTab.add(row);
 
 		this.normalSpeed = new JRadioButton("1 sec", true);
@@ -96,46 +87,33 @@ public class TabbedPanel extends JTabbedPane {
 		group.add(doubleSpeed);
 		group.add(halfSpeed);
 
-		row2.add(this.normalSpeed);
 		row2.add(this.doubleSpeed);
+		row2.add(this.normalSpeed);
 		row2.add(this.halfSpeed);
-
-		//row2.add(Box.createRigidArea(new Dimension(10,30)));
-
-		row2.setLayout(layout3);
 
 		secondTab.add(row2);
 
 		this.strictSimulation = new JRadioButton("Szigorú működési szabály", true);
-		this.weakSimulation = new JRadioButton("Gyenge működési szabály", false);
+		this.weakSimulation = new JRadioButton("Gyenge működési szabály  ", false);
 
 		ButtonGroup group2 = new ButtonGroup();
 		group2.add(strictSimulation);
 		group2.add(weakSimulation);
 
-		row3.add(this.strictSimulation);
-		row3.setLayout(layout4);
-		secondTab.add(row3);
-
-		row4.add(this.weakSimulation);
-		//row4.add(Box.createRigidArea(new Dimension(10,30)));
-		row4.setLayout(layout5);
-		secondTab.add(row4);
-
 		this.randomHeuristic = new JRadioButton("Random heurisztika", true);
-		this.balancedHeuristic = new JRadioButton("Kiegyensúlyozott heurisztika", false);
+		this.balancedHeuristic = new JRadioButton("Egyenletes heurisztika", false);
 
 		ButtonGroup group3 = new ButtonGroup();
 		group3.add(this.randomHeuristic);
 		group3.add(this.balancedHeuristic);
 
-		row5.add(this.randomHeuristic);
-		row5.setLayout(layout6);
-		secondTab.add(row5);
-
-		row6.add(this.balancedHeuristic);
-		row6.setLayout(layout7);
-		secondTab.add(row6);
+		row3.setLayout(layout4);
+		row3.add(this.strictSimulation);
+		row3.add(this.weakSimulation);
+		//row3.add(pad);
+		row3.add(this.randomHeuristic);
+		row3.add(this.balancedHeuristic);
+		secondTab.add(row3);
 
 
 		//Reachability graph
