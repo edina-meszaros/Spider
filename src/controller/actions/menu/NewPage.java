@@ -20,7 +20,7 @@ public class NewPage extends AbstractAction {
 			+ "7dDH/PN3/gXwd3R1+WFHYAAAAABJRU5ErkJggg==";
 
 	public NewPage() {
-		super("Új", new ImageIcon(DatatypeConverter.parseBase64Binary(icon)));
+		super("Új lap", new ImageIcon(DatatypeConverter.parseBase64Binary(icon)));
 	}
 
 	@Override

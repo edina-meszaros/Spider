@@ -1,5 +1,7 @@
 package controller.actions.menu;
 
+import view.AboutWindow;
+
 import java.awt.event.ActionEvent;
 
 import javax.swing.*;
@@ -15,7 +17,8 @@ public class About extends AbstractAction {
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		AboutWindow about = new AboutWindow();
+		about.setVisible(true);
 	}
 
 }

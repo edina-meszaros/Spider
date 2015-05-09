@@ -37,7 +37,7 @@ public class Output extends JComponent {
 		this.title.add(new JLabel("Kimenet / hibák"));
 
 		//kthis.content.setBackground(new Color(219,218,213));
-		this.textEditor.setPreferredSize(new Dimension(200, 300));
+		this.textEditor.setPreferredSize(new Dimension(200, 280));
 		this.textEditor.setEditable(false);
 		this.textEditor.setText("");
 		this.textEditor.setBackground(new Color(219,218,213));

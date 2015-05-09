@@ -3,6 +3,7 @@ package view;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
@@ -19,8 +20,9 @@ public class MainWindow extends JFrame {
 
 		setVisible(true);
 		setTitle("Spider");
+		setIconImage(new ImageIcon("icon.png").getImage());
 		setSize(new Dimension(800, 600));
-		setPreferredSize(new Dimension(800, 600));
+		setPreferredSize(new Dimension(800, 900));
 		setLocationRelativeTo(null);
 
 		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

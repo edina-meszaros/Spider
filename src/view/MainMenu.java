@@ -1,13 +1,11 @@
 package view;
 
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.KeyStroke;
 import javax.xml.bind.DatatypeConverter;
 
 public class MainMenu extends JMenuBar {
@@ -33,6 +31,10 @@ public class MainMenu extends JMenuBar {
 	private JMenuItem help;
 	private JMenuItem about;
 	private JMenuItem ex1;
+	private JMenuItem ex2;
+	private JMenuItem ex3;
+	private JMenuItem ex4;
+	private JMenuItem ex5;
 
 	private MainMenu() {
 		super();
@@ -61,10 +63,20 @@ public class MainMenu extends JMenuBar {
 		exampleSubMenu.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(iconSamples)));
 		exampleSubMenu.setMnemonic(KeyEvent.VK_S);
 
-		ex1 = new JMenuItem("Példa 1");
-		ex1.setAccelerator(KeyStroke.getKeyStroke(
-		        KeyEvent.VK_2, ActionEvent.ALT_MASK));
+		ex1 = new JMenuItem("1. Étkező filozófusok");
 		exampleSubMenu.add(ex1);
+
+		ex2 = new JMenuItem("2. Konkurencia, szinkronizáció");
+		exampleSubMenu.add(ex2);
+
+		ex3 = new JMenuItem("3. Kommunikáció, szinkronizáció");
+		exampleSubMenu.add(ex3);
+
+		ex4 = new JMenuItem("4. Író-olvasó szinkronizáció kölcsönös kizárással");
+		exampleSubMenu.add(ex4);
+
+		ex5 = new JMenuItem("5. Nyelvelfogadás");
+		exampleSubMenu.add(ex5);
 
 		fileMenu.add(exampleSubMenu);
 

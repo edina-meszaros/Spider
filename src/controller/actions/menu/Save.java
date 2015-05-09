@@ -33,6 +33,7 @@ public class Save extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 
 		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogTitle("Mentés");
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("Spider fájlformátum", "spider");

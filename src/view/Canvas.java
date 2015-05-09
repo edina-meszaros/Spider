@@ -1,9 +1,12 @@
 package view;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -20,6 +23,9 @@ public class Canvas extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private static Canvas instance = null;
+
+	private Image background;
+
 	private JPopupMenu popupNewNode;
 	private JPopupMenu popupChangePlace;
 	private JPopupMenu popupChangeTransition;
@@ -35,12 +41,14 @@ public class Canvas extends JPanel {
 	private Point lineStart = null;
 	private Point lineEnd = null;
 
+
 	private Simulation simulation;
 
 	private Canvas() {
 		super();
 		this.setFocusable(true);
 		this.setBackground(Theme.BACKGROUND);
+		this.background = new ImageIcon("background.png").getImage();
 
 		this.popupNewNode = new JPopupMenu();
 		this.popupNewNode.setFocusable(false);
@@ -84,6 +92,11 @@ public class Canvas extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g.create();
+
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.1f));
+		g2.drawImage(background, this.getWidth() - background.getWidth(null) - 10, this.getHeight() - background.getHeight(null) - 10, null);
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+
 
 		//Editor
 		if(TabbedPanel.getInstance().getSelectedIndex() == 0){

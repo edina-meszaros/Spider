@@ -25,6 +25,7 @@ public class Load extends AbstractAction {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		JFileChooser chooser = new JFileChooser();
+		chooser.setDialogTitle("Betöltés");
 		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 		FileNameExtensionFilter filter = new FileNameExtensionFilter(
 				"Spider fájlformátum", "spider");
