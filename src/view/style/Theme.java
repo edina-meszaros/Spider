@@ -8,8 +8,8 @@ public class Theme {
 	public static final Color SELECT = Color.MAGENTA;
 	public static final Color DARK_GREY = new Color(118, 126, 135);
 	public static final Color LIGHT_GREY = new Color(172, 174, 185);
-	public static final Color LIGHT_GREEN = new Color(139, 243, 72);
-	public static final Color DARK_GREEN = new Color(0, 166, 8);
+	public static final Color LIGHT_BLUE = new Color(160, 217, 211);
+	public static final Color DARK_BLUE = new Color(37, 54, 89);
 
 	public static final int SHAPE_SIZE = 40;
 	public static final int TOKEN_SIZE = 10;

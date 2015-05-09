@@ -24,11 +24,11 @@ public class SimulationDrawer extends EditorDrawer{
 		//Draw node
 		if (this.simulation.getActivatableTransitions().contains(node)) {
 
-			g2.setColor(Theme.LIGHT_GREEN);
+			g2.setColor(Theme.LIGHT_BLUE);
 			g2.fillRect(node.getPosition().x, node.getPosition().y,
 					Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
 
-			g2.setColor(Theme.DARK_GREEN);
+			g2.setColor(Theme.DARK_BLUE);
 			g2.setStroke(new BasicStroke(1.5f));
 			g2.drawRect(node.getPosition().x, node.getPosition().y,
 					Theme.SHAPE_SIZE, Theme.SHAPE_SIZE);
