@@ -7,6 +7,7 @@ import javax.swing.JOptionPane;
 
 import model.Graph;
 import model.Node;
+import model.Place;
 import view.Canvas;
 import view.panels.Output;
 
@@ -27,10 +28,13 @@ public class ChangeNodeName extends AbstractAction {
 
 		if(name != null){
 			try{
-
 				if(name.length() > 20){
 					Output.getInstance().setError("A csúcs neve max. 20 karakter lehet!");
 					return;
+				}
+
+				if (name.length() == 0) {
+					name = Graph.getInstance().getNextName(selectedNode instanceof Place ? "P" : "T");
 				}
 
 				selectedNode.setLabel(name);

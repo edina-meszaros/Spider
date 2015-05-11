@@ -4,6 +4,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import controller.actions.simulation.*;
 import model.State;
 import view.Canvas;
 import view.panels.TabbedPanel;
@@ -25,28 +26,35 @@ public class TabChange implements ChangeListener {
         if(index == 0){
         	removeAllEvents(canvas);
         	setAllEvents(canvas);
+			canvas.removeMouseListener(Controller.getInstance().getFireTransition());
 
-        	//TabbedPanel.getInstance().getStop().addMouseListener(this.controller.getStopSimulation());
+			TabbedPanel.getInstance().getPlay().setVisible(true);
+			TabbedPanel.getInstance().getPause().setVisible(false);
+			TabbedPanel.getInstance().getStop().setEnabled(false);
+			SimulationTimer.getInstance().stop();
         }
 
         //Simulation
 		if(index == 1){
         	removeAllEvents(canvas);
+			canvas.addMouseListener(Controller.getInstance().getFireTransition());
         	Simulation simulation = new Simulation(new State());
 
+			SimulationTimer.getInstance().setSimulation(simulation);
         	FireTransition fireTransition = Controller.getInstance().getFireTransition();
         	fireTransition.setSimulation(simulation);
-        	canvas.addMouseListener(fireTransition);
 
         	PlaySimulation playSimulation = Controller.getInstance().getPlaySimulation();
         	playSimulation.setSimulation(simulation);
 
-        	TabbedPanel.getInstance().getPlay().addMouseListener(Controller.getInstance().getPlaySimulation());
-
         	StopSimulation stopSimulation = Controller.getInstance().getStopSimulation();
         	stopSimulation.setSimulation(simulation);
 
-        	TabbedPanel.getInstance().getStop().addMouseListener(Controller.getInstance().getStopSimulation());
+			StrictSimulation strictSimulation = Controller.getInstance().getStrictSimulation();
+			strictSimulation.setSimulation(simulation);
+
+			WeakSimulation weakSimulation = Controller.getInstance().getWeakSimulation();
+			weakSimulation.setSimulation(simulation);
 
 			canvas.setSimulation(simulation);
 
@@ -56,6 +64,12 @@ public class TabChange implements ChangeListener {
         if (index == 2) {
             ReachabilityGraph.getInstance().calculate();
             removeAllEvents(canvas);
+			canvas.removeMouseListener(Controller.getInstance().getFireTransition());
+
+			TabbedPanel.getInstance().getPlay().setVisible(true);
+			TabbedPanel.getInstance().getPause().setVisible(false);
+			TabbedPanel.getInstance().getStop().setEnabled(false);
+			SimulationTimer.getInstance().stop();
         }
 
 

@@ -33,15 +33,8 @@ public class Node implements Serializable {
 		if ( this == object ) return true;
 		if ( !(object instanceof Node) ) return false;
 		
-		Node node = (Node) object;		
-		if(this.id.equals(node.getId())) return true;
-		
-		if (this.label == null) {
-			if (node.getLabel() != null)
-				return false;
-		} else if (this.label.equals(node.getLabel()))
-			return true;
-		return false;
+		Node node = (Node) object;
+		return this.id.equals(node.getId());
 	}
 
 	@Override

@@ -3,24 +3,14 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
-import javax.swing.KeyStroke;
+import javax.swing.*;
 
+import controller.actions.*;
+import controller.actions.simulation.*;
 import view.Canvas;
 import view.MainMenu;
 import view.MainWindow;
 import view.panels.TabbedPanel;
-import controller.actions.CreateArch;
-import controller.actions.DeleteArch;
-import controller.actions.DeleteNode;
-import controller.actions.FireTransition;
-import controller.actions.MoveNode;
-import controller.actions.PlaySimulation;
-import controller.actions.RemoveBoundedPlaces;
-import controller.actions.SelectArch;
-import controller.actions.SelectNode;
-import controller.actions.StopSimulation;
-import controller.actions.TabChange;
-import controller.actions.UnselectOnLostFocus;
 import controller.actions.menu.About;
 import controller.actions.menu.Exit;
 import controller.actions.menu.Help;
@@ -57,7 +47,10 @@ public class Controller {
 	private UnselectOnLostFocus unselectOnLostFocus = new UnselectOnLostFocus();
 	private FireTransition fireTransition = new FireTransition();
 	private PlaySimulation playSimulation = new PlaySimulation();
+	private PauseSimulation pauseSimulation = new PauseSimulation();
 	private StopSimulation stopSimulation = new StopSimulation();
+	private StrictSimulation strictSimulation = new StrictSimulation();
+	private WeakSimulation weakSimulation = new WeakSimulation();
 
 	private Controller(){
 
@@ -111,6 +104,15 @@ public class Controller {
 
 		TabbedPanel.getInstance().addChangeListener(new TabChange());
 		TabbedPanel.getInstance().getRemoveBounds().addMouseListener(new RemoveBoundedPlaces());
+
+		TabbedPanel.getInstance().getPlay().addMouseListener(playSimulation);
+
+		TabbedPanel.getInstance().getPause().addMouseListener(pauseSimulation);
+
+		TabbedPanel.getInstance().getStop().addMouseListener(stopSimulation);
+
+		TabbedPanel.getInstance().getStrictSimulation().addMouseListener(strictSimulation);
+		TabbedPanel.getInstance().getWeakSimulation().addMouseListener(weakSimulation);
 	}
 
 	public static Controller getInstance() {
@@ -137,5 +139,8 @@ public class Controller {
 	public UnselectOnLostFocus getUnselectOnLostFocus() { return unselectOnLostFocus; }
 	public FireTransition getFireTransition() { return fireTransition; }
 	public PlaySimulation getPlaySimulation() { return playSimulation; }
+	public PauseSimulation getPauseSimulation() { return pauseSimulation; }
 	public StopSimulation getStopSimulation() { return stopSimulation; }
+	public StrictSimulation getStrictSimulation() { return strictSimulation; }
+	public WeakSimulation getWeakSimulation() { return weakSimulation; }
 }

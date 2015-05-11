@@ -1,5 +1,7 @@
 package view;
 
+import view.style.Theme;
+
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -11,14 +13,6 @@ import javax.xml.bind.DatatypeConverter;
 public class MainMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
-
-	private static final String iconSamples = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAs"
-			+ "TAAALEwEAmpwYAAABUklEQVR4nH3SP0sdURAF8N/bfYjExMIPEAimFQ1YGSy0NyliitinzVeInb2mylcQwUpIbx/EQm"
-			+ "wURDCgCObliY1uindW1/XPwHDnzjlz5zBzGdgQht1ZB92czbi24dSAT9jDPlYw6WmbDGc/NYvQR9XyX1jCy/hScm1eX4"
-			+ "IzzGMZxw3CYby+H4czn5qq2wB38Bof8QbfMBvp21jFASbCrVAVGU6JIuBPvMcH/I0vYCbYRLglOt10uM5kd7CBt3iVLh"
-			+ "L/xjrGw72Wl+S1y0x5Nedl8KKFTeVeMthvreBFQ8F47jfBH8OeVTBlsKJaQf85BdUTCkYaCkZa86kV3G6hQA/vsJYuVw"
-			+ "0FV1GwFk4v+U6BfxjDpsG+v2I33Zu+G2w73LHU+owj93/bd8zhIj6XXPOXHqUWjOILtjz8723fCne0Li7dt2n8wClO8A"
-			+ "fnyU23uOV/gix5Sw6iHnEAAAAASUVORK5CYII=";
 
 	private static MainMenu instance = null;
 	private JMenu fileMenu;
@@ -60,7 +54,7 @@ public class MainMenu extends JMenuBar {
 		fileMenu.add(load);
 
 		exampleSubMenu = new JMenu("Példák");
-		exampleSubMenu.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(iconSamples)));
+		exampleSubMenu.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.iconSamples)));
 		exampleSubMenu.setMnemonic(KeyEvent.VK_S);
 
 		ex1 = new JMenuItem("1. Étkező filozófusok");

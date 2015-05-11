@@ -16,7 +16,6 @@ public class LeftPanel extends JPanel {
 
 		this.add(TabbedPanel.getInstance());
 		this.add(Output.getInstance());
-		//this.add(Properties.getInstance());
 	}
 
 	public static LeftPanel getInstance() {

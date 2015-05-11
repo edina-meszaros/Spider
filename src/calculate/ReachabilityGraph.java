@@ -8,8 +8,11 @@ import model.Place;
 import model.ReachabilityNode;
 import model.State;
 import model.Transition;
+import view.panels.Output;
 
 public class ReachabilityGraph {
+
+    private static final int maxNodes = 30;
 
     private static ReachabilityGraph instance;
 
@@ -35,7 +38,7 @@ public class ReachabilityGraph {
         flatTree.add(root);
         nodesToBeProcessed.add(root);
 
-        while (!nodesToBeProcessed.isEmpty()) {
+        while (!nodesToBeProcessed.isEmpty() && flatTree.size() <= maxNodes) {
             ReachabilityNode currentNode = nodesToBeProcessed.get(0);
             nodesToBeProcessed.remove(0);
 
@@ -59,6 +62,10 @@ public class ReachabilityGraph {
                 flatTree.add(newNode);
                 currentNode.addChild(newNode);
             }
+        }
+
+        if (flatTree.size() > maxNodes) {
+            Output.getInstance().setError("A fedési fa maximális mérete (" + maxNodes + ") elérve!");
         }
     }
 

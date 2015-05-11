@@ -14,19 +14,13 @@ import javax.xml.bind.DatatypeConverter;
 
 import model.Graph;
 import view.Canvas;
+import view.panels.Output;
+import view.style.Theme;
 
 public class Save extends AbstractAction {
 
-	private static final String icon = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAA"
-			+ "ALEwEAmpwYAAABSUlEQVR4nI3SvW4TURAF4G/XllchBIgCilLQ8QYUNEgp6XkNCl7Gfo68AAVQklCRCNHSIEAKGM"
-			+ "KPQuyl8LnylbVIHGk0s+ee+blzFzpMMUf/nzZPTtckeGKFzxjjqvK9NZr4O/GzBpdY4DHe4QLX8Q230FZF2mjv4Q"
-			+ "gjOfyYqke4G7+PFzjFm9gpXqbwJ/QNlun2IF2+Y2djgvoKi9gr3GgywRLvc516B4uNHRR0mbQtBea4n+4FQ8sr+h2"
-			+ "8xs1xJf6AnwPdhnBRGtT3m6TDKPwEz2OTcKNoJiVpXBWof5QltvEwZ9v4Yv2k/VCBTVziRxUPYvMnUX3fDtcm9i9tj"
-			+ "3OrpxH/LNxV7DxcZ7WDLlzf4g+u4TAFGuxht5p0N1OUZzzEVnLNrBfzNAn7OK74k3CiKfysjDzFV/zCowgPcIa3ieX"
-			+ "sd7RTdH8ByG5sGaY2WU8AAAAASUVORK5CYII=";
-
 	public Save() {
-		super("Mentés", new ImageIcon(DatatypeConverter.parseBase64Binary(icon)));
+		super("Mentés", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.saveIcon)));
 	}
 
 	@Override
@@ -64,7 +58,7 @@ public class Save extends AbstractAction {
 			Canvas.getInstance().repaint();
 
 		} catch (IOException ex) {
-			// return
+			Output.getInstance().setError("Hiba a fájl mentése közben!");
 		}
 	}
 

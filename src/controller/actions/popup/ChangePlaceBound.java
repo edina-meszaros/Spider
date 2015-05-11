@@ -28,15 +28,15 @@ public class ChangePlaceBound extends AbstractAction {
 			try{
 				int bound = Integer.parseInt(input);
 
-				if(bound < 1){
+				if(bound < 0){
 
-					Output.getInstance().setError("A korlát nem lehet kisebb, mint 1!");
+					Output.getInstance().setError("A korlát nem lehet negatív!");
 					return;
 				}
 
 				int token = selectedNode.getTokens();
 
-				if(token > bound){
+				if(token > bound && bound != 0){
 					selectedNode.setTokens(bound);
 
 					String error = "Korlátos csúcs tokenszáma nem lehet nagyobb, mint a korlát!\r\n"

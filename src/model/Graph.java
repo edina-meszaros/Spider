@@ -146,7 +146,8 @@ public class Graph implements Serializable {
 
 	public boolean hasBoundedPlace(){
 		for (Place place : this.getPlaces()){
-			return place.getBound() > 0;
+			if (place.getBound() > 0)
+				return true;
 		}
 
 		return false;

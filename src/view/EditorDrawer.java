@@ -140,8 +140,9 @@ public class EditorDrawer {
 					BasicStroke.JOIN_ROUND, 1.0f, dash1, 2f);
 			g2.setStroke(bs1);
 
+			int angle = getAngle(lineStart, lineEnd);
 			g2.drawLine(lineStart.x + Theme.NODE_CENTER, lineStart.y + Theme.NODE_CENTER, lineEnd.x, lineEnd.y);
-			g2.fillArc(lineEnd.x-8, lineEnd.y-8, 20, 20, 135, 45);
+			g2.fillArc(lineEnd.x - 10, lineEnd.y - 10, 20, 20, angle - 20, 40);
 		}
 	}
 

@@ -1,5 +1,6 @@
 package calculate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ import model.Transition;
 public class Simulation {
 
     private State state;
+    private boolean strict = false;
 
     public Simulation(State state) {
         this.state = state;
@@ -20,6 +22,14 @@ public class Simulation {
 
     public State getState() {
         return state;
+    }
+
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    public void setStrict(boolean strict) {
+        this.strict = strict;
     }
 
     public List<Transition> getActivatableTransitions() {
@@ -35,6 +45,24 @@ public class Simulation {
                 if (state.getMarking(place) < arch.getWeight()) {
                     activatables.remove(arch.getTarget());
                 }
+            }
+        }
+
+        // Remove transitions which would overflow the bounds
+        if (strict) {
+            List<Transition> removeList = new ArrayList<Transition>();
+            for (Transition transition : activatables) {
+                for (Arch arch : Graph.getInstance().getEdges(transition)) {
+                    Place place = (Place)arch.getTarget();
+                    if (place.getBound() != 0 && place.getBound() < place.getTokens() + arch.getWeight()) {
+                        removeList.add(transition);
+                        break;
+                    }
+                }
+            }
+
+            for (Transition transition : removeList) {
+                activatables.remove(transition);
             }
         }
 

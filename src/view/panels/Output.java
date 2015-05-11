@@ -3,13 +3,10 @@ package view.panels;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextPane;
+import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
 import javax.swing.text.BadLocationException;
@@ -20,7 +17,7 @@ import javax.swing.text.StyledDocument;
 
 import view.style.Theme;
 
-public class Output extends JComponent {
+public class Output extends JComponent implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +26,7 @@ public class Output extends JComponent {
 	private JPanel content = new JPanel();
 	private JTextPane textEditor = new JTextPane();
 	private Border border = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
+	private Timer grayer;
 
 	private Output(){
 
@@ -36,7 +34,6 @@ public class Output extends JComponent {
 		this.title.setBackground(new Color(147, 157, 168));
 		this.title.add(new JLabel("Kimenet / hibák"));
 
-		//kthis.content.setBackground(new Color(219,218,213));
 		this.textEditor.setPreferredSize(new Dimension(200, 280));
 		this.textEditor.setEditable(false);
 		this.textEditor.setText("");
@@ -54,6 +51,7 @@ public class Output extends JComponent {
 		this.add(title, BorderLayout.NORTH);
 		this.add(content, BorderLayout.CENTER);
 		this.setBorder(this.border);
+		this.grayer = new Timer(5000, this);
 	}
 
 	public static Output getInstance() {
@@ -80,11 +78,31 @@ public class Output extends JComponent {
 
 		try {
 			this.textEditor.setText("");
-			   doc.insertString(0, error, newStyle);
-			   if (history.length() != 0)
-			    doc.insertString(doc.getLength(), "\r\n\n" + history, oldStyle);
+			if (history.length() != 0)
+				doc.insertString(0, history + "\r\n\r\n", oldStyle);
+			doc.insertString(doc.getLength(), error, newStyle);
+			grayer.stop();
+			grayer.start();
 		} catch (BadLocationException e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// Gray out everything
+		StyleContext sc2 = new StyleContext();
+		Style oldStyle = sc2.getStyle(StyleContext.DEFAULT_STYLE);
+		StyleConstants.setForeground(oldStyle, Theme.DARK_GREY);
+
+		StyledDocument doc = this.textEditor.getStyledDocument();
+		try {
+			String history = this.textEditor.getText();
+			this.textEditor.setText("");
+			doc.insertString(0, history, oldStyle);
+		} catch (BadLocationException e1) {
+			e1.printStackTrace();
+		}
+		grayer.stop();
 	}
 }

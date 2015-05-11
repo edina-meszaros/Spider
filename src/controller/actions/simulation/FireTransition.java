@@ -1,4 +1,4 @@
-package controller.actions;
+package controller.actions.simulation;
 
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
