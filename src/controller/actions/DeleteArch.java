@@ -9,6 +9,7 @@ import model.Arch;
 import model.Graph;
 import model.Node;
 import view.Canvas;
+import view.panels.TabbedPanel;
 
 public class DeleteArch extends KeyAdapter {
 
@@ -27,5 +28,6 @@ public class DeleteArch extends KeyAdapter {
 		}
 
         Canvas.getInstance().repaint();
+		TabbedPanel.getInstance().refreshNetAttributes();
 	}
 }

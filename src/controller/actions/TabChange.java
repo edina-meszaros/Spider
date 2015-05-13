@@ -4,13 +4,18 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import controller.actions.simulation.*;
 import model.State;
 import view.Canvas;
 import view.panels.TabbedPanel;
-import calculate.ReachabilityGraph;
+import calculate.ReachabilityTree;
 import calculate.Simulation;
 import controller.Controller;
+import controller.actions.simulation.FireTransition;
+import controller.actions.simulation.PlaySimulation;
+import controller.actions.simulation.SimulationTimer;
+import controller.actions.simulation.StopSimulation;
+import controller.actions.simulation.StrictSimulation;
+import controller.actions.simulation.WeakSimulation;
 
 public class TabChange implements ChangeListener {
 
@@ -60,11 +65,12 @@ public class TabChange implements ChangeListener {
 
         }
 
-        //Reachability graph
+        //Reachability tree
         if (index == 2) {
-            ReachabilityGraph.getInstance().calculate();
             removeAllEvents(canvas);
 			canvas.removeMouseListener(Controller.getInstance().getFireTransition());
+
+			ReachabilityTree.getInstance().calculate();
 
 			TabbedPanel.getInstance().getPlay().setVisible(true);
 			TabbedPanel.getInstance().getPause().setVisible(false);

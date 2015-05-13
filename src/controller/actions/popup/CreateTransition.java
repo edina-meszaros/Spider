@@ -10,6 +10,7 @@ import model.Arch;
 import model.Graph;
 import model.Transition;
 import view.Canvas;
+import view.panels.TabbedPanel;
 
 public class CreateTransition extends AbstractAction {
 
@@ -27,5 +28,6 @@ public class CreateTransition extends AbstractAction {
 
 		Graph.getInstance().getGraph().put(transition, new ArrayList<Arch>());
 		Canvas.getInstance().repaint();
+		TabbedPanel.getInstance().refreshNetAttributes();
 	}
 }

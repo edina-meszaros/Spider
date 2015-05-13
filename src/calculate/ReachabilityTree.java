@@ -10,28 +10,32 @@ import model.State;
 import model.Transition;
 import view.panels.Output;
 
-public class ReachabilityGraph {
+public class ReachabilityTree {
 
     private static final int maxNodes = 30;
 
-    private static ReachabilityGraph instance;
+    private static ReachabilityTree instance;
 
     private ReachabilityNode root;
     private List<ReachabilityNode> flatTree;
 
-    public static ReachabilityGraph getInstance() {
+    public static ReachabilityTree getInstance() {
         if (instance == null) {
-            instance = new ReachabilityGraph();
+            instance = new ReachabilityTree();
         }
 
         return instance;
     }
 
-    private ReachabilityGraph() {
+    private ReachabilityTree() {
 
     }
 
     public void calculate() {
+        calculate(true);
+    }
+
+    public void calculate(boolean writeError) {
         List<ReachabilityNode> nodesToBeProcessed = new ArrayList<>();
         root = new ReachabilityNode();
         flatTree = new ArrayList<>();
@@ -64,7 +68,7 @@ public class ReachabilityGraph {
             }
         }
 
-        if (flatTree.size() > maxNodes) {
+        if (flatTree.size() > maxNodes && writeError) {
             Output.getInstance().setError("A fedési fa maximális mérete (" + maxNodes + ") elérve!");
         }
     }

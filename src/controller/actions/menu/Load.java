@@ -50,6 +50,7 @@ public class Load extends AbstractAction {
 			zis.close();
 			fis.close();
 			Canvas.getInstance().repaint();
+			TabbedPanel.getInstance().refreshNetAttributes();
 		} catch (Exception e1) {
 			Output.getInstance().setError("Hiba a fájl betöltése közben!");
 		}

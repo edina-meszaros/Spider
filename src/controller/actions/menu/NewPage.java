@@ -8,6 +8,7 @@ import javax.xml.bind.DatatypeConverter;
 
 import model.Graph;
 import view.Canvas;
+import view.panels.TabbedPanel;
 import view.style.Theme;
 
 public class NewPage extends AbstractAction {
@@ -20,6 +21,7 @@ public class NewPage extends AbstractAction {
 	public void actionPerformed(ActionEvent e) {
 		Graph.reset();
 		Canvas.getInstance().repaint();
+		TabbedPanel.getInstance().refreshNetAttributes();
 	}
 
 }

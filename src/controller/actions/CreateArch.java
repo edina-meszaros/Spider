@@ -13,6 +13,7 @@ import model.Place;
 import model.Transition;
 import view.Canvas;
 import view.panels.Output;
+import view.panels.TabbedPanel;
 import view.style.Theme;
 
 public class CreateArch extends MouseAdapter {
@@ -75,6 +76,7 @@ public class CreateArch extends MouseAdapter {
         			if(!isContainsNode(targetNode, edges)){
         				edges.add(new Arch(targetNode));
         				refreshCanvas();
+						TabbedPanel.getInstance().refreshNetAttributes();
         			}
 
         		}else{

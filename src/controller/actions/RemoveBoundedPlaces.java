@@ -13,6 +13,7 @@ import model.Node;
 import model.Place;
 import model.Transition;
 import view.Canvas;
+import view.panels.TabbedPanel;
 
 public class RemoveBoundedPlaces extends MouseAdapter {
 
@@ -52,6 +53,7 @@ public class RemoveBoundedPlaces extends MouseAdapter {
 			}
 
 			Canvas.getInstance().repaint();
+			TabbedPanel.getInstance().refreshNetAttributes();
 		}
 	}
 

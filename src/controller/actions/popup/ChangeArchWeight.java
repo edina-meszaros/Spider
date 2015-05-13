@@ -9,6 +9,7 @@ import model.Arch;
 import model.Graph;
 import view.Canvas;
 import view.panels.Output;
+import view.panels.TabbedPanel;
 
 public class ChangeArchWeight extends AbstractAction {
 
@@ -43,6 +44,7 @@ public class ChangeArchWeight extends AbstractAction {
 				}
 
 				selectedArch.setWeight(Integer.parseInt(input));
+				TabbedPanel.getInstance().refreshNetAttributes();
 
 			} catch (NumberFormatException ex){
 				Output.getInstance().setError("Érvénytelen élsúly!");

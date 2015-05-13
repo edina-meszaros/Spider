@@ -13,7 +13,7 @@ import model.Place;
 import model.ReachabilityNode;
 import model.State;
 import view.style.Theme;
-import calculate.ReachabilityGraph;
+import calculate.ReachabilityTree;
 
 public class ReachabilityGraphDrawer {
 
@@ -35,7 +35,7 @@ public class ReachabilityGraphDrawer {
 		this.x = 20;
 		this.y = 20;
 
-		ReachabilityGraph reachabilityGraph = ReachabilityGraph.getInstance();
+		ReachabilityTree reachabilityGraph = ReachabilityTree.getInstance();
 		if(Graph.getInstance().getPlaces().isEmpty())
 			return;
 

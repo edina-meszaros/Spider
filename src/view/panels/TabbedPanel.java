@@ -14,6 +14,7 @@ import javax.swing.JTabbedPane;
 import javax.xml.bind.DatatypeConverter;
 
 import view.style.Theme;
+import calculate.NetAttributes;
 
 public class TabbedPanel extends JTabbedPane {
 
@@ -34,6 +35,9 @@ public class TabbedPanel extends JTabbedPane {
 	private JRadioButton weakSimulation;
 	private JRadioButton randomHeuristic;
 	private JRadioButton balancedHeuristic;
+	private JLabel transparency;
+	private JLabel normalization;
+	private JLabel safetyness;
 
 	private TabbedPanel(){
 
@@ -43,11 +47,12 @@ public class TabbedPanel extends JTabbedPane {
 		this.firstTab.setPreferredSize(new Dimension(150, 300));
 		this.firstTab.setLayout(new GridLayout(0, 1));
 
-		this.firstTab.add(new JLabel("Átlátszóság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)), LEFT));
-		this.firstTab.add(new JLabel("Normalitás", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)), LEFT));
-		this.firstTab.add(new JLabel("Biztonságosság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT));
-		this.firstTab.add(new JLabel("Visszatérési képesség", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT));
-		this.firstTab.add(new JLabel("Otthonállapot", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT));
+		transparency = new JLabel("Átlátszóság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
+		normalization = new JLabel("Normalitás", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
+		safetyness = new JLabel("Biztonságosság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
+		this.firstTab.add(transparency);
+		this.firstTab.add(normalization);
+		this.firstTab.add(safetyness);
 
 		this.removeBounds = new JButton("Korlátok kiküszöbölése");
 		this.firstTab.add(removeBounds);
@@ -117,7 +122,7 @@ public class TabbedPanel extends JTabbedPane {
 		secondTab.add(row3);
 
 
-		//Reachability graph
+		//Reachability tree
 		this.thirdTab = new JPanel();
 		this.thirdTab.setBackground(new Color(219,218,213));
 		this.thirdTab.setPreferredSize(new Dimension(150, 300));
@@ -125,6 +130,8 @@ public class TabbedPanel extends JTabbedPane {
 		this.addTab("Elemző", this.firstTab);
 		this.addTab("Szimuláció", this.secondTab);
 		this.addTab("Fedési fa", this.thirdTab);
+
+		refreshNetAttributes();
 	}
 
 	public static TabbedPanel getInstance() {
@@ -132,6 +139,23 @@ public class TabbedPanel extends JTabbedPane {
 			instance = new TabbedPanel();
 		}
 		return instance;
+	}
+
+	public void refreshNetAttributes() {
+		NetAttributes attributes = NetAttributes.getInstance();
+
+		if (attributes.isTransparent())
+			this.transparency.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)));
+		else
+			this.transparency.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)));
+		if (attributes.isNormal())
+			this.normalization.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)));
+		else
+			this.normalization.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)));
+		if (attributes.isSafe())
+			this.safetyness.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_TICK)));
+		else
+			this.safetyness.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)));
 	}
 
 	public JPanel getFirstTab() { return firstTab; }

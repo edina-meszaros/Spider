@@ -9,6 +9,7 @@ import model.Graph;
 import model.Place;
 import view.Canvas;
 import view.panels.Output;
+import view.panels.TabbedPanel;
 
 public class ChangePlaceToken extends AbstractAction {
 
@@ -42,6 +43,7 @@ public class ChangePlaceToken extends AbstractAction {
 				}
 
 				selectedNode.setTokens(token);
+				TabbedPanel.getInstance().refreshNetAttributes();
 			} catch (NumberFormatException ex){
 
 				Output.getInstance().setError("Érvénytelen tokenszám!");

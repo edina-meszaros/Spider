@@ -10,6 +10,7 @@ import model.Arch;
 import model.Graph;
 import model.Place;
 import view.Canvas;
+import view.panels.TabbedPanel;
 
 public class CreatePlace extends AbstractAction {
 
@@ -27,5 +28,6 @@ public class CreatePlace extends AbstractAction {
 
 		Graph.getInstance().getGraph().put(place, new ArrayList<Arch>());
 		Canvas.getInstance().repaint();
+		TabbedPanel.getInstance().refreshNetAttributes();
 	}
 }
