@@ -15,7 +15,7 @@ import model.State;
 import view.style.Theme;
 import calculate.ReachabilityTree;
 
-public class ReachabilityGraphDrawer {
+public class ReachabilityTreeDrawer {
 
 	private Graphics2D g2;
 	private int counter = 0;
@@ -24,7 +24,7 @@ public class ReachabilityGraphDrawer {
 	private int y;
 	private Dimension screenSize = new Dimension();
 
-	public ReachabilityGraphDrawer(Graphics2D g2) {
+	public ReachabilityTreeDrawer(Graphics2D g2) {
 		this.g2 = g2;
 	}
 
