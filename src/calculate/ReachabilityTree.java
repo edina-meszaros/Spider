@@ -52,6 +52,7 @@ public class ReachabilityTree {
 
                 simulation = new Simulation(new State(currentNode.getState()));
                 simulation.fireTransition(activatable);
+
                 ReachabilityNode newNode = new ReachabilityNode();
                 newNode.setState(simulation.getState());
                 newNode.setParentNode(currentNode);
