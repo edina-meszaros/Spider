@@ -1,5 +1,7 @@
 package view;
 
+import view.style.Theme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,7 @@ public class AboutWindow extends JFrame {
 
         this.setSize(600, 362);
 
-        JLabel icon = new JLabel(new ImageIcon("logo-medium.png"));
+        JLabel icon = new JLabel(new ImageIcon(Theme.aboutImagePath));
         icon.setSize(317, 332);
         this.add(icon, BorderLayout.LINE_START);
 

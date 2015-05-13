@@ -9,6 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import view.panels.LeftPanel;
+import view.style.Theme;
 
 public class MainWindow extends JFrame {
 
@@ -20,7 +21,7 @@ public class MainWindow extends JFrame {
 
 		setVisible(true);
 		setTitle("Spider");
-		setIconImage(new ImageIcon("icon.png").getImage());
+		setIconImage(new ImageIcon(Theme.mainWindowIconPath).getImage());
 		setSize(new Dimension(800, 600));
 		setPreferredSize(new Dimension(800, 900));
 		setLocationRelativeTo(null);

@@ -48,7 +48,8 @@ public class Canvas extends JPanel {
 		super();
 		this.setFocusable(true);
 		this.setBackground(Theme.BACKGROUND);
-		this.background = new ImageIcon("background.png").getImage();
+
+		this.background = new ImageIcon(Theme.backgroundImagePath).getImage();
 
 		this.popupNewNode = new JPopupMenu();
 		this.popupNewNode.setFocusable(false);

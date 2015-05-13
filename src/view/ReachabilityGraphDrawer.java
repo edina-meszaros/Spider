@@ -70,22 +70,20 @@ public class ReachabilityGraphDrawer {
 			}
 		}
 
-		screenSize.width = this.x + 150;
-		screenSize.height = Math.max(y + 50, screenSize.height);
-
-
 		positions.put(node, new Point(x, y));
 		g2.drawString(markingSet, x, y);
 
+		FontMetrics metrics=g2.getFontMetrics(new Font("Monospaced", Font.PLAIN, 12));
+		screenSize.width = this.x + metrics.stringWidth(markingSet) + 20;
+		screenSize.height = Math.max(y + 50, screenSize.height);
+
 		if(node.isOld()){
-			FontMetrics metrics=g2.getFontMetrics(new Font("Monospaced", Font.PLAIN, 12));
 			int nodeWidth=metrics.stringWidth(markingSet);
 
 			g2.drawString("régi", x + nodeWidth / 2, y + 15);
 		}
 
 		if(node.getParentNode() != null){
-			FontMetrics metrics=g2.getFontMetrics(new Font("Monospaced", Font.PLAIN, 12));
 			int nodeWidth=metrics.stringWidth(markingSet);
 			int nodeHeight=metrics.getHeight();
 
