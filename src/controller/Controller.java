@@ -94,6 +94,12 @@ public class Controller {
 		menu.getLoad().setAction(new Load());
 		menu.getLoad().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, ActionEvent.CTRL_MASK));
 
+		menu.getEx1().setAction(new Load("1. Étkező filozófusok", "examples/eating-philosophers.spider"));
+		menu.getEx2().setAction(new Load("2. Konkurencia, szinkronizáció", "examples/concurrency.spider"));
+		menu.getEx3().setAction(new Load("3. Kommunikáció, szinkronizáció", "examples/communication.spider"));
+		menu.getEx4().setAction(new Load("4. Író-olvasó szinkronizáció kölcsönös kizárással", "examples/read-write-sync.spider"));
+		menu.getEx5().setAction(new Load("5. Nyelvelfogadás", "examples/language-acceptance.spider"));
+
 		menu.getExit().setAction(new Exit());
 		menu.getExit().setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_Q, ActionEvent.CTRL_MASK));
 

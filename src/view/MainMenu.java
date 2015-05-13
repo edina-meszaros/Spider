@@ -57,19 +57,19 @@ public class MainMenu extends JMenuBar {
 		exampleSubMenu.setIcon(new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.iconSamples)));
 		exampleSubMenu.setMnemonic(KeyEvent.VK_S);
 
-		ex1 = new JMenuItem("1. Étkező filozófusok");
+		ex1 = new JMenuItem();
 		exampleSubMenu.add(ex1);
 
-		ex2 = new JMenuItem("2. Konkurencia, szinkronizáció");
+		ex2 = new JMenuItem();
 		exampleSubMenu.add(ex2);
 
-		ex3 = new JMenuItem("3. Kommunikáció, szinkronizáció");
+		ex3 = new JMenuItem();
 		exampleSubMenu.add(ex3);
 
-		ex4 = new JMenuItem("4. Író-olvasó szinkronizáció kölcsönös kizárással");
+		ex4 = new JMenuItem();
 		exampleSubMenu.add(ex4);
 
-		ex5 = new JMenuItem("5. Nyelvelfogadás");
+		ex5 = new JMenuItem();
 		exampleSubMenu.add(ex5);
 
 		fileMenu.add(exampleSubMenu);
@@ -106,4 +106,9 @@ public class MainMenu extends JMenuBar {
 	public JMenuItem getExit() { return exit; }
 	public JMenuItem getHelp() { return help; }
 	public JMenuItem getAbout() { return about; }
+	public JMenuItem getEx1() { return ex1; }
+	public JMenuItem getEx2() { return ex2; }
+	public JMenuItem getEx3() { return ex3; }
+	public JMenuItem getEx4() { return ex4; }
+	public JMenuItem getEx5() { return ex5; }
 }

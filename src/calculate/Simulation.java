@@ -84,7 +84,10 @@ public class Simulation {
 
         // Add tokens to target nodes
         for (Arch arch : graph.get(transition)) {
-            state.increaseMarking((Place) arch.getTarget(), (double) arch.getWeight());
+            Place target = (Place) arch.getTarget();
+            state.increaseMarking(target, (double) arch.getWeight());
+            if (target.getBound() != 0 && state.getMarking(target) > target.getBound())
+                state.setMarking(target, (double) target.getBound());
         }
     }
 
