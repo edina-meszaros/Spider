@@ -1,14 +1,16 @@
 package controller.actions.menu;
 
-import view.style.Theme;
-
-import java.awt.*;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.*;
+import javax.swing.AbstractAction;
+import javax.swing.ImageIcon;
 import javax.xml.bind.DatatypeConverter;
+
+import view.panels.Output;
+import view.style.Theme;
 
 public class Help extends AbstractAction {
 
@@ -22,7 +24,7 @@ public class Help extends AbstractAction {
 			File myFile = new File("docs/Documentation.pdf");
 			Desktop.getDesktop().open(myFile);
 		} catch (IOException ex) {
-			// no application registered for PDFs
+			Output.getInstance().setError("A felhasználói dokumentáció megnyitása sikertelen!");
 		}
 	}
 

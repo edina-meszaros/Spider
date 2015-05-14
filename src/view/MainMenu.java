@@ -1,7 +1,5 @@
 package view;
 
-import view.style.Theme;
-
 import java.awt.event.KeyEvent;
 
 import javax.swing.ImageIcon;
@@ -9,6 +7,8 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.xml.bind.DatatypeConverter;
+
+import view.style.Theme;
 
 public class MainMenu extends JMenuBar {
 
@@ -33,11 +33,7 @@ public class MainMenu extends JMenuBar {
 	private MainMenu() {
 		super();
 
-		//A menu example:
-
 		fileMenu = new JMenu("Fájl");
-		//menu.setMnemonic(KeyEvent.VK_A);
-
 		this.add(fileMenu);
 
 		newPage = new JMenuItem();
@@ -45,9 +41,7 @@ public class MainMenu extends JMenuBar {
 
 		fileMenu.addSeparator();
 
-		//a group of JMenuItems
 		save = new JMenuItem();
-		//menuItem.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_1, ActionEvent.ALT_MASK));
 		fileMenu.add(save);
 
 		load = new JMenuItem();
@@ -89,8 +83,6 @@ public class MainMenu extends JMenuBar {
 		helpMenu.add(about);
 
 		this.add(helpMenu);
-
-
 	}
 
 	public static MainMenu getInstance() {

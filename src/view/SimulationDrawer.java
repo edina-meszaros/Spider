@@ -98,8 +98,4 @@ public class SimulationDrawer extends EditorDrawer{
 			break;
 		}
 	}
-
-
-
-
 }

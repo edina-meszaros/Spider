@@ -12,7 +12,6 @@ import calculate.ReachabilityTree;
 import calculate.Simulation;
 import controller.Controller;
 import controller.actions.simulation.FireTransition;
-import controller.actions.simulation.PlaySimulation;
 import controller.actions.simulation.SimulationTimer;
 import controller.actions.simulation.StopSimulation;
 import controller.actions.simulation.StrictSimulation;
@@ -44,9 +43,6 @@ public class TabChange implements ChangeListener {
 			SimulationTimer.getInstance().setSimulation(simulation);
         	FireTransition fireTransition = Controller.getInstance().getFireTransition();
         	fireTransition.setSimulation(simulation);
-
-        	PlaySimulation playSimulation = Controller.getInstance().getPlaySimulation();
-        	playSimulation.setSimulation(simulation);
 
         	StopSimulation stopSimulation = Controller.getInstance().getStopSimulation();
         	stopSimulation.setSimulation(simulation);

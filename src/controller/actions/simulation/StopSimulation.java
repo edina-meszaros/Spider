@@ -27,8 +27,6 @@ public class StopSimulation extends MouseAdapter {
 		TabbedPanel.getInstance().getBalancedHeuristic().setEnabled(true);
 		TabbedPanel.getInstance().getRandomHeuristic().setEnabled(true);
 
-		//Controller.getInstance().getPlaySimulation().setSimulation(new Simulation(new State()));
-
 		SimulationTimer.getInstance().stop();
 		simulation.setState(new State());
 		Canvas.getInstance().repaint();

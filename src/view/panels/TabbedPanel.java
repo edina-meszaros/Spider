@@ -90,7 +90,6 @@ public class TabbedPanel extends JTabbedPane {
 		row2.setBackground(Theme.BACKGROUND);
 		row3.setBackground(Theme.BACKGROUND);
 		pad.setBackground(Theme.BACKGROUND);
-		//pad.setPreferredSize(new Dimension(0, 10));
 
 		GridLayout layout4 = new GridLayout(0, 1);
 
@@ -131,7 +130,6 @@ public class TabbedPanel extends JTabbedPane {
 		row3.setLayout(layout4);
 		row3.add(this.strictSimulation);
 		row3.add(this.weakSimulation);
-		//row3.add(pad);
 		row3.add(this.randomHeuristic);
 		row3.add(this.balancedHeuristic);
 		secondTab.add(row3);

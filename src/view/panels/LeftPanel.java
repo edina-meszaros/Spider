@@ -11,7 +11,6 @@ public class LeftPanel extends JPanel {
 
 	private LeftPanel() {
 		super();
-		//this.setSize(200, 300);
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		this.add(TabbedPanel.getInstance());

@@ -1,12 +1,10 @@
 package controller.actions.simulation;
 
-import calculate.Simulation;
-import model.State;
-import view.Canvas;
-import view.panels.TabbedPanel;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import view.Canvas;
+import calculate.Simulation;
 
 public class StrictSimulation extends MouseAdapter {
 

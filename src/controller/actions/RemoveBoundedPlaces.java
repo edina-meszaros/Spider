@@ -5,11 +5,9 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import model.Arch;
 import model.Graph;
-import model.Node;
 import model.Place;
 import model.Transition;
 import view.Canvas;

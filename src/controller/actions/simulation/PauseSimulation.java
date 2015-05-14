@@ -1,11 +1,11 @@
 package controller.actions.simulation;
 
-import calculate.Simulation;
-import view.Canvas;
-import view.panels.TabbedPanel;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+
+import view.Canvas;
+import view.panels.TabbedPanel;
+import calculate.Simulation;
 
 public class PauseSimulation extends MouseAdapter {
 
@@ -21,8 +21,6 @@ public class PauseSimulation extends MouseAdapter {
 		TabbedPanel.getInstance().getPlay().setVisible(true);
 		TabbedPanel.getInstance().getPause().setVisible(false);
 		TabbedPanel.getInstance().getStop().setEnabled(true);
-
-		//Controller.getInstance().getPlaySimulation().setSimulation(new Simulation(new State()));
 
 		SimulationTimer.getInstance().stop();
 		Canvas.getInstance().repaint();

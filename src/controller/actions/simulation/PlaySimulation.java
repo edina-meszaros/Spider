@@ -4,15 +4,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import view.panels.TabbedPanel;
-import calculate.Simulation;
 
 public class PlaySimulation extends MouseAdapter {
-
-	private Simulation simulation;
-
-    public void setSimulation(Simulation simulation) {
-    	this.simulation = simulation;
-    }
 
 	@Override
     public void mouseClicked(MouseEvent e) {
