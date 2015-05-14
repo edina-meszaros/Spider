@@ -6,6 +6,7 @@ import javax.swing.event.ChangeListener;
 
 import model.State;
 import view.Canvas;
+import view.panels.Output;
 import view.panels.TabbedPanel;
 import calculate.ReachabilityTree;
 import calculate.Simulation;
@@ -27,21 +28,16 @@ public class TabChange implements ChangeListener {
 
         Canvas canvas = Canvas.getInstance();
 
+		removeAllEvents(canvas);
+
         //Editor
         if(index == 0){
-        	removeAllEvents(canvas);
         	setAllEvents(canvas);
 			canvas.removeMouseListener(Controller.getInstance().getFireTransition());
-
-			TabbedPanel.getInstance().getPlay().setVisible(true);
-			TabbedPanel.getInstance().getPause().setVisible(false);
-			TabbedPanel.getInstance().getStop().setEnabled(false);
-			SimulationTimer.getInstance().stop();
         }
 
         //Simulation
 		if(index == 1){
-        	removeAllEvents(canvas);
 			canvas.addMouseListener(Controller.getInstance().getFireTransition());
         	Simulation simulation = new Simulation(new State());
 
@@ -67,17 +63,21 @@ public class TabChange implements ChangeListener {
 
         //Reachability tree
         if (index == 2) {
-            removeAllEvents(canvas);
 			canvas.removeMouseListener(Controller.getInstance().getFireTransition());
 
 			ReachabilityTree.getInstance().calculate();
-
-			TabbedPanel.getInstance().getPlay().setVisible(true);
-			TabbedPanel.getInstance().getPause().setVisible(false);
-			TabbedPanel.getInstance().getStop().setEnabled(false);
-			SimulationTimer.getInstance().stop();
         }
 
+		TabbedPanel.getInstance().getPlay().setVisible(true);
+		TabbedPanel.getInstance().getPause().setVisible(false);
+		TabbedPanel.getInstance().getStop().setEnabled(false);
+		TabbedPanel.getInstance().getStrictSimulation().setEnabled(true);
+		TabbedPanel.getInstance().getWeakSimulation().setEnabled(true);
+		TabbedPanel.getInstance().getBalancedHeuristic().setEnabled(true);
+		TabbedPanel.getInstance().getRandomHeuristic().setEnabled(true);
+		SimulationTimer.getInstance().stop();
+
+		Output.getInstance().clear();
 
         canvas.repaint();
     }

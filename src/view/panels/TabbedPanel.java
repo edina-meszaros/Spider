@@ -49,6 +49,7 @@ public class TabbedPanel extends JTabbedPane {
 		this.firstTab.setPreferredSize(new Dimension(150, 300));
 		this.firstTab.setLayout(new GridLayout(0, 1));
 
+
 		transparency = new JLabel("Átlátszóság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
 		normalization = new JLabel("Normalitás", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
 		safetyness = new JLabel("Biztonságosság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);

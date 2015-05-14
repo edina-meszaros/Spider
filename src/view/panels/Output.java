@@ -88,6 +88,10 @@ public class Output extends JComponent implements ActionListener {
 		}
 	}
 
+	public void clear() {
+		this.textEditor.setText("");
+	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// Gray out everything
