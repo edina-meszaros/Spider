@@ -22,14 +22,14 @@ public class AboutWindow extends JFrame {
     public AboutWindow() {
         super();
 
-        this.setSize(600, 362);
+        this.setSize(400, 200);
 
         JLabel icon = new JLabel(new ImageIcon(Theme.aboutImagePath));
         icon.setSize(317, 332);
         this.add(icon, BorderLayout.LINE_START);
 
         JLabel data = new JLabel();
-        data.setText("<html><p style=\"margin:5px;font-size:12px;\">Név: <b>Spider Petriháló elemző izé</b></p>" +
+        data.setText("<html><p style=\"margin:5px;font-size:12px;\"><b>Spider Petri háló elemző és szerkesztő</b></p>" +
                 "<p style=\"margin:5px;font-size:10px;\">Készítette: <i>Mészáros Edina</i></p>");
         data.setVerticalAlignment(JLabel.TOP);
         this.add(data, BorderLayout.CENTER);
