@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTabbedPane;
+import javax.swing.border.Border;
 import javax.xml.bind.DatatypeConverter;
 
 import view.style.Theme;
@@ -50,9 +52,21 @@ public class TabbedPanel extends JTabbedPane {
 		transparency = new JLabel("Átlátszóság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
 		normalization = new JLabel("Normalitás", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
 		safetyness = new JLabel("Biztonságosság", new ImageIcon(DatatypeConverter.parseBase64Binary(Theme.ICON_X)), LEFT);
+
+
+		Border paddingBorder = BorderFactory.createEmptyBorder(0,20,0,0);
+		Border border = BorderFactory.createLineBorder(Theme.BACKGROUND);
+
+		transparency.setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
+		normalization.setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
+		safetyness.setBorder(BorderFactory.createCompoundBorder(border,paddingBorder));
+
 		this.firstTab.add(transparency);
 		this.firstTab.add(normalization);
 		this.firstTab.add(safetyness);
+		JLabel padding = new JLabel();
+		padding.setPreferredSize(new Dimension(20, 100));
+		this.firstTab.add(padding);
 
 		this.removeBounds = new JButton("Korlátok kiküszöbölése");
 		this.firstTab.add(removeBounds);
