@@ -112,7 +112,7 @@ public class ReachabilityTreeDrawer {
 		for(Place place : Graph.getInstance().getSortedPlaces()){
 
 			if(state.getMarking(place) == Double.POSITIVE_INFINITY){
-				markingSet += "oo" + ", ";
+				markingSet += "\u03C9" + ", ";
 			}else{
 				markingSet += state.getMarking(place).intValue() + ", ";
 			}
